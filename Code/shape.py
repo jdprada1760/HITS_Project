@@ -4,6 +4,49 @@ matplotlib.use('Agg')
 from arepo import *
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FormatStrFormatter
+
+# Loads given snapshot of the simulation given the needed parameters
+# lvl -> The level of the simulation
+# halo -> The name of the halo
+# snap -> Name of snap to load
+# subSnap -> Name of the file where group and subgroup information is stored
+# return pos -> The centered position of the main structure particles (filter substructures)
+# return rad -> The virial radius 
+def loadSim(lvl,halo,snap,subSnap):
+    # Path of the simulation
+    path = "/hits/universe/GigaGalaxy/"+lvl+"/"+halo+"/output" 
+
+    # Loads groups to select the principal halo
+    subSn = Subfind(path+subSnap)
+
+    # filterr = [Halo(subSn, halo = 0)]
+    # filterr = [Halo(subSn, halo = 0, subhalo = subSn.GroupFirstSub[0])]
+
+    # Loads the simulation
+    #sn = Snapshot(path+snap, parttype=[1], filter=filterr, combineFiles=True, verbose=True)
+    sn = Snapshot(path+snap, parttype=[1], combineFiles=True, verbose=True)
+
+    # r the radius of the halo (R_mean200)*1000 to obtain it in kpc
+    rad = 1000.*subSn.group.Group_R_TopHat200[0]
+
+    # Calculates the center of the halo (initial)*1000 to get it in kpc__
+    # Center can be the center of mass or the minimum of potential
+    # CM = 1000.*subSn.SubhaloCM[0]
+    CM = 1000*subSn.group.GroupPos[0]
+
+    # Gets the length of the main structure particles /// 0 - Principal halo, 1 - DM
+    cut = subSn.group.GroupLenType[0,1]
+    subCut = subSn.subhalo.SubhaloLenType[0,1]
+    print("Group Len is: "+str(cut))
+    print("SubGroup Len is: "+str(subCut))
+
+    # The particle positions *1000 -> kpc
+    pos =  1000.*sn.pos[:subCut]
+    pos -= CM
+
+    return pos,rad
+
 
 # Gets semiaxes given eigenvalues of Inertia and a radius
 def calc_semiaxes(vals, rad):
@@ -11,7 +54,10 @@ def calc_semiaxes(vals, rad):
     q = np.sqrt(vals[1]/vals[0])
     s = np.sqrt(vals[2]/vals[0])
     # Calculates semiaxes of ellipsoid conserving volume
-    a = ((rad**3.)/(q*s))**(1./3.)
+    #a = ((rad**3.)/(q*s))**(1./3.)
+    # Calculates semiaxes of ellipsoid keeping biggest eigenvalue equal to the radius
+    a = rad
+    
     b = q*a
     c = s*a
     return a,b,c
@@ -26,11 +72,14 @@ def get_Semiaxes(a,b,c,pos):
     # Filter particles inside determined ellipsoid
     aux = (pos[:,0]/a)**2+(pos[:,1]/b)**2+(pos[:,2]/c)**2
     npos = pos[np.where(aux <= 1)[0],:]
+    if len(npos) < 3000:
+        return -1,-1,-1,0
     # Recalculates center of mass and centers particles (filtered and non-filtered)
-    cm = npos.mean(axis = 0)
+    # cm = npos.mean(axis = 0)
     #print(cm)
-    npos = npos - cm
-    pos = pos - cm
+    #npos = npos - cm
+    #pos = pos - cm
+    
     # Axial ratios
     q = b/a
     s = c/a
@@ -61,6 +110,8 @@ def recalculate_Semiaxes(a,b,c,pos,n_it=10):
     for i in range(n_it):
         # Calculates inertia tensor
         a,b,c,pos = get_Semiaxes(a,b,c,pos)
+        if a < 0:
+            return -1,-1,-1,0
         #print(a,b,c)
     return a,b,c,pos
 
@@ -69,31 +120,26 @@ def plotHalo(filename,a,b,c,pos,lvl,halo):
     # Draws ellipse
     from matplotlib.patches import Ellipse
     elli = Ellipse(xy=[0,0],width = a, height = b, fill = False)  
-    # Filter particles inside determined ellipsoid
-    aux = (pos[:,0]/a)**2+(pos[:,1]/b)**2+(pos[:,2]/c)**2
-    npos = pos[np.where(aux <= 1)[0],:]
-    # Recalculates center of mass and centers particles (filtered and non-filtered)
-    cm = npos.mean(axis = 0) 
-    #print(cm)
     # Filter box
     ind = np.where((abs(pos[:,0])< rad) & (abs(pos[:,1])< rad)& (abs(pos[:,2])< rad))[0]
     npos = pos[ind,:]
-    #npos = pos
     # Plot
     fig = plt.figure(0)
     ax = fig.add_subplot(111, aspect='equal')
     ax.add_artist(elli)
-    markersize = 0.1
+    markersize = 0.15*(rvir/rad)
     '''
     if(Ni is None):
         alpha = 0.2
         markersize = 0.5
     '''
-    alpha = (10.0**(-1.0*len(npos)/Ni))
+    #alpha = (10.0**(-1.0*len(npos)/Ni))
+    alpha = 0.1
     label = "r="+'{:.2e}'.format(float(rad))
     #label += "\n b/a="+'{:.2e}'.format(float(b/a))
     #label += "\n c/a="+'{:.2e}'.format(float(c/a))
     #label += "\n c="+'{:.2e}'.format(float(c))
+    ax.plot([0],[0], marker = 'o')
     ax.plot(npos[:,0], npos[:,1], marker = '.', linewidth = 0, alpha = alpha, markersize = markersize, label = label)
     ax.set_title(filename.split('.')[0])
     ax.legend()
@@ -152,37 +198,17 @@ plt.savefig("Processed_Ellipse.png")
 plt.close()
 '''
 
-
-# Specification of the simulation
 lvl = 'level5' 
-halo = 'halo28'
-path = "/hits/universe/GigaGalaxy/"+lvl+"/"+halo+"/output" 
+halo = 'halo9_MHD'
 snap = "/snapshot_063.hdf5"
 subSnap = "/fof_subhalo_tab_063.hdf5"
-
-# Loads groups to select the principal halo
-subSn = Subfind(path+subSnap)
-filterr = [Halo(subSn, halo = 0, subhalo = subSn.GroupFirstSub)]
-
-# Loads the simulation to make some graphics
-sn = Snapshot(path+snap, parttype=[1], filter=filterr, combineFiles=True, verbose=True)
-
-# r the radius of the halo (R_mean200)
-rad = subSn.group.Group_R_Mean200[0]
-
-# Calculates the center of mass f the subhalo (initial)
-CM = subSn.SubhaloCM[0]
-# 
-CM2 = subSn.GroupCM[0]-CM
-# The particle positions
-pos =  sn.pos
-pos -= CM
-
+pos,rad = loadSim(lvl,halo,snap,subSnap)
+rvir = rad
 # Initial number of particles
 Ni = len(pos)
 
 # Logspace for radius
-xrad = np.logspace(np.log10(0.04*rad),np.log10(0.5*rad),num=50, endpoint = True)[::-1]
+xrad = np.logspace(np.log10(0.3*rad),np.log10(1.5*rad),num=50, endpoint = True)[::-1]
 #print(0.01*rad,2*rad)
 #print(xrad)
 # Keeps semiaxes
@@ -192,7 +218,9 @@ for i in range(len(xrad[:-1])):
     rad = (a*b*c)**(1./3.)
     print("________________________________________________________________")
     print(xrad[i],rad)
-    a,b,c,pos = recalculate_Semiaxes(a,b,c,pos,n_it = 20)
+    a,b,c,pos = recalculate_Semiaxes(a,b,c,pos,n_it = 10)
+    if a < 0:
+        break
     semmiaxes.append([a,b,c])
     if i%2 == 0:
         title = lvl+"_"+halo+"_"+str(i)+".png"
@@ -209,15 +237,25 @@ print("__________________________________________________________")
 print(c/a)
 print("__________________________________________________________")
 print(c/b)
-ax0.plot((xrad[:-1]), b/a)
-ax1.plot((xrad[:-1]), c/a)
-ax2.plot((xrad[:-1]), c/b)
+rads = (a*b*c)**(1./3.)
+ax0.plot((rads), b/a, marker = '.')
+ax1.plot((rads), c/a, marker = '.')
+ax2.plot((rads), c/b, marker = '.')
+ax0.plot([rvir,rvir],[0,1])
+ax1.plot([rvir,rvir],[0,1])
+ax2.plot([rvir,rvir],[0,1])
 ax0.set_xscale('log')
 ax1.set_xscale('log')
 ax2.set_xscale('log')
 ax0.set_ylim(0,1)
 ax1.set_ylim(0,1)
 ax2.set_ylim(0,1)
+ax0.set_xlim(0.1,350)
+ax1.set_xlim(0.1,350)
+ax2.set_xlim(0.1,350)
+ax0.xaxis.set_major_formatter(FormatStrFormatter('%.1f'))
+ax1.xaxis.set_major_formatter(FormatStrFormatter('%.1f'))
+ax2.xaxis.set_major_formatter(FormatStrFormatter('%.1f'))
 ax0.set_ylabel("b/a")
 ax1.set_ylabel("c/a")
 ax2.set_ylabel("c/b")
