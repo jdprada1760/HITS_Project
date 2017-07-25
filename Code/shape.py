@@ -56,8 +56,7 @@ def calc_semiaxes(vals, rad):
     # Calculates semiaxes of ellipsoid conserving volume
     #a = ((rad**3.)/(q*s))**(1./3.)
     # Calculates semiaxes of ellipsoid keeping biggest eigenvalue equal to the radius
-    a = rad
-    
+    a = rad    
     b = q*a
     c = s*a
     return a,b,c
@@ -73,7 +72,7 @@ def get_Semiaxes(a,b,c,pos):
     aux = (pos[:,0]/a)**2+(pos[:,1]/b)**2+(pos[:,2]/c)**2
     npos = pos[np.where(aux <= 1)[0],:]
     if len(npos) < 3000:
-        return -1,-1,-1,0
+        return -1.,-1.,-1.,0.
     # Recalculates center of mass and centers particles (filtered and non-filtered)
     # cm = npos.mean(axis = 0)
     #print(cm)
@@ -88,40 +87,52 @@ def get_Semiaxes(a,b,c,pos):
     for i in range(3):
         for j in range(3):
             # The distance measure (usual distance when treating a circle)
-            #d = np.sum(npos[:,0]**2+(npos[:,1]/q)**2+(npos[:,2]/s)**2)
-            d = np.sum(npos[:,0]**2+(npos[:,1]/1)**2+(npos[:,2]/1)**2)
-            I[i,j] = np.sum(npos[:,i]*npos[:,j])/d
+            d = (npos[:,0]**2+(npos[:,1]/q)**2+(npos[:,2]/s)**2)
+            if len(np.where(d==0)[0])!=0:
+                npos[np.where(d==0)[0]] = 1e-17*np.array([1,1,1])
+                d = (npos[:,0]**2+(npos[:,1]/q)**2+(npos[:,2]/s)**2)
+            #d = np.sum(npos[:,0]**2+(npos[:,1]/1)**2+(npos[:,2]/1)**2)
+            I[i,j] = np.sum(npos[:,i]*npos[:,j]/d)
     # Solves eigensystem and order values
     vals,vecs = np.linalg.eig(I)
-    vecs = vecs[:,(-vals).argsort()]
-    vals[::-1].sort()
+    ind = (-vals).argsort()
+    vecs = vecs[:,ind]
+    vals = vals[ind]
     # Gets semiaxes
-    a,b,c = calc_semiaxes(vals,rad)
+    a,b,c = calc_semiaxes(vals,a)
     # Rotates positions to diagonal basis
     pos = (vecs.T).dot(pos.T).T
+    #print(vecs.T.dot(I).dot(vecs))
     return a,b,c,pos
     
 # Calls get_semiaxes iteratively reshaping iteratively with previous result starting from initial calculation
 # Initial semiaxes a,b,c
-# n_it = number of iterations
-# cm the initial center of mass
-def recalculate_Semiaxes(a,b,c,pos,n_it=10):
+# epsilon -> Convergence tolerance
+def recalculate_Semiaxes(a,b,c,pos,epsilon=1e-6):
     # Iterates over n_it
-    for i in range(n_it):
+    for i in range(1000):
         # Calculates inertia tensor
-        a,b,c,pos = get_Semiaxes(a,b,c,pos)
-        if a < 0:
-            return -1,-1,-1,0
-        #print(a,b,c)
+        an,bn,cn,pos = get_Semiaxes(a,b,c,pos)
+        # Stops if something bad happens
+        if an < 0:
+            return -1.,-1.,-1.,0.
+        # ratio between semiaxes in consecutive iterations
+        ratio = abs((((an-a)/a +(bn-b)/b +(cn-c)/c))/3.0)
+        a,b,c = an,bn,cn
+        # Stops if convergence is achieved within 1e-6
+        if ratio < epsilon:
+            print("Convergence achieved at: ",i)
+            return a,b,c,pos
+        #print(ratio,a,b,c)
     return a,b,c,pos
 
 def plotHalo(filename,a,b,c,pos,lvl,halo):
     rad = (a*b*c)**(1./3.)
     # Draws ellipse
     from matplotlib.patches import Ellipse
-    elli = Ellipse(xy=[0,0],width = a, height = b, fill = False)  
+    elli = Ellipse(xy=[0,0],width = 2*a, height = 2*b, fill = False)  
     # Filter box
-    ind = np.where((abs(pos[:,0])< rad) & (abs(pos[:,1])< rad)& (abs(pos[:,2])< rad))[0]
+    ind = np.where((abs(pos[:,0])< 1.5*a) & (abs(pos[:,1])< 1.5*a)& (abs(pos[:,2])< 1.5*a))[0]
     npos = pos[ind,:]
     # Plot
     fig = plt.figure(0)
@@ -141,6 +152,8 @@ def plotHalo(filename,a,b,c,pos,lvl,halo):
     #label += "\n c="+'{:.2e}'.format(float(c))
     ax.plot([0],[0], marker = 'o')
     ax.plot(npos[:,0], npos[:,1], marker = '.', linewidth = 0, alpha = alpha, markersize = markersize, label = label)
+    ax.set_xlim(-1.5*a,1.5*a)
+    ax.set_ylim(-1.5*a,1.5*a)
     ax.set_title(filename.split('.')[0])
     ax.legend()
     plt.savefig("../Plots/"+lvl+"/"+halo+"/"+filename)
@@ -170,6 +183,25 @@ def gen_ellipse(a,b,c, n_points):
 def dist(x,y,z,a,b,c):
     return (2*np.pi)**(-3./2.)*a*b*c*np.exp(-((x/a)**2+(y/b)**2+(z/c)**2))
 
+
+# Plots many graphics of ratios (must be between 0 and 1)
+# yvals -> Fields to plot on x axis (may be more than one array)
+# xvals -> Only one array for x axis
+def ratiosPlots(xvals, yvals, ylabel, rvir):  
+     fig, axs = plt.subplots(nrows=len(yvals))
+     for ax,yval,ylab in zip(axs,yvals,ylabel):
+         ax.plot(xvals,yval, marker = '.')
+         ax.plot([rvir,rvir],[0,1])
+         ax.set_xscale('log')
+         # Plotting ratios
+         ax.set_ylim(0,1)
+         # Valid for all Milkyway-like galaxies
+         ax.set_xlim(0.1,350)
+         ax.xaxis.set_major_formatter(FormatStrFormatter('%.1f'))
+         ax.set_ylabel(ylab)
+     axs[-1].set_xlabel("log(R(kpc/h))")
+     return fig,axs
+
 '''
 Ni = None
 # Generates ellipse
@@ -197,68 +229,67 @@ plt.ylim(-4*b,4*b)
 plt.savefig("Processed_Ellipse.png")
 plt.close()
 '''
-
-lvl = 'level5' 
-halo = 'halo9_MHD'
-snap = "/snapshot_063.hdf5"
-subSnap = "/fof_subhalo_tab_063.hdf5"
-pos,rad = loadSim(lvl,halo,snap,subSnap)
-rvir = rad
-# Initial number of particles
-Ni = len(pos)
-
-# Logspace for radius
-xrad = np.logspace(np.log10(0.3*rad),np.log10(1.5*rad),num=50, endpoint = True)[::-1]
-#print(0.01*rad,2*rad)
-#print(xrad)
-# Keeps semiaxes
-semmiaxes = []
-a,b,c = xrad[0],xrad[0],xrad[0]
-for i in range(len(xrad[:-1])):
-    rad = (a*b*c)**(1./3.)
-    print("________________________________________________________________")
-    print(xrad[i],rad)
-    a,b,c,pos = recalculate_Semiaxes(a,b,c,pos,n_it = 10)
-    if a < 0:
-        break
-    semmiaxes.append([a,b,c])
-    if i%2 == 0:
-        title = lvl+"_"+halo+"_"+str(i)+".png"
-        plotHalo(title,a,b,c,pos,lvl,halo)
-    # Uses last semiaxes to simplify further calculations by rescaling
-    scale = xrad[i+1]/xrad[i]
-    a,b,c = scale*a,scale*b,scale*c
-
-semmiaxes = np.array(semmiaxes)
-fig, (ax0, ax1, ax2) = plt.subplots(nrows=3)
-a,b,c = semmiaxes.T
-print(b/a)
-print("__________________________________________________________")
-print(c/a)
-print("__________________________________________________________")
-print(c/b)
-rads = (a*b*c)**(1./3.)
-ax0.plot((rads), b/a, marker = '.')
-ax1.plot((rads), c/a, marker = '.')
-ax2.plot((rads), c/b, marker = '.')
-ax0.plot([rvir,rvir],[0,1])
-ax1.plot([rvir,rvir],[0,1])
-ax2.plot([rvir,rvir],[0,1])
-ax0.set_xscale('log')
-ax1.set_xscale('log')
-ax2.set_xscale('log')
-ax0.set_ylim(0,1)
-ax1.set_ylim(0,1)
-ax2.set_ylim(0,1)
-ax0.set_xlim(0.1,350)
-ax1.set_xlim(0.1,350)
-ax2.set_xlim(0.1,350)
-ax0.xaxis.set_major_formatter(FormatStrFormatter('%.1f'))
-ax1.xaxis.set_major_formatter(FormatStrFormatter('%.1f'))
-ax2.xaxis.set_major_formatter(FormatStrFormatter('%.1f'))
-ax0.set_ylabel("b/a")
-ax1.set_ylabel("c/a")
-ax2.set_ylabel("c/b")
-ax2.set_xlabel("log(R)")
-plt.savefig("../Plots/"+lvl+"/"+halo+"/"+"Axial_ratios_vs_R__"+lvl+"_"+halo+".png")
-
+'''
+lvl = 'level5_Durham'
+#lvl = 'level5' 
+for j in range(25,26):
+    print("-------------------------------------------------")
+    print(j)
+    halo = 'halo_'+str(j)
+    snap = "/snapshot_255.hdf5"
+    subSnap = "/fof_subhalo_tab_255.hdf5"
+    pos,rvir = loadSim(lvl,halo,snap,subSnap)
+    rvir
+    print("Radius of the simulation:  "+str(rvir))
+    # Logspace for radius
+    logdelta = 3.0/50.0
+    logr_ini = -1
+    # Keeps semiaxes
+    semmiaxes = []
+    for i in range(1000):
+        x_rad = 10.0**(logr_ini+i*logdelta)
+        #x_rad =340.0
+        a,b,c,posx = recalculate_Semiaxes(x_rad,x_rad,x_rad,pos)
+        if a > 0:
+            semmiaxes.append([a,b,c])
+            if i%10 == 0:
+                title = lvl+"_"+halo+"_"+str(i//10)+".png"
+                plotHalo(title,a,b,c,posx,lvl,halo)
+        rad = (abs(a*b*c))**(1./3.)
+        #print("________________________________________________________________")
+        print(x_rad,rad)
+        if( x_rad > 2.0*rvir ):
+            break
+        # Uses last semiaxes to simplify further calculations by rescaling
+        #scale = xrad[i+1]/xrad[i]
+        #a,b,c = scale*a,scale*b,scale*c
+    semmiaxes = np.array(semmiaxes)
+    np.savetxt("../Plots/"+lvl+"/"+halo+"/"+"abc_"+lvl+"_"+halo+".txt",semmiaxes, delimiter = ',')
+    if(len(semmiaxes) != 0):
+        a,b,c = semmiaxes.T
+        yvals = np.array([b/a,c/a,c/b])
+        ylabel = ['b/a','c/a','c/b']
+        xvals = (a*b*c)**(1./3.)
+        fig,axs = ratiosPlots(xvals, yvals, ylabel, rvir)  
+        plt.savefig("../Plots/"+lvl+"/"+halo+"/"+"Axial_ratios_vs_R__"+lvl+"_"+halo+".png")
+        plt.close()
+'''
+from matplotlib.backends.backend_pdf import PdfPages
+import matplotlib.pyplot as plt
+lvl = 'level5_Durham'
+with PdfPages('../Plots/'+lvl+'/AxialRatios.pdf') as pdf:
+    for j in range(1,31):
+        halo = 'halo_'+str(j)
+        print(halo)
+        path = "../Plots/"+lvl+"/"+halo+"/"+"abc_"+lvl+"_"+halo+".txt"
+        a,b,c = np.loadtxt(path,delimiter = ',').T
+        snap = "/snapshot_255.hdf5"
+        subSnap = "/fof_subhalo_tab_255.hdf5"
+        pos,rvir = loadSim(lvl,halo,snap,subSnap)
+        yvals = np.array([b/a,c/a,(a**2-b**2)/(a**2-c**2)])
+        ylabel = ['b/a','c/a','T']
+        xvals = (a*b*c)**(1./3.)
+        fig,axs = ratiosPlots(xvals, yvals, ylabel, rvir)
+        axs[0].set_title(halo)
+        pdf.savefig(fig)
+        plt.close()
