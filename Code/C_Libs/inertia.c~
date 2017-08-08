@@ -1,0 +1,136 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <gsl/gsl_math.h>
+#include <gsl/gsl_eigen.h>
+
+#define FLOAT double
+#define abs fabs
+void update_eigensys(const FLOAT *pos, int len, FLOAT* axes, FLOAT *vecs);
+int *sort_evals(gsl_vector* eval);
+void get_shape(const void * posv, int len, void * vecsv, void * axesv);
+
+/*
+ * Calculates the shape of the halo via the inertia tensor according to Allgood's method
+ * In      : posv  = The values of position of DM particles (const)
+ * In      : len   = The number of DM particles
+ * Modifies: vecsv = [v1,v2,v3] the eigenvectors of the shape vector
+ * Modifies: axes  = [a, b, c ] the eigenvalues of the shape vector
+ * Initial values: a,b,c = rad_________vecs = canonical base
+ * 
+ */
+void get_shape(const void * posv, int len, void * vecsv, void * axesv) {
+    
+    // Indices
+    int i = 0;
+
+    // Interprets data 
+    const FLOAT * pos = (FLOAT *) posv;
+    FLOAT * vecs = (FLOAT *) vecsv;
+    FLOAT * axes = (FLOAT *) axesv;
+    printf("vec1 = %f  %f  %f\n", vecs[0],vecs[1],vecs[2]);
+    printf("vec2 = %f  %f  %f\n", vecs[3],vecs[4],vecs[5]);
+    printf("vec3 = %f  %f  %f\n", vecs[6],vecs[7],vecs[8]);
+    // Keeps eigenvalues for convergence calculations
+    FLOAT a = axes[0];
+    FLOAT b = axes[0];
+    FLOAT c = axes[0];
+    FLOAT conv = 100;
+    do{
+        i++;
+	//printf("Iteration %d\n", i);
+        update_eigensys(pos,len,axes,vecs);
+	conv = (1./3.)*(((a-axes[0])/a)+((b-axes[1])/b)+((c-axes[2])/c));
+	//printf("Axes = %f  %f  %f\n", a,b,c);
+	//printf("Convergence = %f  %f\n",conv,pow(10.0,-6));
+	a = axes[0];
+	b = axes[1];
+	c = axes[2];
+    }while( abs(conv) >= pow(10.0,-6) );
+    printf("Convergence achived at:   %d\n",i);
+}
+
+/* 
+ * Diagonalizes the inertia tensor and update eigen vals and eigenvecs
+ * vecs define the major axis of the ellipsoid
+ * axes define the axes sizes
+ *
+ */
+void update_eigensys(const FLOAT *pos, int len, FLOAT* axes, FLOAT *vecs){
+    
+    int i;
+    int j;
+    // Allocates the inertia matrix
+    double *inertia = malloc(9*sizeof(double));
+
+    // Filters positions and calculates the inertia tensor
+    for( i = 0; i < len; i++ ){
+        
+        FLOAT val = pow((pos[3*i]*vecs[0]+pos[3*i+1]*vecs[1]+pos[3*i+2]*vecs[2])/axes[0],2);
+	val      += pow((pos[3*i]*vecs[3]+pos[3*i+1]*vecs[4]+pos[3*i+2]*vecs[5])/axes[1],2);
+	val      += pow((pos[3*i]*vecs[6]+pos[3*i+1]*vecs[7]+pos[3*i+2]*vecs[8])/axes[2],2);
+	if( val <= 1 ){
+	    int l;
+	    int n;
+	    // Calculates the inertia tensor for this particle
+	    for( l = 0; l < 3; l++ ){
+	        for( n = l; n < 3; n++){
+		    // Inertia term for this particle is calculated 
+		  inertia[3*l+n] += (double) pos[3*i+l]*pos[3*i+n]/(pow(axes[0],2)*val);   
+		}
+	    }
+	}
+    }
+    // Inertia matrix is symmetrized
+    int l;
+    int n;
+    // Calculates the inertia tensor for this particle
+    for( l = 0; l < 3; l++ ){
+	for( n = l; n < 3; n++){
+	    inertia[3*n+l] = inertia[3*l+n];
+	}
+    }
+    // Diagonalizes (symmetric) matrix GNU scientific
+    gsl_matrix_view m = gsl_matrix_view_array(inertia, 3, 3);
+    
+    // Allocation
+    gsl_vector *eval = gsl_vector_alloc(3);
+    gsl_matrix *evec = gsl_matrix_alloc(3, 3);
+    gsl_eigen_symmv_workspace *w = gsl_eigen_symmv_alloc(3);
+    // Eigensystem solve
+    gsl_eigen_symmv(&m.matrix, eval, evec, w);
+    // Sorts eigenvectors and eigenvalues
+    gsl_eigen_symmv_sort(eval, evec, GSL_EIGEN_SORT_ABS_DESC);        
+    // Free Workspace
+    gsl_eigen_symmv_free(w);
+    for (i = 0; i < 3; i++)
+      {
+        double eval_i  = gsl_vector_get (eval, i);
+        //gsl_vector_view evec_i = gsl_matrix_column (evec, i);
+
+        printf ("eigenvalue = %.4e\n", eval_i);
+        printf ("eigenvector = \n");
+	printf("[%f  %f  %f]\n",vecs[3*i],vecs[3*i+1],vecs[3*i+2]);
+	  //gsl_vector_fprintf (stdout, 
+	  //                &evec_i.vector, "%.4e");
+      }
+    // Actualizes the eigensystem conserving biggest semiaxis
+    FLOAT v0 = ((FLOAT) gsl_vector_get (eval, 0));
+    for( i = 0; i < 3; i++ ){
+        if( i != 0 ){
+	    axes[i] = axes[0]*sqrt(abs(((FLOAT) gsl_vector_get (eval,i))/v0));
+	}
+	for( j = 0; j < 3; j++ ){
+	    vecs[3*i + j] = gsl_matrix_get(evec, i, j);
+	}
+    }
+    
+    // Free memory
+    gsl_vector_free (eval);
+    gsl_matrix_free (evec);
+    free(inertia);
+}
+
+int main(){
+  return 0;
+}
