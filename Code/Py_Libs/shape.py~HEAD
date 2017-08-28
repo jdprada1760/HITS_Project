@@ -223,8 +223,8 @@ def main():
     #lvl = 'level5'
     lvl = 'level4_MHD'
     #lvl = 'level5_Durham' 
-    halonums = [20]
-    #halonums = range(1,11)
+    #halonums = [20]
+    halonums = range(1,11)
     #halonums = ['halo16','halo16_MHD','halo24','halo24_MHD','halo28', 'halo6_MHD','halo9','halo9_MHD']
     for j in halonums:
         print("--------------------------------------------------------------------------")
