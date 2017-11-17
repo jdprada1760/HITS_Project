@@ -17,11 +17,12 @@ import ctypes as ct
 inertia = ct.cdll.LoadLibrary('./C_Libs/inertia.so')
 
 # Simiulation specs
-#lvl = 'level4_MHD'
-lvl = 'level4_DM'
-halonums = range(1,31)
-snapnum = 127
-#snapnum = 63
+lvl = 'level3_MHD'
+#lvl = 'level3_DM'
+#halonums = range(1,31)
+halonums = [6,16,21,23,24,27]
+#snapnum = 127
+snapnum = 63
 #snapnum = 255
 
 # Keeps semiaxes and eigenvecs
@@ -55,38 +56,72 @@ eigenvecs = np.reshape(np.array(eigenvecs),(len(halonums),18))
 np.savetxt("../Plots/"+lvl+"/Semiaxes_rvir_1e2rvir.csv",semmiaxes,delimiter=',')
 np.savetxt("../Plots/"+lvl+"/Eigenvecs_rvir_1e2rvir.csv",eigenvecs,delimiter=',')
 
-''' 
+'''
 
 # Simiulation specs
+lvl3 = 'level3_MHD'
+lvl3no = 'level3_DM'
 lvl = 'level4_MHD'
-#lvl = 'level4_DM'
+lvlno = 'level4_DM'
 # Obtains the axes
-axes = np.loadtxt("../Plots/"+lvl+"/Semiaxes_rvir_1e2rvir.csv", delimiter = ',')
+axes = np.loadtxt("../Plots/"+lvl+"/Semiaxes_rvir_1e2rvir.csv", delimiter = ',')[(5,15,20,22,23,26),:]
+axesno = np.loadtxt("../Plots/"+lvlno+"/Semiaxes_rvir_1e2rvir.csv", delimiter = ',')[(5,15,20,22,23,26),:]
+axes3 = np.loadtxt("../Plots/"+lvl3+"/Semiaxes_rvir_1e2rvir.csv", delimiter = ',')
+axes3no = np.loadtxt("../Plots/"+lvl3no+"/Semiaxes_rvir_1e2rvir.csv", delimiter = ',')
 # Axes in inner regions 0.01*rvir ~ 1-5 kpc
 axes1 = axes[:,3:]
+axes1_3 = axes3[:,3:]
 # Axes in outer regions rvir ~ 100-500 kpc
 axes2 = axes[:,:3]
+axes2_3 = axes[:,:3]
+# Axes in inner regions 0.01*rvir ~ 1-5 kpc
+axes1no = axesno[:,3:]
+axes1no_3 = axesno[:,3:]
+# Axes in outer regions rvir ~ 100-500 kpc
+axes2no = axesno[:,:3]
+axes2no_3 = axesno[:,:3]
+
+print( "001rvir3 = ", (axes1_3[:,0]*axes1_3[:,1]*axes1_3[:,2])**(1./3.))
+print( "001rvir4 = ", (axes1[:,0]*axes1[:,1]*axes1[:,2])**(1./3.))
+print( "rvir3 = ", (axes2_3[:,0]*axes2_3[:,1]*axes2_3[:,2])**(1./3.))
+print( "rvir4 = ", (axes2[:,0]*axes2[:,1]*axes2[:,2])**(1./3.))
 
 # Plots axial ratios c/a Vs b/a for R = 0.01Rvir 
-plt.plot(axes1[:,1]/axes1[:,0],axes1[:,2]/axes1[:,0], marker = 'o',
- c = 'b', alpha = 0.6, linewidth = 0, label = r"$R = 0.01R_{vir}$" )
+plt.plot(axes1[:,1]/axes1[:,0],axes1[:,2]/axes1[:,0], marker = '+', markersize = 20,
+ c = 'cyan', alpha = 0.6, linewidth = 0, label = r"$lvl4 ... R_{MHD} = 0.01R_{vir}$" )
+plt.plot(axes1_3[:,1]/axes1_3[:,0],axes1_3[:,2]/axes1_3[:,0], marker = 's',
+ c = 'cyan', alpha = 0.6, linewidth = 0, label = r"$lvl3 ... R_{MHD} = 0.01R_{vir}$" )
+plt.plot(axes1no[:,1]/axes1no[:,0],axes1no[:,2]/axes1no[:,0], marker = '+', markersize = 20,
+ c = 'm', alpha = 0.6, linewidth = 0, label = r"$lvl4 ... R_{DM} = 0.01R_{vir}$" )
+plt.plot(axes1no_3[:,1]/axes1no_3[:,0],axes1no_3[:,2]/axes1no_3[:,0], marker = 's',
+ c = 'm', alpha = 0.6, linewidth = 0, label = r"$lvl3 ... R_{DM} = 0.01R_{vir}$" )
 # Plots axial ratios c/a Vs b/a for R = Rvir 
-plt.plot(axes2[:,1]/axes2[:,0],axes2[:,2]/axes2[:,0], marker = '^',
- c = 'r', alpha = 0.7, linewidth = 0, label = r"$R = R_{vir}$" )
+plt.plot(axes2[:,1]/axes2[:,0],axes2[:,2]/axes2[:,0], marker = '+', markersize = 20,
+ c = 'blue', alpha = 0.7, linewidth = 0, label = r"$lvl4 ... R_{MHD} = R_{vir}$" )
+plt.plot(axes2_3[:,1]/axes2_3[:,0],axes2_3[:,2]/axes2_3[:,0], marker = 's',
+ c = 'blue', alpha = 0.7, linewidth = 0, label = r"$lvl3 ... R_{MHD} = R_{vir}$" )
+plt.plot(axes2no[:,1]/axes2no[:,0],axes2no[:,2]/axes2no[:,0], marker = '+', markersize = 20,
+ c = 'red', alpha = 0.7, linewidth = 0, label = r"$lvl4 ... R_{DM} = R_{vir}$" )
+plt.plot(axes2no_3[:,1]/axes2no_3[:,0],axes2no_3[:,2]/axes2no_3[:,0], marker = 's',
+ c = 'red', alpha = 0.7, linewidth = 0, label = r"$lvl3 ... R_{DM} = R_{vir}$" )
 # Plots Observational references
 plt.errorbar([1],[0.47], yerr = 0.14, label = "Loebman et al. @20kpc",marker = 'o')
-plt.plot([1],[0.9], label = "Vera-Ciro et al. ~<10kpc",marker = '*',linewidth = 0)#<~ 10kpc
-plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '*',linewidth = 0)#>> 30kpc
-plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = '*',linewidth = 0)# Must be outerskirts
+plt.plot([1],[0.9], label = "Vera-Ciro et al. ~<10kpc",marker = '*',linewidth = 0, markersize = 15,c = 'm')#<~ 10kpc
+plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '*',linewidth = 0, markersize = 15, c = 'g')#>> 30kpc
+plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = '*',linewidth = 0, markersize = 15, c = 'y')# Must be outerskirts
 plt.plot([0,1],[0,1])
 
 plt.xlim(-0.05,1.05)
 plt.ylim(-0.05,1.05)
 plt.xlabel("b/a")
 plt.ylabel("c/a")
-plt.title("Triaxiality Inner-Outterskirts "+lvl)
-plt.legend()
-plt.savefig("../Plots/"+lvl+"/Triaxiality_"+lvl+".png")
+#plt.title("Triaxiality Inner-Outterskirts "+lvl)
+#plt.title("Triaxiality Innerskirts DM vs MHD")
+plt.title("Triaxiality Outterskirts DM vs MHD Lvl 3,4")
+plt.legend(loc = (1,0))
+#plt.savefig("../Plots/"+lvl+"/Triaxiality_"+lvl+".png")
+plt.savefig("../Plots/"+"/Triaxiality_General.png",bbox_inches="tight")
+#plt.savefig("../Plots/"+"/Triaxiality_Outer_lvl3.png")
 
 
 
