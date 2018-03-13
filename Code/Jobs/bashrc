@@ -1,0 +1,40 @@
+#!/bin/bash 
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+source /etc/profile.d/modules.sh
+
+module purge
+module load gcc
+module load sge 
+module load gcc
+module load sge 
+module load mvapich2/gcc/64/1.6-qlc
+module load tap
+module load tap_hdf5
+module load tap_gmp
+module load svn
+module load bbcp
+module load tap_hwloc
+module load hydra
+module load tap_fftw3f/3.3.4
+module load tap_fftw/2.1.5
+module load tap_python
+module load tap_gsl
+module load ffmpeg/20140423
+export LM_LICENSE_FILE=1700@172.16.3.240
+
+PS1='\h:\w> '
+alias l='ls -ltrh'
+
+echo "Modules loaded correctly"
+module list
+#module avail
+
+
+
+
+

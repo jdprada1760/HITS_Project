@@ -36,9 +36,17 @@ def loadSim(lvl,halo,snapnum):
     
     # DM Mass
     DMass = sn.MassTable[1]
-
+    
     # r the radius of the halo (R_mean200)*1000 to obtain it in kpc
-    rad = 1000.*subSn.group.Group_R_TopHat200[0]
+    radiii = 1000.*subSn.group.Group_R_TopHat200[0]
+    rad = 1000.*subSn.group.Group_R_Crit500[0]
+    print("Rad_Crit_500 Vs Rad_Top_200: " + str(rad)+"   "+str(radiii))
+    # Some galactic disk properties of the principal subhalo
+    diskrads = 1000*subSn.SubhaloHalfmassRadType[0]
+    
+    # The redshift and scale factor
+    redshift = sn.Redshift
+    scalefactor = sn.Time
 
     # Calculates the center of the halo (initial)*1000 to get it in kpc__
     # Center can be the center of mass or the minimum of potential
@@ -55,7 +63,17 @@ def loadSim(lvl,halo,snapnum):
     pos =  1000.*sn.pos[:subCut]
     pos -= CM
 
-    return pos,rad
+    # Creates a dictionary of important quantities about the studied
+    dictio = {}
+    dictio['Redshift'] = redshift
+    dictio['Scale factor'] = scalefactor
+    dictio['rad_gas'] = diskrads[0]
+    dictio['rad_dm'] = diskrads[1]
+    dictio['rad_stars'] = diskrads[4]
+    dictio['rad_bh'] = diskrads[5]
+  
+    
+    return pos,rad,dictio
 
 
 # Gets semiaxes given eigenvalues of Inertia and a radius

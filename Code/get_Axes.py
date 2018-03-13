@@ -1,14 +1,19 @@
+#########################################################################
+# Calculates the radial profile for the axes at each snapshot
+#########################################################################
+
 import matplotlib
 matplotlib.use('Agg')
-import os
+import sys
+import gc
 
 # Python
 from arepo import *
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FormatStrFormatter
-import yt
-from yt.units import parsec, Msun
+#import yt
+#from yt.units import parsec, Msun
 from Py_Libs.shape import *
 import os as os
 
@@ -38,10 +43,13 @@ print(eigenvecs)
 
 #lvl = 'level5'
 #lvl = 'level3_MHD'
-lvl = 'level3_DM'
+#lvl = 'level3_DM'
 #lvl = 'level5_Durham' 
 #lvl = 'level2'
-halonums = [21,23,24,27]
+
+lvl = sys.argv[1]
+halonums = [int(val) for val in sys.argv[2:]]
+
 #halonums = range(1,31)
 #halonums = [24]
 for j in halonums:
@@ -50,9 +58,16 @@ for j in halonums:
     #halo = "halo" + str(j) +"_MHD"        
     halo = 'halo_'+str(j)
     
-    #snapnum = 17
-    snapnum = 119
-    #snapnum = 59    
+    # Considerations of level
+    snapnum = 0
+    step = 0
+    if lvl == 'level3_MHD':
+        snapnum = 63
+        step = 1
+    elif lvl == 'level3_DM':
+        snapnum = 127
+        step = 2
+    
     # This boolean determines the stop of the snapshot calculations
     boole = True
     
@@ -63,7 +78,7 @@ for j in halonums:
         pos = np.array(pos,dtype = np.float)
         
         # Stops if 
-        if (rvir < 20) : 
+        if (info['Redshift'] >= 2) : 
             boole = False
         
         print("---------------------------------------------------------------------------------")
@@ -79,6 +94,7 @@ for j in halonums:
         
         # Keeps semiaxes
         semmiaxes = []
+        axes_vecs = []
         # Initial radius, axes and inertia
         x_rad = 10.0**(logr_ini)
         axes = np.ones(3,dtype = np.float)*x_rad
@@ -96,9 +112,9 @@ for j in halonums:
                 inertia.get_shape(ct.c_void_p(pos.ctypes.data),ct.c_int(len(pos)), ct.c_void_p(vecs.ctypes.data), ct.c_void_p(axes.ctypes.data))
                 rad = (abs(axes[0]*axes[1]*axes[2]))**(1./3.)
                 # Advance
-                if axes[0] < 0:
+                if axes[0] <= 0:
                     break
-                elif abs(rad-x_rad)/x_rad > 0.01 :
+                elif abs(rad-x_rad)/x_rad > 0.05 :
                     axes = (axes[0]+1.5*(x_rad-rad))*axes/axes[0]
                     #axes = np.ones(3,dtype = np.float)*(axes[0]+1.*(x_rad-rad))
                     #vecs = np.identity(3,dtype = np.float)  
@@ -107,12 +123,13 @@ for j in halonums:
                     
                 l += 1   
                 print("+++"+str(l)+"+++",rad,x_rad,axes[0])  
-                if l > 200 :
+                if l > 10 :
                     break
 
             x_rad = 10.0**(logr_ini+(i+1)*logdelta)
             if axes[0] > 0:
                 semmiaxes.append(np.copy(axes))
+                axes_vecs.append(np.copy(vecs).flatten())
                 # Uses last result to improve convergence
                 axes[1:] = (x_rad/axes[0])*axes[1:]
                 axes[0] = x_rad
@@ -131,7 +148,6 @@ for j in halonums:
             if( x_rad > 1.0*rvir ):
                 break
                 
-        snapnum = snapnum-8
         semmiaxes.append(np.array([rvir,rvir,rvir]))
         semmiaxes = np.array(semmiaxes)
         path = "../Plots/"+lvl+"/"+halo+"/"+"snap_"+str(snapnum)
@@ -141,7 +157,11 @@ for j in halonums:
         except OSError:
             print("Directory already exists")
         np.savetxt(path+"/s"+str(snapnum)+".txt",semmiaxes, delimiter = ',')
+        np.savetxt(path+"/s"+str(snapnum)+"_vecs.txt",axes_vecs, delimiter = ',')
         np.save(path+"/info.npy",info)
+        snapnum = snapnum-step
+        # Forces garbage collector
+        gc.collect()
         
 
     #np.savetxt("../Plots/"+lvl+"/"+halo+"/rand_sample/"+str(k)+".txt",semmiaxes, delimiter = ',')

@@ -5,7 +5,7 @@
 #include <gsl/gsl_eigen.h>
 #include "omp.h"
 
-#define nproc 8
+#define nproc 4
 #define FLOAT double
 void update_eigensys(const FLOAT *pos, int len, FLOAT* axes, FLOAT *vecs);
 int *sort_evals(gsl_vector* eval);
@@ -47,7 +47,7 @@ void get_shape(const void * posv, int len, void * vecsv, void * axesv) {
         i++;
 	//printf("Iteration %d ______________________________________________________________\n", i);
         update_eigensys(pos,len,axes,vecs);
-	conv = (1./3.)*(((a-axes[0])/a)+((b-axes[1])/b)+((c-axes[2])/c));
+	conv = (1./3.)*((fabs(a-axes[0])/a)+(fabs(b-axes[1])/b)+(fabs(c-axes[2])/c));
 	//printf("Axes = %f  %f  %f\n", a,b,c);
 	//printf("Convergence = %f  %f\n",conv,pow(10.0,-6));
 	a = axes[0];
@@ -57,7 +57,7 @@ void get_shape(const void * posv, int len, void * vecsv, void * axesv) {
 	    break;
 	}
     }while( fabs(conv) >= pow(10.0,-6) );
-    printf("Convergence achived at:   %d\n",i);
+    //printf("Convergence achived at:   %d\n",i);
 }
 
 /* 
