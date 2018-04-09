@@ -31,20 +31,26 @@ with PdfPages("../Plots/"+lvl+"/"+"Z_Triax_"+lvl+".pdf") as pdf:
         # Paths to file
         path = "../Plots/"+lvl+"/"+halo
         
-        # Plots last snapshot in terms of radius
-        arr = np.loadtxt(path+"/"+"abc_"+lvl+"_"+halo+".txt", delimiter = ",")
-        a,b,c = (arr)[:-1].T
+        # Loads redshift rvir shapes
+        arr = np.loadtxt(path+"/"+"Z_axes.txt", delimiter = ",")
+        redshift,a,b,c = arr.T  
+
+        # Fonts 
+        MEDIUM_SIZE = 30
+        SMALL_SIZE = 25
+        plt.rc('font', size=MEDIUM_SIZE)          # controls default text sizes
+        plt.rc('axes', titlesize=MEDIUM_SIZE)     # fontsize of the axes title
+        plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
+        plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+        plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+        plt.rc('legend', fontsize=SMALL_SIZE)  
 
         # Plots    
         fig, axs = plt.subplots(figsize=(10,10))
         
         # Color settings
         my_norm = colors.Normalize(0,1)
-        mapa = cm.ScalarMappable(norm=my_norm, cmap='hsv')
-        
-        # Loads redshift rvir shapes
-        arr = np.loadtxt(path+"/"+"Z_axes.txt", delimiter = ",")
-        redshift,a,b,c = arr.T        
+        mapa = cm.ScalarMappable(norm=my_norm, cmap='hsv')      
         
         for j in range(len(a)):
             
@@ -58,6 +64,9 @@ with PdfPages("../Plots/"+lvl+"/"+"Z_Triax_"+lvl+".pdf") as pdf:
             
             if redshift[j+1] < 1.5:
                 axs.plot([b[j]/a[j],b[j+1]/a[j+1]],[c[j]/a[j],c[j+1]/a[j+1]], color = my_col, linewidth=2, alpha = 1, zorder = len(a)-j)
+            
+
+
                 
                 
         # Plots last snapshot in terms of radius
@@ -66,7 +75,7 @@ with PdfPages("../Plots/"+lvl+"/"+"Z_Triax_"+lvl+".pdf") as pdf:
         rvir =  arr[-1][0]
         xvals = (a*b*c)**(1./3.)
         # Axial ratios and radii (including rvir)
-        a,b,c = (arr[xvals>=10])[:-1].T
+        a,b,c = (arr[:-1][xvals>=10]).T
         xvals = (a*b*c)**(1./3.)
         
         # Radius at which comparison is performed (in kpc)
@@ -77,20 +86,20 @@ with PdfPages("../Plots/"+lvl+"/"+"Z_Triax_"+lvl+".pdf") as pdf:
         axs.plot([0,1],[0,1], linewidth= 2, c = 'black')
         axs.set_xlabel("b/a")
         axs.set_ylabel("c/a")
-        axs.set_title("Triaxiality "+halo)
+        axs.set_title(halo)
         axs.set_xlim(0,1)
         axs.set_ylim(0,1)
         #axs.xaxis.set_major_formatter(FormatStrFormatter('%.1f'))
         
         # Colorbar
-        xticks = [0, 0.5, 1, 2,4,8]
+        xticks = [0, 0.5, 1,2]
         yticks = [1.0/(1.0+x) for x in xticks]
         
         # Colorbar ax
         cbaxes = fig.add_axes([0.95, 0.1, 0.02, 0.8]) 
         cbar = mpl.colorbar.ColorbarBase(cbaxes, cmap = "hsv", norm = my_norm, orientation = 'vertical', ticks = yticks )  
         cbar.ax.set_yticklabels(xticks)
-        cbar.set_label('$Redshift$', fontsize=14 )
+        cbar.set_label('$Redshift$', fontsize=30 )
         
         # Save
         pdf.savefig(fig, bbox_inches='tight')

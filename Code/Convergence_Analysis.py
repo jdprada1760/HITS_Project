@@ -91,7 +91,6 @@ with PdfPages("../Plots/Convergence_lvl34_"+sys.argv[1]+".pdf") as pdf:
                 xvals = (a*b*c)**(1./3.)
                 yvals = np.array([b/a,c/a,c/b])
                 ax.plot(xvals,yvals[indi], c = 'grey', linewidth=0.1, zorder = 1)
-                ax.yaxis.set_major_formatter(FormatStrFormatter('%.1f'))
                 # Statistics
                 yrand.append(yvals[indi,-mini:])
                 #print len(yvals[indi,-mini:])
@@ -100,7 +99,7 @@ with PdfPages("../Plots/Convergence_lvl34_"+sys.argv[1]+".pdf") as pdf:
                     xrand = xvals[-mini:]
                     
                 # Hide axes
-                plt.setp( ax.get_xticklabels(), visible=False)                
+            plt.setp( ax.get_xticklabels(), visible=False)                
             
             yrand = np.array(yrand)
             
@@ -126,7 +125,7 @@ with PdfPages("../Plots/Convergence_lvl34_"+sys.argv[1]+".pdf") as pdf:
             ax.axhline(0.05, linewidth = 0.1)
             #ax.plot([rvir,rvir],[0,1], label = r"$R_{200}$")
             ax.plot([rvir,rvir],[0,1], label = r"$R_{200}$", linestyle = '--')
-            ax.set_xscale('log')
+            
             
             # Major ticks every 20, minor ticks every 5
             # grid!!
@@ -143,8 +142,8 @@ with PdfPages("../Plots/Convergence_lvl34_"+sys.argv[1]+".pdf") as pdf:
             ax.grid(which='minor', alpha=0.3)
             ax.grid(which='major', alpha=0.6)
 
-
-            
+            ax.set_xscale('log')
+            ax.yaxis.set_major_formatter(FormatStrFormatter('%.1f'))
             
             # Plotting ratios
             ax.set_ylim(0,1)
@@ -157,7 +156,7 @@ with PdfPages("../Plots/Convergence_lvl34_"+sys.argv[1]+".pdf") as pdf:
             
         # Axs specs    
         #plt.grid()
-        axs[0].legend()
+        axs[-1].legend(loc = 0)
         axs[-1].set_xlabel("R(Kpc/h)")
         axs[-1].xaxis.set_major_formatter(FormatStrFormatter('%.1f'))
         axs[-1].yaxis.set_major_formatter(FormatStrFormatter('%.1f'))

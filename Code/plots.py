@@ -149,7 +149,7 @@ def fun2():
                 #ax.legend()
                 
             
-            axs[0].legend()
+            axs[-1].legend(loc = 0)
             plt.setp( axs[-1].get_xticklabels(), visible=True)
             axs[-1].set_xlabel("R(Kpc/h)")
             axs[0].set_title(halo)

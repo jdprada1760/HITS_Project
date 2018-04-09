@@ -37,13 +37,22 @@ with PdfPages("../Plots/Redshift_"+lvl3+".pdf") as pdf:
             return int(l.split("_")[1])
         listdir.sort(key=getkey)
 
+        # Fonts 
+        MEDIUM_SIZE = 30
+        SMALL_SIZE = 25
+        SSSMALL_SIZE = 17
+        plt.rc('font', size=SSSMALL_SIZE)          # controls default text sizes
+        plt.rc('axes', titlesize=MEDIUM_SIZE)     # fontsize of the axes title
+        plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
+        plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+        plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
             
         # Plots    
         ylabel = ['b/a','c/a','c/b']
         fig, axs = plt.subplots(figsize=(10,10),nrows=3)
        
         # Color settings
-        my_norm = colors.Normalize(0,1)
+        my_norm = colors.Normalize(0.2,1)
         mapa = cm.ScalarMappable(norm=my_norm, cmap='hsv')
         
         for direc in listdir:
@@ -69,16 +78,39 @@ with PdfPages("../Plots/Redshift_"+lvl3+".pdf") as pdf:
                 
                 
                 my_col = mapa.to_rgba((1.0/(1.0+redshift)))
-                mappable = ax.plot(xvals,yval, color = my_col, linewidth=0.5, label = "Redshift: "+ str(redshift), alpha = 1)
-                ax.plot([rvir,rvir],[0,1], color = my_col)
+                if(redshift < 1e-6):
+                    mappable = ax.plot(xvals,yval, color = my_col, linewidth=1, label = "Radial shape", alpha = 1,zorder=10)
+                    ax.plot([rvir,rvir],[0,0.5], color = my_col, linestyle = '-.',label = r"$R_{500}$",zorder =1)
+                else:
+                    mappable = ax.plot(xvals,yval, color = my_col, linewidth=0.5,  alpha = 1,zorder = 10)
+                    ax.plot([rvir,rvir],[0,0.5], color = my_col,linestyle = '-.',zorder=1)
+                
+                # Major ticks every 20, minor ticks every 5
+                major_ticksy = np.linspace(0, 1, 3)
+                minor_ticksy = np.linspace(0, 1, 11)
+                major_ticksx = np.logspace(-1, 2, 3)
+                minor_ticksx = np.logspace(-1, 2, 30)
+
+                ax.set_xticks(major_ticksx)
+                ax.set_xticks(minor_ticksx, minor=True)
+                ax.set_yticks(major_ticksy)
+                ax.set_yticks(minor_ticksy, minor=True)
+                ax.grid(which='both')
+                ax.grid(which='minor', alpha=0.3)
+                ax.grid(which='major', alpha=0.6)
+
                 ax.set_xscale('log')
             
                 # Plotting ratios
                 ax.set_ylim(0,1)
         
                 # Axs specs
-                ax.set_xlim(3,rvir+20)
+                ax.set_xlim(3,rvir+30)
                 ax.xaxis.set_major_formatter(FormatStrFormatter('%.1f'))
+                ax.yaxis.set_major_formatter(FormatStrFormatter('%.1f'))
+                
+                # Hide axes 
+                plt.setp( ax.get_xticklabels(), visible=False)                
                 
             
         # Axs specs  
@@ -91,11 +123,13 @@ with PdfPages("../Plots/Redshift_"+lvl3+".pdf") as pdf:
         cbaxes = fig.add_axes([0.95, 0.1, 0.02, 0.8]) 
         cbar = mpl.colorbar.ColorbarBase(cbaxes, cmap = "hsv", norm = my_norm, orientation = 'vertical', ticks = yticks )  
         cbar.ax.set_yticklabels(xticks)
-        cbar.set_label('$Redshift$', fontsize=14 )
+        cbar.set_label('$Redshift$', fontsize=30 )
 
-        
-        axs[-1].set_xlabel("log(R(kpc/h))")
-        axs[0].set_title(halo+"  Rvir="+str(rvir)+"Kpc" )    
+        axs[-1].legend(loc = 0)
+        axs[-1].set_xlabel("R(Kpc/h)")
+        plt.setp( axs[-1].get_xticklabels(), visible=True)                
+        #axs[0].set_title(halo+"  Rvir="+str(rvir)+"Kpc" )  
+        axs[0].set_title(halo)  
         
         pdf.savefig(fig, bbox_inches='tight')
         plt.close()
