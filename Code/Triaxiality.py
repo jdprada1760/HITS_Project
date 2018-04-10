@@ -53,24 +53,24 @@ for j in halonums:
 # Reshapes so that each halo info is in the same row
 semmiaxes = np.reshape(np.array(semmiaxes),(len(halonums),6))
 eigenvecs = np.reshape(np.array(eigenvecs),(len(halonums),18))
-np.savetxt("../Plots/"+lvl+"/Semiaxes_rvir_1e2rvir.csv",semmiaxes,delimiter=',')
-np.savetxt("../Plots/"+lvl+"/Eigenvecs_rvir_1e2rvir.csv",eigenvecs,delimiter=',')
+np.savetxt("../Plots/Triaxiality/"+lvl+"/Semiaxes_rvir_1e2rvir.csv",semmiaxes,delimiter=',')
+np.savetxt("../Plots/Triaxiality/"+lvl+"/Eigenvecs_rvir_1e2rvir.csv",eigenvecs,delimiter=',')
 
 '''
 ############################################################
 #    Level 3 Innerskirts DM vs MHD
 ############################################################
 # Fonts 
+# Fonts 
 MEDIUM_SIZE = 30
 SMALL_SIZE = 25
-SSSMALL_SIZE = 15
+SSSMALL_SIZE = 10
 plt.rc('font', size=SSSMALL_SIZE)          # controls default text sizes
 plt.rc('axes', titlesize=MEDIUM_SIZE)     # fontsize of the axes title
 plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
 plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
-
-
+        
 # Simiulation specs
 lvl3 = 'level3_MHD'
 lvl3no = 'level3_DM'
@@ -100,17 +100,17 @@ print( "rvir3 = ", (axes2_3[:,0]*axes2_3[:,1]*axes2_3[:,2])**(1./3.))
 print( "rvir4 = ", (axes2[:,0]*axes2[:,1]*axes2[:,2])**(1./3.))
 
 # Plots axial ratios c/a Vs b/a for R = 0.01Rvir 
-plt.plot(axes1_3[:,1]/axes1_3[:,0],axes1_3[:,2]/axes1_3[:,0], marker = 's',
-c = 'cyan', alpha = 0.6, linewidth = 0, label = r"$lvl3 ... R_{MHD} = 0.01R_{vir}$" )
+plt.plot(axes1_3[:,1]/axes1_3[:,0],axes1_3[:,2]/axes1_3[:,0], marker = 'o',
+markersize = 15, c = 'b', alpha = 0.6, linewidth = 0, label = r"$R_{MHD} = 0.01R_{200}$" )
 plt.plot(axes1no_3[:,1]/axes1no_3[:,0],axes1no_3[:,2]/axes1no_3[:,0], marker = 's',
-c = 'm', alpha = 0.6, linewidth = 0, label = r"$lvl3 ... R_{DM} = 0.01R_{vir}$" )
+markersize = 15, c = 'r', alpha = 0.6, linewidth = 0, label = r"$R_{DM} = 0.01R_{200}$" )
 
 
 # Plots Observational references
-plt.errorbar([1],[0.47], yerr = 0.14, label = "Loebman et al. @20kpc",marker = '*',markersize = 15, color = 'black')
+plt.errorbar([1],[0.47], yerr = 0.14, label = "Loebman et al. @20kpc",marker = 'H',markersize = 15, color = 'black')
 plt.plot([1],[0.9], label = "Vera-Ciro et al. ~<10kpc",marker = '*',linewidth = 0, markersize = 15,c = 'm')#<~ 10kpc
-plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '*',linewidth = 0, markersize = 15, c = 'g')#>> 30kpc
-plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = '*',linewidth = 0, markersize = 15, c = 'y')# Must be outerskirts
+plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '8',linewidth = 0, markersize = 15, c = 'g')#>> 30kpc
+plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = 'P',linewidth = 0, markersize = 15, c = 'y')# Must be outerskirts
 plt.plot([0,1],[0,1])
 
 plt.xlim(-0.05,1.05)
@@ -118,8 +118,8 @@ plt.ylim(-0.05,1.05)
 plt.xlabel("b/a")
 plt.ylabel("c/a")
 plt.title("Level 3 Innerskirts DM vs MHD")
-plt.legend(loc = (1,0))
-plt.savefig("../Plots/"+"/Triaxiality_Inner_lvl3.png",bbox_inches="tight")
+plt.legend(loc = 0)
+plt.savefig("../Plots/Triaxiality/"+"/Triaxiality_Inner_lvl3.png",bbox_inches="tight")
 plt.clf()
 
 
@@ -140,17 +140,17 @@ plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 
 
 # Plots axial ratios c/a Vs b/a for R = Rvir 
-plt.plot(axes2_3[:,1]/axes2_3[:,0],axes2_3[:,2]/axes2_3[:,0], marker = 's',
-c = 'blue', alpha = 0.7, linewidth = 0, label = r"$lvl3 ... R_{MHD} = R_{vir}$" )
+plt.plot(axes2_3[:,1]/axes2_3[:,0],axes2_3[:,2]/axes2_3[:,0], marker = 'o',
+c = 'blue',markersize = 15, alpha = 0.7, linewidth = 0, label = r"$R_{MHD} = R_{200}$" )
 plt.plot(axes2no_3[:,1]/axes2no_3[:,0],axes2no_3[:,2]/axes2no_3[:,0], marker = 's',
-c = 'red', alpha = 0.7, linewidth = 0, label = r"$lvl3 ... R_{DM} = R_{vir}$" )
+c = 'red',markersize = 15, alpha = 0.7, linewidth = 0, label = r"$R_{DM} = R_{200}$" )
 
 
 # Plots Observational references
-plt.errorbar([1],[0.47], yerr = 0.14, label = "Loebman et al. @20kpc",marker = '*',markersize = 15, color = 'black')
+plt.errorbar([1],[0.47], yerr = 0.14, label = "Loebman et al. @20kpc",marker = 'H',markersize = 15, color = 'black')
 plt.plot([1],[0.9], label = "Vera-Ciro et al. ~<10kpc",marker = '*',linewidth = 0, markersize = 15,c = 'm')#<~ 10kpc
-plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '*',linewidth = 0, markersize = 15, c = 'g')#>> 30kpc
-plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = '*',linewidth = 0, markersize = 15, c = 'y')# Must be outerskirts
+plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '8',linewidth = 0, markersize = 15, c = 'g')#>> 30kpc
+plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = 'P',linewidth = 0, markersize = 15, c = 'y')# Must be outerskirts
 plt.plot([0,1],[0,1])
 
 plt.xlim(-0.05,1.05)
@@ -158,8 +158,8 @@ plt.ylim(-0.05,1.05)
 plt.xlabel("b/a")
 plt.ylabel("c/a")
 plt.title("Level 3 Outterskirts DM vs MHD")
-plt.legend(loc = (1,0))
-plt.savefig("../Plots/"+"/Triaxiality_Outter_lvl3.png",bbox_inches="tight")
+plt.legend(loc = 0)
+plt.savefig("../Plots/Triaxiality/"+"/Triaxiality_Outter_lvl3.png",bbox_inches="tight")
 plt.clf()
 
 
@@ -179,15 +179,15 @@ plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 
 # Plots axial ratios c/a Vs b/a for R = 0.01Rvir 
 plt.plot(axes1[:,1]/axes1[:,0],axes1[:,2]/axes1[:,0], marker = 's',
- c = 'cyan', alpha = 0.6, linewidth = 0, label = r"$lvl4 ... R_{MHD} = 0.01R_{vir}$" )
-plt.plot(axes1no[:,1]/axes1no[:,0],axes1no[:,2]/axes1no[:,0], marker = 's',
-c = 'm', alpha = 0.6, linewidth = 0, label = r"$lvl4 ... R_{DM} = 0.01R_{vir}$" )
+ c = 'r',markersize = 15, alpha = 0.6, linewidth = 0, label = r"$R_{MHD} = 0.01R_{200}$" )
+plt.plot(axes1no[:,1]/axes1no[:,0],axes1no[:,2]/axes1no[:,0], marker = 'o',
+c = 'b',markersize = 15, alpha = 0.6, linewidth = 0, label = r"$R_{DM} = 0.01R_{200}$" )
 
 # Plots Observational references
-plt.errorbar([1],[0.47], yerr = 0.14, label = "Loebman et al. @20kpc",marker = '*',markersize = 15, color = 'black')
+plt.errorbar([1],[0.47], yerr = 0.14, label = "Loebman et al. @20kpc",marker = 'H',markersize = 15, color = 'black')
 plt.plot([1],[0.9], label = "Vera-Ciro et al. ~<10kpc",marker = '*',linewidth = 0, markersize = 15,c = 'm')#<~ 10kpc
-plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '*',linewidth = 0, markersize = 15, c = 'g')#>> 30kpc
-plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = '*',linewidth = 0, markersize = 15, c = 'y')# Must be outerskirts
+plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '8',linewidth = 0, markersize = 15, c = 'g')#>> 30kpc
+plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = 'P',linewidth = 0, markersize = 15, c = 'y')# Must be outerskirts
 plt.plot([0,1],[0,1])
 
 plt.xlim(-0.05,1.05)
@@ -195,8 +195,8 @@ plt.ylim(-0.05,1.05)
 plt.xlabel("b/a")
 plt.ylabel("c/a")
 plt.title("Level 4 Outterskirts DM vs MHD")
-plt.legend(loc = (1,0))
-plt.savefig("../Plots/"+"/Triaxiality_Inner_lvl4.png",bbox_inches="tight")
+plt.legend(loc = 0)
+plt.savefig("../Plots/Triaxiality/"+"/Triaxiality_Inner_lvl4.png",bbox_inches="tight")
 plt.clf()
 
 
@@ -214,15 +214,15 @@ plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 
 # Plots axial ratios c/a Vs b/a for R = Rvir 
 plt.plot(axes2[:,1]/axes2[:,0],axes2[:,2]/axes2[:,0], marker = 's', 
- c = 'blue', alpha = 0.7, linewidth = 0, label = r"$lvl4 ... R_{MHD} = R_{vir}$" )
-plt.plot(axes2no[:,1]/axes2no[:,0],axes2no[:,2]/axes2no[:,0], marker = 's', 
-c = 'red', alpha = 0.7, linewidth = 0, label = r"$lvl4 ... R_{DM} = R_{vir}$" )
+ c = 'blue',markersize = 15, alpha = 0.7, linewidth = 0, label = r"$R_{MHD} = R_{200}$" )
+plt.plot(axes2no[:,1]/axes2no[:,0],axes2no[:,2]/axes2no[:,0], marker = 'o', 
+c = 'red',markersize = 15, alpha = 0.7, linewidth = 0, label = r"$R_{DM} = R_{200}$" )
 
 # Plots Observational references
-plt.errorbar([1],[0.47], yerr = 0.14, label = "Loebman et al. @20kpc",marker = '*',markersize = 15, color = 'black')
+plt.errorbar([1],[0.47], yerr = 0.14, label = "Loebman et al. @20kpc",marker = 'H',markersize = 15, color = 'black')
 plt.plot([1],[0.9], label = "Vera-Ciro et al. ~<10kpc",marker = '*',linewidth = 0, markersize = 15,c = 'm')#<~ 10kpc
-plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '*',linewidth = 0, markersize = 15, c = 'g')#>> 30kpc
-plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = '*',linewidth = 0, markersize = 15, c = 'y')# Must be outerskirts
+plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '8',linewidth = 0, markersize = 15, c = 'g')#>> 30kpc
+plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = 'P',linewidth = 0, markersize = 15, c = 'y')# Must be outerskirts
 plt.plot([0,1],[0,1])
 
 plt.xlim(-0.05,1.05)
@@ -230,8 +230,8 @@ plt.ylim(-0.05,1.05)
 plt.xlabel("b/a")
 plt.ylabel("c/a")
 plt.title("Level 4 Innerskirts DM vs MHD")
-plt.legend(loc = (1,0))
-plt.savefig("../Plots/"+"/Triaxiality_Outter_lvl4.png",bbox_inches="tight")
+plt.legend(loc = 0)
+plt.savefig("../Plots/Triaxiality/"+"/Triaxiality_Outter_lvl4.png",bbox_inches="tight")
 plt.clf()
 
 
@@ -247,15 +247,15 @@ plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 
 # Plots axial ratios c/a Vs b/a for R = Rvir and R= 0.01Rvir
 plt.plot(axes1no[:,1]/axes1no[:,0],axes1no[:,2]/axes1no[:,0], marker = 's',
-c = 'm', alpha = 0.6, linewidth = 0, label = r"$lvl4 ... R_{DM} = 0.01R_{vir}$" )
-plt.plot(axes2no[:,1]/axes2no[:,0],axes2no[:,2]/axes2no[:,0], marker = 's', 
-c = 'red', alpha = 0.7, linewidth = 0, label = r"$lvl4 ... R_{DM} = R_{vir}$" )
+c = 'r',markersize = 15, alpha = 0.6, linewidth = 0, label = r"$R_{DM} = 0.01R_{200}$" )
+plt.plot(axes2no[:,1]/axes2no[:,0],axes2no[:,2]/axes2no[:,0], marker = 'o', 
+c = 'b',markersize = 15, alpha = 0.7, linewidth = 0, label = r"$R_{DM} = R_{200}$" )
 
 # Plots Observational references
-plt.errorbar([1],[0.47], yerr = 0.14, label = "Loebman et al. @20kpc",marker = '*',markersize = 15, color = 'black')
+plt.errorbar([1],[0.47], yerr = 0.14, label = "Loebman et al. @20kpc",marker = 'H',markersize = 15, color = 'black')
 plt.plot([1],[0.9], label = "Vera-Ciro et al. ~<10kpc",marker = '*',linewidth = 0, markersize = 15,c = 'm')#<~ 10kpc
-plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '*',linewidth = 0, markersize = 15, c = 'g')#>> 30kpc
-plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = '*',linewidth = 0, markersize = 15, c = 'y')# Must be outerskirts
+plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '8',linewidth = 0, markersize = 15, c = 'g')#>> 30kpc
+plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = 'P',linewidth = 0, markersize = 15, c = 'y')# Must be outerskirts
 plt.plot([0,1],[0,1])
 
 plt.xlim(-0.05,1.05)
@@ -263,8 +263,8 @@ plt.ylim(-0.05,1.05)
 plt.xlabel("b/a")
 plt.ylabel("c/a")
 plt.title("Level 4 DM Inner vs Outter")
-plt.legend(loc = (1,0))
-plt.savefig("../Plots/"+"/Triaxiality_DM_lvl4.png",bbox_inches="tight")
+plt.legend(loc = 0)
+plt.savefig("../Plots/Triaxiality/"+"/Triaxiality_DM_lvl4.png",bbox_inches="tight")
 plt.clf()
 
 
@@ -281,15 +281,15 @@ plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 
 # Plots axial ratios c/a Vs b/a for R = Rvir and R= 0.01Rvir
 plt.plot(axes1[:,1]/axes1[:,0],axes1[:,2]/axes1[:,0], marker = 's', 
-c = 'cyan', alpha = 0.6, linewidth = 0, label = r"$lvl4 ... R_{MHD} = 0.01R_{vir}$" )
-plt.plot(axes2[:,1]/axes2[:,0],axes2[:,2]/axes2[:,0], marker = 's', 
-c = 'blue', alpha = 0.7, linewidth = 0, label = r"$lvl4 ... R_{MHD} = R_{vir}$" )
+c = 'r',markersize = 15, alpha = 0.6, linewidth = 0, label = r"$R_{MHD} = 0.01R_{200}$" )
+plt.plot(axes2[:,1]/axes2[:,0],axes2[:,2]/axes2[:,0], marker = 'o', 
+c = 'b',markersize = 15, alpha = 0.7, linewidth = 0, label = r"$R_{MHD} = R_{200}$" )
 
 # Plots Observational references
-plt.errorbar([1],[0.47], yerr = 0.14, label = "Loebman et al. @20kpc",marker = '*',markersize = 15, color = 'black')
+plt.errorbar([1],[0.47], yerr = 0.14, label = "Loebman et al. @20kpc",marker = 'H',markersize = 15, color = 'black')
 plt.plot([1],[0.9], label = "Vera-Ciro et al. ~<10kpc",marker = '*',linewidth = 0, markersize = 15,c = 'm')#<~ 10kpc
-plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '*',linewidth = 0, markersize = 15, c = 'g')#>> 30kpc
-plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = '*',linewidth = 0, markersize = 15, c = 'y')# Must be outerskirts
+plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '8',linewidth = 0, markersize = 15, c = 'g')#>> 30kpc
+plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = 'P',linewidth = 0, markersize = 15, c = 'y')# Must be outerskirts
 plt.plot([0,1],[0,1])
 
 plt.xlim(-0.05,1.05)
@@ -297,8 +297,8 @@ plt.ylim(-0.05,1.05)
 plt.xlabel("b/a")
 plt.ylabel("c/a")
 plt.title("Level 4 MHD Inner vs Outter")
-plt.legend(loc = (1,0))
-plt.savefig("../Plots/"+"/Triaxiality_MHD_lvl4.png",bbox_inches="tight")
+plt.legend(loc = 0)
+plt.savefig("../Plots/Triaxiality/"+"/Triaxiality_MHD_lvl4.png",bbox_inches="tight")
 plt.clf()
 
 
@@ -315,15 +315,15 @@ plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 
 # Plots axial ratios c/a Vs b/a for R = Rvir and R= 0.01Rvir
 plt.plot(axes1no_3[:,1]/axes1no_3[:,0],axes1no_3[:,2]/axes1no_3[:,0], marker = 's',
-c = 'm', alpha = 0.6, linewidth = 0, label = r"$lvl3 ... R_{DM} = 0.01R_{vir}$" )
-plt.plot(axes2no_3[:,1]/axes2no_3[:,0],axes2no_3[:,2]/axes2no_3[:,0], marker = 's',
-c = 'red', alpha = 0.7, linewidth = 0, label = r"$lvl3 ... R_{DM} = R_{vir}$" )
+c = 'r',markersize = 15, alpha = 0.6, linewidth = 0, label = r"$R_{DM} = 0.01R_{200}$" )
+plt.plot(axes2no_3[:,1]/axes2no_3[:,0],axes2no_3[:,2]/axes2no_3[:,0], marker = 'o',
+c = 'b',markersize = 15, alpha = 0.7, linewidth = 0, label = r"$R_{DM} = R_{200}$" )
 
 # Plots Observational references
-plt.errorbar([1],[0.47], yerr = 0.14, label = "Loebman et al. @20kpc",marker = '*',markersize = 15, color = 'black')
+plt.errorbar([1],[0.47], yerr = 0.14, label = "Loebman et al. @20kpc",marker = 'H',markersize = 15, color = 'black')
 plt.plot([1],[0.9], label = "Vera-Ciro et al. ~<10kpc",marker = '*',linewidth = 0, markersize = 15,c = 'm')#<~ 10kpc
-plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '*',linewidth = 0, markersize = 15, c = 'g')#>> 30kpc
-plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = '*',linewidth = 0, markersize = 15, c = 'y')# Must be outerskirts
+plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '8',linewidth = 0, markersize = 15, c = 'g')#>> 30kpc
+plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = 'P',linewidth = 0, markersize = 15, c = 'y')# Must be outerskirts
 plt.plot([0,1],[0,1])
 
 plt.xlim(-0.05,1.05)
@@ -331,8 +331,8 @@ plt.ylim(-0.05,1.05)
 plt.xlabel("b/a")
 plt.ylabel("c/a")
 plt.title("Level 3 DM Inner vs Outter")
-plt.legend(loc = (1,0))
-plt.savefig("../Plots/"+"/Triaxiality_DM_lvl3.png",bbox_inches="tight")
+plt.legend(loc = 0)
+plt.savefig("../Plots/Triaxiality/"+"/Triaxiality_DM_lvl3.png",bbox_inches="tight")
 plt.clf()
 
 
@@ -349,15 +349,15 @@ plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 
 # Plots axial ratios c/a Vs b/a for R = Rvir and R= 0.01Rvir
 plt.plot(axes1_3[:,1]/axes1_3[:,0],axes1_3[:,2]/axes1_3[:,0], marker = 's',
-c = 'cyan', alpha = 0.6, linewidth = 0, label = r"$lvl3 ... R_{MHD} = 0.01R_{vir}$" )
-plt.plot(axes2_3[:,1]/axes2_3[:,0],axes2_3[:,2]/axes2_3[:,0], marker = 's',
-c = 'blue', alpha = 0.7, linewidth = 0, label = r"$lvl3 ... R_{MHD} = R_{vir}$" )
+c = 'r',markersize = 15, alpha = 0.6, linewidth = 0, label = r"$R_{MHD} = 0.01R_{200}$" )
+plt.plot(axes2_3[:,1]/axes2_3[:,0],axes2_3[:,2]/axes2_3[:,0], marker = 'o',
+c = 'blue',markersize = 15, alpha = 0.7, linewidth = 0, label = r"$R_{MHD} = R_{200}$" )
 
 # Plots Observational references
-plt.errorbar([1],[0.47], yerr = 0.14, label = "Loebman et al. @20kpc",marker = '*',markersize = 15, color = 'black')
+plt.errorbar([1],[0.47], yerr = 0.14, label = "Loebman et al. @20kpc",marker = 'H',markersize = 15, color = 'black')
 plt.plot([1],[0.9], label = "Vera-Ciro et al. ~<10kpc",marker = '*',linewidth = 0, markersize = 15,c = 'm')#<~ 10kpc
-plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '*',linewidth = 0, markersize = 15, c = 'g')#>> 30kpc
-plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = '*',linewidth = 0, markersize = 15, c = 'y')# Must be outerskirts
+plt.plot([0.9],[0.8], label = "Vera-Ciro et al. >>30kpc",marker = '8',linewidth = 0, markersize = 15, c = 'g')#>> 30kpc
+plt.plot([0.99],[0.72], label = "Law & Majewski 2010 ",marker = 'P',linewidth = 0, markersize = 15, c = 'y')# Must be outerskirts
 plt.plot([0,1],[0,1])
 
 plt.xlim(-0.05,1.05)
@@ -365,8 +365,8 @@ plt.ylim(-0.05,1.05)
 plt.xlabel("b/a")
 plt.ylabel("c/a")
 plt.title("Level 3 MHD Inner vs Outter")
-plt.legend(loc = (1,0))
-plt.savefig("../Plots/"+"/Triaxiality_MHD_lvl3.png",bbox_inches="tight")
+plt.legend(loc = 0)
+plt.savefig("../Plots/Triaxiality/"+"/Triaxiality_MHD_lvl3.png",bbox_inches="tight")
 plt.clf()
 
 
