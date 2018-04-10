@@ -115,7 +115,7 @@ for j in halonums:
                 if axes[0] <= 0:
                     break
                 elif abs(rad-x_rad)/x_rad > 0.05 :
-                    axes = (axes[0]+1.5*(x_rad-rad))*axes/axes[0]
+                    axes = (axes[0]+.5*(x_rad-rad))*axes/axes[0]
                     #axes = np.ones(3,dtype = np.float)*(axes[0]+1.*(x_rad-rad))
                     #vecs = np.identity(3,dtype = np.float)  
                 else:
@@ -123,7 +123,7 @@ for j in halonums:
                     
                 l += 1   
                 print("+++"+str(l)+"+++",rad,x_rad,axes[0])  
-                if l > 10 :
+                if l > 30 :
                     break
 
             x_rad = 10.0**(logr_ini+(i+1)*logdelta)

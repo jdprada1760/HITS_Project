@@ -38,32 +38,36 @@ with PdfPages("../Plots/"+lvl+"/"+"Z_Triax_"+lvl+".pdf") as pdf:
         # Fonts 
         MEDIUM_SIZE = 30
         SMALL_SIZE = 25
-        plt.rc('font', size=MEDIUM_SIZE)          # controls default text sizes
+        SSSMALL_SIZE = 20
+        plt.rc('font', size=SSSMALL_SIZE)          # controls default text sizes
         plt.rc('axes', titlesize=MEDIUM_SIZE)     # fontsize of the axes title
         plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
         plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
         plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
-        plt.rc('legend', fontsize=SMALL_SIZE)  
-
+        
         # Plots    
         fig, axs = plt.subplots(figsize=(10,10))
         
         # Color settings
-        my_norm = colors.Normalize(0,1)
+        my_norm = colors.Normalize(0.2,1)
         mapa = cm.ScalarMappable(norm=my_norm, cmap='hsv')      
         
         for j in range(len(a)):
             
-            print("Redshift: "+str(redshift[j]))
+            
             if redshift[j] > 1.5:
                 continue
-            
+            print("Redshift: "+str(redshift[j]))
             # Plot scatter point
             my_col = mapa.to_rgba((1.0/(1.0+redshift[j])))
-            axs.scatter(b[j]/a[j],c[j]/a[j], color = my_col, s=90, alpha = 1, zorder = len(a)-j)
+            if redshift[j] < 1e-6:
+            
+                axs.scatter(b[j]/a[j],c[j]/a[j], color = my_col, s=90, alpha = 1, zorder = len(a)-j,label = r"Historical shape $R_{500}$")
+            else:
+                axs.scatter(b[j]/a[j],c[j]/a[j], color = my_col, s=90, alpha = 1, zorder = len(a)-j)
             
             if redshift[j+1] < 1.5:
-                axs.plot([b[j]/a[j],b[j+1]/a[j+1]],[c[j]/a[j],c[j+1]/a[j+1]], color = my_col, linewidth=2, alpha = 1, zorder = len(a)-j)
+                axs.plot([b[j]/a[j],b[j+1]/a[j+1]],[c[j]/a[j],c[j+1]/a[j+1]], color = my_col, linewidth=3, alpha = 1, zorder = len(a)-j)
             
 
 
@@ -75,18 +79,34 @@ with PdfPages("../Plots/"+lvl+"/"+"Z_Triax_"+lvl+".pdf") as pdf:
         rvir =  arr[-1][0]
         xvals = (a*b*c)**(1./3.)
         # Axial ratios and radii (including rvir)
-        a,b,c = (arr[:-1][xvals>=10]).T
+        a,b,c = (arr[:-1][xvals>=1]).T
         xvals = (a*b*c)**(1./3.)
         
         # Radius at which comparison is performed (in kpc)
-        axs.plot((b/a)[xvals>rvir],(c/a)[xvals>rvir], color = 'black', linewidth=1.5, alpha = 1, zorder = len(a))
-        axs.plot((b/a)[xvals<rvir],(c/a)[xvals<rvir], color = 'black', linewidth=1.5, alpha = 1, marker = "+", zorder = len(a))
+        axs.plot((b/a)[xvals>rvir],(c/a)[xvals>rvir], color = 'black', linewidth=2, alpha = 1, linestyle = "--", zorder = len(a))
+        axs.plot((b/a)[xvals<rvir],(c/a)[xvals<rvir], color = 'black', linewidth=2, alpha = 1, linestyle = "--", zorder = len(a),label="Radial shape z = 0")
     
         # Axs specs
         axs.plot([0,1],[0,1], linewidth= 2, c = 'black')
         axs.set_xlabel("b/a")
         axs.set_ylabel("c/a")
         axs.set_title(halo)
+        
+         # grid!!
+        # Major ticks every 20, minor ticks every 5
+        major_ticksy = np.linspace(0, 1, 3)
+        minor_ticksy = np.linspace(0, 1, 11)
+        #major_ticksx = np.logspace(-1, 2, 3)
+        #minor_ticksx = np.logspace(-1, 2, 30)
+
+        axs.set_xticks(major_ticksy)
+        axs.set_xticks(minor_ticksy, minor=True)
+        axs.set_yticks(major_ticksy)
+        axs.set_yticks(minor_ticksy, minor=True)
+        axs.grid(which='both')
+        axs.grid(which='minor', alpha=0.3)
+        axs.grid(which='major', alpha=0.6)
+
         axs.set_xlim(0,1)
         axs.set_ylim(0,1)
         #axs.xaxis.set_major_formatter(FormatStrFormatter('%.1f'))
@@ -97,6 +117,8 @@ with PdfPages("../Plots/"+lvl+"/"+"Z_Triax_"+lvl+".pdf") as pdf:
         
         # Colorbar ax
         cbaxes = fig.add_axes([0.95, 0.1, 0.02, 0.8]) 
+        
+        axs.legend(loc=0)
         cbar = mpl.colorbar.ColorbarBase(cbaxes, cmap = "hsv", norm = my_norm, orientation = 'vertical', ticks = yticks )  
         cbar.ax.set_yticklabels(xticks)
         cbar.set_label('$Redshift$', fontsize=30 )

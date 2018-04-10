@@ -68,12 +68,13 @@ for j in halonums:
     semmiaxes = []
     axes_vecs = []
     
+    pos,rvirrr,info = loadSim(lvl,halo,63)
     while(boole):
         
         # Loads particles positions, virial radius and other important info
         pos,rvir,info = loadSim(lvl,halo,snapnum)
         # We need the virial radius in physical coordinates
-        rvir = rvir*info["Scale factor"]
+        rvir = rvirrr*info["Scale factor"]
         pos = np.array(pos,dtype = np.float)
         
         # Stops if 
@@ -103,7 +104,7 @@ for j in halonums:
             if axes[0] < 0:
                 break
             elif abs(rad-rvir)/rvir > 0.01 :
-                axes = (axes[0]+1.5*(rvir-rad))*axes/axes[0]
+                axes = (axes[0]+0.5*(rvir-rad))*axes/axes[0]
 		axes_vecs.append(np.copy(vecs).flatten())
             else:
                 break

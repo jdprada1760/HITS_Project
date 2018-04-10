@@ -100,6 +100,7 @@ with PdfPages("../Plots/Redshift_"+lvl3+".pdf") as pdf:
                 ax.grid(which='major', alpha=0.6)
 
                 ax.set_xscale('log')
+                ax.set_ylabel(ylab)
             
                 # Plotting ratios
                 ax.set_ylim(0,1)
