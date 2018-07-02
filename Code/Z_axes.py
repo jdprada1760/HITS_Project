@@ -68,17 +68,17 @@ for j in halonums:
     semmiaxes = []
     axes_vecs = []
     
-    pos,rvirrr,info = loadSim(lvl,halo,63)
+    pos,rvirrr,info = loadSim(lvl,halo,int(sys.argv[2]))
     while(boole):
         
         # Loads particles positions, virial radius and other important info
         pos,rvir,info = loadSim(lvl,halo,snapnum)
         # We need the virial radius in physical coordinates
-        rvir = rvirrr*info["Scale factor"]
+        rvir = rvir#*info["Scale factor"]
         pos = np.array(pos,dtype = np.float)
         
         # Stops if 
-        if (rvir < 10) : 
+        if (info['Redshift'] > 5) : 
             boole = False
         
         #print("---------------------------------------------------------------------------------")
@@ -101,11 +101,11 @@ for j in halonums:
             inertia.get_shape(ct.c_void_p(pos.ctypes.data),ct.c_int(len(pos)), ct.c_void_p(vecs.ctypes.data), ct.c_void_p(axes.ctypes.data))
             rad = (abs(axes[0]*axes[1]*axes[2]))**(1./3.)
             # Advance
-            if axes[0] < 0:
+            if axes[0] <= 0:
                 break
             elif abs(rad-rvir)/rvir > 0.01 :
-                axes = (axes[0]+0.5*(rvir-rad))*axes/axes[0]
-		axes_vecs.append(np.copy(vecs).flatten())
+                axes = (axes[0]+1.5*(rvir-rad))*axes/axes[0]
+                axes_vecs.append(np.copy(vecs).flatten())
             else:
                 break
                 

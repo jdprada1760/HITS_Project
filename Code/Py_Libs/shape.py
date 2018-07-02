@@ -32,7 +32,7 @@ def loadSim(lvl,halo,snapnum):
 
     # Loads the simulation
     #sn = Snapshot(path+snap, parttype=[1], filter=filterr, combineFiles=True, verbose=True)
-    sn = Snapshot(path,snapnum, parttype=[1], combineFiles=True, verbose=True)
+    sn = Snapshot(path,snapnum, parttype=[1], combineFiles=True, verbose=False)
     
     # DM Mass
     DMass = sn.MassTable[1]
@@ -40,7 +40,8 @@ def loadSim(lvl,halo,snapnum):
     # r the radius of the halo (R_mean200)*1000 to obtain it in kpc
     radiii = 1000.*subSn.group.Group_R_TopHat200[0]
     rad = 1000.*subSn.group.Group_R_Crit500[0]
-    print("Rad_Crit_500 Vs Rad_Top_200: " + str(rad)+"   "+str(radiii))
+    rad2 = 1000.*subSn.group.Group_R_Crit200[0]
+    print("Rad_Crit_500 Vs Rad_Top_200 Vs Rad_Crit_200: " + str(rad)+"   "+str(radiii)+"   "+str(rad2))
     # Some galactic disk properties of the principal subhalo
     diskrads = 1000*subSn.SubhaloHalfmassRadType[0]
     
@@ -73,7 +74,7 @@ def loadSim(lvl,halo,snapnum):
     dictio['rad_bh'] = diskrads[5]
   
     
-    return pos,rad,dictio
+    return pos,rad2,dictio
 
 
 # Gets semiaxes given eigenvalues of Inertia and a radius

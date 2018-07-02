@@ -55,7 +55,7 @@ def fun1():
             ax1.set_xlabel("R(Kpc/h)")
             ax1.legend()
             ax1.set_title(halo)
-            pdf.savefig(fig)
+            pdf.savefig(fig,bbox_inches='tight')
             plt.close()
 
 
@@ -154,7 +154,7 @@ def fun2():
             axs[-1].set_xlabel("R(Kpc/h)")
             axs[0].set_title(halo)
             
-            pdf.savefig(fig)
+            pdf.savefig(fig,bbox_inches='tight')
             plt.close()
             
             

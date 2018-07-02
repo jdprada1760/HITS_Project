@@ -16,11 +16,11 @@ import os
 
 #########################################################################################################
 
-lvl = 'level4_'# level of the simullation
-nhalos = 30 # number of halos
+#lvl = 'level4_'# level of the simullation
+#nhalos = 30 # number of halos
 
-#lvl = 'level3_'# level of the simullation
-#nhalos = 6 # number of halos
+lvl = 'level3_'# level of the simullation
+nhalos = 6 # number of halos
 
 folder = '../Plots/' # The folder containing all files
 
@@ -84,9 +84,9 @@ def main():
     axesDM = axes[1::2]
     
     # Isopotential and Isodensity axes
-    tmp,axes = read_csv(folder+fn_denaxes, skip_header = 0) # Isodensity (den)
+    tmp,axes = read_csv(folder+fn_denaxes) # Isodensity (den)
     axesDen = np.reshape(axes,(nhalos,5,3)) # contains only MHD (nhalos) axes (3) sampled at (5) radii
-    tmp,axes = read_csv(folder+fn_potaxes, skip_header = 0) # Isopotential (pot)
+    tmp,axes = read_csv(folder+fn_potaxes) # Isopotential (pot)
     axesPot = np.reshape(axes,(nhalos,5,3))
     
     #print axesMHD
@@ -119,9 +119,9 @@ def main():
     vecsDM = vecs[1::2]
     
     # Isopotential and Isodensity axes
-    tmp,vecs = read_csv(folder+fn_denvecs, skip_header = 0) #skipHeader:Little error of unified notation (no problem,to fix later)
+    tmp,vecs = read_csv(folder+fn_denvecs) 
     vecsDen = np.reshape(vecs,(nhalos,5,3,3))
-    tmp,vecs = read_csv(folder+fn_potvecs, skip_header = 0)
+    tmp,vecs = read_csv(folder+fn_potvecs)
     vecsPot = np.reshape(vecs,(nhalos,5,3,3))
 
     ####################
@@ -133,9 +133,9 @@ def main():
     
     
     import matplotlib.pyplot as plt
-    plt.plot(axesMHD[:,0,1]/axesMHD[:,0,0],axesMHD[:,0,2]/axesMHD[:,0,0], 'ro' )
-    plt.plot(axesDM[:,0,1]/axesDM[:,0,0],axesDM[:,0,2]/axesDM[:,0,0], 'bo' )
-    plt.show()
+    #plt.plot(axesMHD[:,0,1]/axesMHD[:,0,0],axesMHD[:,0,2]/axesMHD[:,0,0], 'ro' )
+    #plt.plot(axesDM[:,0,1]/axesDM[:,0,0],axesDM[:,0,2]/axesDM[:,0,0], 'bo' )
+    #plt.show()
     
     
     simple_plot(GasDiskRad,quant[:,0],'GasDiskRad',name, name+' Vs GasDiskRad')
@@ -164,12 +164,15 @@ def main():
     
     from matplotlib.backends.backend_pdf import PdfPages
     
-    with PdfPages("./pics/alignments"+".pdf") as pdf:
-        for j in range(30):
+    with PdfPages("./pics/alignments_level3"+".pdf") as pdf:
+        halos = range(nhalos)
+        #halos = [11,10]
+        for j in halos:
             # Graphics
-            polar_graphs(pdf,vecsMHD[j],disk_vec[j],radii,"halo_"+str(j))
+            rads = (axesMHD[j,:,0]*axesMHD[j,:,1]*axesMHD[j,:,2])**(1./3.)
+            polar_graphs(pdf,vecsMHD[j],disk_vec[j],radii,"halo_"+str(j), radii_vals= rads, mode = 'all_in_1')
         
-        
+            
             # Text 
             print "______________________________________________________________"
             print "____________" + "halo_"+str(j)+"______________________________"
@@ -191,9 +194,49 @@ def main():
                 print "Minor axis"
                 print (180.0/np.pi)*np.arccos(np.abs(np.sum(vecsMHD[j,i,2]*disk_vec[j]))) # both are normalized vectors
                 print "\n"
+            
+    
+    
+    # We study the axial ratios between different measurements
+    #halos = range(30)
+    halos = range(nhalos)
+    for j in halos:
+        # Text 
+        print "______________________________________________________________"
+        print "____________" + "halo_"+str(j)+"______________________________"
+        print "______________________________________________________________\n"
+        
+        for i in range(5):
+                print "############        " + radii[i] +"             ###############\n\n"
+                print "Volume"
+                print "b/a = " + str(axesMHD[j,i,1]/axesMHD[j,i,0]) 
+                print "c/a = " + str(axesMHD[j,i,2]/axesMHD[j,i,0]) + "\n"
+                
+                '''
+                print "IsoDensity"
+                print "b/a = " + str(axesDen[j,i,1]/axesDen[j,i,0]) 
+                print "c/a = " + str(axesDen[j,i,2]/axesDen[j,i,0]) + "\n"
+                '''
+                
+                print "IsoPotential"
+                print "b/a = " + str(axesPot[j,i,1]/axesPot[j,i,0]) 
+                print "c/a = " + str(axesPot[j,i,2]/axesPot[j,i,0]) + "\n"
+                
+                
+                print "IsoPotential Formula Isodensity"
+                axesPot[j,i] = get_potential_axes(axesPot[j,i])
+                print "b/a = " + str(axesPot[j,i,1]/axesPot[j,i,0]) 
+                print "c/a = " + str(axesPot[j,i,2]/axesPot[j,i,0]) + "\n"
+                
+                print "error b/a = " + str(abs((axesPot[j,i,1]/axesPot[j,i,0])-(axesMHD[j,i,1]/axesMHD[j,i,0]))/(axesMHD[j,i,1]/axesMHD[j,i,0])) 
+                print "error c/a = " + str(abs((axesPot[j,i,2]/axesPot[j,i,0])-(axesMHD[j,i,2]/axesMHD[j,i,0]))/(axesMHD[j,i,2]/axesMHD[j,i,0])) 
+                print "Triaxiality = " + str(T_MHD[j,i])
+               
+    
+    
+    
 
-
-def simple_plot(x,y,xlabel,ylabel,title, mode = 'scatter', logx = False):
+def simple_plot(x,y,xlabel,ylabel,title, mode = 'scatter', logx = False, folder = ''):
     
     import matplotlib.pyplot as plt
     
@@ -213,7 +256,7 @@ def simple_plot(x,y,xlabel,ylabel,title, mode = 'scatter', logx = False):
     #plt.show()
     
     # Tries to create directory
-    path = './pics/'
+    path = './pics/'+lvl.split('_')[0]+'/'
     try:
         os.makedirs(path)
     except OSError:
@@ -250,63 +293,213 @@ def get_T(axes):
 def asphericity(axes):
     return 1-(1./np.sqrt(2))*np.sqrt((1-(axes[:,:,1]/axes[:,:,0]))**2 + (1-(axes[:,:,2]/axes[:,:,0]))**2)    
         
-# Given a vector matrix mat, and a sigle vector vec, rotates vector and returns its representation in coordinates theta,phi
+# Given a vector matrix mat, and a sigle vector vec, rotates vector and returns its representation (in mat) in coordinates theta,phi
 # theta,phi = 0,0 : minor axis (z)
 # theta,phi = 90,0: medium axis (x)
 # theta,phi = 90,90: major axis (y)
+# ref      = axis of reference to solve sign degeneracy
+# reference vector is represented in the basis of Mat
+# this reference should be  the previous value of the vector
 # returns theta,phi (clearly)
 
-def sphere_coords(mat,vec):
+def sphere_coords(mat,vec, ref = None):
     
     # we asume mat = [vmajor,vmedium,vminor]
-    z = np.abs(np.sum(mat[2]*vec)) # abs to avoid angles bigger than 90 deg
-    y = np.sum(mat[0]*vec)
-    x = np.sum(mat[1]*vec)
+    z = np.dot(mat[2],vec) # (abs) to avoid angles bigger than 90 deg
+    y = np.dot(mat[0],vec)
+    x = np.dot(mat[1],vec)
+    
+    posi = np.array([x,y,z])# Position vector
+
+    
+    # If no reference is given then we take the z axis as vector of reference
+    if ref is None:
+        if posi[2] < 0 :
+            posi = -posi
+            
+    
+    # If there is a vector of reference, then we take the sign which gives the smallest angle
+    else:
+        
+        # First we check that there is no flip, the threshold is arbitrary    
+        if np.arccos(np.abs(np.dot(posi,ref))) > 45:
+            ref = np.ones(3)/np.sqrt(3) #If ther is a flipp, choose the mean vector of axes.
+    
+        #print "posi          ",posi
+        sign = np.dot(posi,ref)#The sign along the reference vector
+        #print "dot           ",sign
+        #print ref
+        if sign < 0 :
+            posi = -posi
+        #print "posi after    ",posi
+        
     
     # To spherical coordinates
-    theta = (180.0/np.pi)*np.arccos(z)
-    phi = (180.0/np.pi)*np.arctan(y/x)
-    
+    theta = (180.0/np.pi)*np.arccos(posi[2])
+    phi = (180.0/np.pi)*np.arctan(posi[1]/posi[0])
+    if posi[0] < 0:
+        phi += 180
+    #print "theta,phi     ",theta,phi
+    #print '--------'
     return theta,phi
+
+# Returns the corresponding vector in cartesians
+# theta is in degrees, phi is in radians (matplotlib )
+def to_Cartesians(theta,phi):
+    theta = (np.pi/180.)*theta
+    return np.array([np.sin(theta)*np.cos(phi),np.sin(theta)*np.sin(phi),np.cos(theta) ])
+    
+    
     
 # Given pdf makes, for a single halo makes a graphic of alignment of axes    
 # Parameters: pdf              : The pdf manager to save fig
 #             vecs(5,3,3)      : The vectors of reference at each radius  
 #             disk_vec(3),     : The disk vector, unchanged in principle, but with different representations (calculated within)
 #             radii            : The radii at which each triaxiality is measured      
-def polar_graphs(pdf,vecs,disk_vec,radii,title):        
+def polar_graphs(pdf,vecs,disk_vec,radii,title, radii_vals = None, mode = 'all_in_1'):        
     
     import matplotlib.pyplot as plt
     
-    # to modify the size
-    fig = plt.figure(figsize=(15,10))
-    fig.suptitle(title, fontsize=16)
-    #  theta and phi
-    ax1 = plt.subplot2grid(shape=(2,6), loc=(0,0), colspan=2, projection = 'polar')
-    ax2 = plt.subplot2grid((2,6), (0,2), colspan=2, projection = 'polar')
-    ax3 = plt.subplot2grid((2,6), (0,4), colspan=2, projection = 'polar')
-    ax4 = plt.subplot2grid((2,6), (1,1), colspan=2, projection = 'polar')
-    ax5 = plt.subplot2grid((2,6), (1,3), colspan=2, projection = 'polar')
+    fig =  None
+    theta,phi = sphere_coords(vecs[0],disk_vec ) # Gets disk in the spherical coordinates determined by principal axes
+    phi = (np.pi/180.)*phi # phi input must be in radians
     
-    axs = [ax1,ax2,ax3,ax4,ax5]
-    for i in range(5):
+    ######################################################################################################################
+    ######################################################################################################################
+    if mode == 'all_in_1':
+        # to modify the size
+        fig = plt.figure(figsize=(8,8))
+
+    
+        ax = fig.add_subplot(111, projection='polar')
+        ax.set_rmin(0)
+        ax.set_rmax(100)
+        ax.set_rlim(0,100)
+        ax.set_rlabel_position(-22.5)  
+        ax.set_rticks([30,45,60,90,100])
+        ax.set_axisbelow(True)
+        ax.grid(True) 
+        #ax.set_title(radii[i])
+        ax.scatter([phi],[theta], marker = 'X', c = 'black', s = 250) # plot disk
         
-        theta,phi = sphere_coords(vecs[i],disk_vec ) # Gets disk in the spherical coordinates determined by principal axes
-        axs[i].set_rmax(110)
-        axs[i].plot((np.pi/180.)*phi,theta, marker = 'o', c = 'black') # plot disk
-        axs[i].set_rticks([30,45,60,90,110])
-        axs[i].grid(True)
-        axs[i].plot(90,0, marker = '*', c = 'y', markersize = 20) # plot minor axis
-        axs[i].plot(0,90, marker = 's', c = 'b', markersize = 20) # plot mid axis
-        axs[i].plot((np.pi/180.)*90,90, marker = '^', c = 'g', markersize = 20) # plot major axis
-        #axs[i].plot((np.pi/180.)*110,0, linewidth = 0)#
-        axs[i].set_title(radii[i])
-        axs[i].margins(0)
-        #axs[i].set_rlabel_position(95)
-        #axs[i].legend()
+        mint,minp = 0,90 # angles theta,phi of first radius (12,4%Rvir)
+        midt,midp = 90,0
+        majt,majp = 90,90
+        minp = (np.pi/180.)*minp # phi must be in radians
+        midp = (np.pi/180.)*midp
+        majp = (np.pi/180.)*majp
+        
+        # The colormap # Color settings
+        import matplotlib.cm as cm
+        import matplotlib.colors as colors
+        
+        my_norm = colors.Normalize(np.log(0.8*min(radii_vals)),np.log(1.2*max(radii_vals)))
+        mapa = cm.ScalarMappable(norm=my_norm, cmap='inferno')
+        
+        my_col = mapa.to_rgba(np.log(radii_vals[0]))
+        # Axes of reference
+        ec = ['green','red']# EdgeColors         
+        ax.scatter([90],[0], marker = '*', c = my_col, s = 450, alpha = 0.7,
+        linewidths = 1.5, edgecolors = 'green' ) # plot minor axis
+        ax.scatter([0],[90], marker = 's', c = my_col, s = 300, alpha = 0.7,
+        linewidths = 1.5, edgecolors = 'green') # plot mid axis
+        ax.scatter([(np.pi/2)],[90], marker = '^', c = my_col, s =300, alpha = 0.7,
+        linewidths = 1.5, edgecolors = 'green') # plot major axis
+
+        for i in range(1,5):
+        
+            my_col = mapa.to_rgba(np.log(radii_vals[i]))
+        
+            mint,minp = sphere_coords(vecs[0,:,:],vecs[i,2,:],to_Cartesians(mint,minp))# angular parameters min
+            midt,midp = sphere_coords(vecs[0,:,:],vecs[i,1,:],to_Cartesians(midt,midp))# angular parameters mid
+            majt,majp = sphere_coords(vecs[0,:,:],vecs[i,0,:],to_Cartesians(majt,majp))# angular parameters maj
+            
+            minp = (np.pi/180.)*minp# radians for matplotlib
+            midp = (np.pi/180.)*midp
+            majp = (np.pi/180.)*majp
+            
+            '''
+            print "Minor: "
+            print vecs[0,[1,0,2],:].dot(vecs[i,2,:])
+            print to_Cartesians(mint,minp)
+            print "Mid: "
+            print vecs[0,[1,0,2],:].dot(vecs[i,1,:])
+            print to_Cartesians(midt,midp)
+            print "Major: "
+            print vecs[0,[1,0,2],:].dot(vecs[i,0,:])
+            print to_Cartesians(majt,majp)
+            print "____________________________________________________"
+            '''
+            
+            #print mint, ec[int(mint>90)], int(mint>90), int(mint<90), ec
+            ax.scatter([minp],[90-np.abs(90-mint)], marker = '*', c = my_col,s = 450, alpha = 0.7, 
+            linewidths = 1.5, edgecolors = ec[int(mint>90)] )
+            ax.scatter([midp],[90-np.abs(90-midt)], marker = 's', c = my_col,s = 300, alpha = 0.7, 
+            linewidths = 1.5, edgecolors = ec[int(midt>90)])
+            ax.scatter([majp],[90-np.abs(90-majt)], marker = '^', c = my_col,s = 300, alpha = 0.7, 
+            linewidths = 1.5, edgecolors = ec[int(majt>90)])
+            
+        # Colorbar ax
+        import matplotlib as mpl
+        from matplotlib.ticker import FormatStrFormatter
+        cbaxes = fig.add_axes([0.95, 0.1, 0.02, 0.8])
+        
+        xticks = np.array([0.10, 0.20, 0.40, 0.80, 1])*radii_vals[-2]
+        yticks = np.log(xticks)  
+        cbar = mpl.colorbar.ColorbarBase(cbaxes, cmap = "inferno", norm = my_norm, orientation = 'vertical', ticks = yticks )  
+        cbar.ax.set_yticklabels(xticks)
+        cbar.ax.yaxis.set_major_formatter(FormatStrFormatter('%.2f'))
+        cbar.set_label('$Radius(kpc)$', fontsize=30 )
+    
+    ###########################################################################################################################
+    ###########################################################################################################################    
+    elif mode == 'each_in_5':
+        
+        fig = plt.figure(figsize=(15,10))
+        #  theta and phi
+        ax1 = plt.subplot2grid(shape=(2,6), loc=(0,0), colspan=2, projection = 'polar')
+        ax2 = plt.subplot2grid((2,6), (0,2), colspan=2, projection = 'polar')
+        ax3 = plt.subplot2grid((2,6), (0,4), colspan=2, projection = 'polar')
+        ax4 = plt.subplot2grid((2,6), (1,1), colspan=2, projection = 'polar')
+        ax5 = plt.subplot2grid((2,6), (1,3), colspan=2, projection = 'polar')
+        
+        axs = [ax1,ax2,ax3,ax4,ax5]
+        for i in range(5):
+            
+
+            axs[i].set_rmin(0)
+            axs[i].set_rmax(120)
+            axs[i].set_rlim(0,120)
+            axs[i].set_rlabel_position(-22.5)
+            #axs[i].set_origin(0)
+            axs[i].plot([phi],[theta], marker = 'o', c = 'black') # plot disk
+            axs[i].set_rticks([30,45,60,90,120])
+            axs[i].grid(True)
+            axs[i].plot([90],[0], marker = '*', c = 'y', markersize = 15) # plot minor axis
+            axs[i].plot([0],[90], marker = 's', c = 'b', markersize = 15) # plot mid axis
+            axs[i].plot([(np.pi/180.)*90],[90], marker = '^', c = 'g', markersize = 15) # plot major axis
+            #axs[i].plot((np.pi/180.)*110,0, linewidth = 0)#
+            axs[i].set_title(radii[i])
+            #axs[i].margins(0)
+            #axs[i].set_rlabel_position(95)
+            #axs[i].legend()
+    fig.suptitle(title, fontsize=16)        
     pdf.savefig(fig, bbox_inches='tight')
     plt.close()    
-        
+
+
+# given axes from volumetric density, returns the estimated axes of the potential.
+def get_potential_axes(axes):
+    A = axes[0]/axes[2]
+    B = axes[1]/axes[2]
+    
+    A = 3*(A-1)+1
+    B = 3*(B-1)+1
+    
+    axes[1] = axes[0]*B/A
+    axes[2] = axes[0]/A
+    
+    return axes        
         
 
 

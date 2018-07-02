@@ -49,8 +49,8 @@ with PdfPages("../Plots/"+lvl+"/"+"Z_Triax_"+lvl+".pdf") as pdf:
         fig, axs = plt.subplots(figsize=(10,10))
         
         # Color settings
-        my_norm = colors.Normalize(0.2,1)
-        mapa = cm.ScalarMappable(norm=my_norm, cmap='hsv')      
+        my_norm = colors.Normalize(0.0,0.8)
+        mapa = cm.ScalarMappable(norm=my_norm, cmap='CMRmap')      
         
         for j in range(len(a)):
             
@@ -59,7 +59,7 @@ with PdfPages("../Plots/"+lvl+"/"+"Z_Triax_"+lvl+".pdf") as pdf:
                 continue
             print("Redshift: "+str(redshift[j]))
             # Plot scatter point
-            my_col = mapa.to_rgba((1.0/(1.0+redshift[j])))
+            my_col = mapa.to_rgba(1-(1.0/(1.0+redshift[j])))
             if redshift[j] < 1e-6:
             
                 axs.scatter(b[j]/a[j],c[j]/a[j], color = my_col, s=90, alpha = 1, zorder = len(a)-j,label = r"Historical shape $R_{500}$")
@@ -113,13 +113,13 @@ with PdfPages("../Plots/"+lvl+"/"+"Z_Triax_"+lvl+".pdf") as pdf:
         
         # Colorbar
         xticks = [0, 0.5, 1,2]
-        yticks = [1.0/(1.0+x) for x in xticks]
+        yticks = [1.- 1.0/(1.0+x) for x in xticks]
         
         # Colorbar ax
         cbaxes = fig.add_axes([0.95, 0.1, 0.02, 0.8]) 
         
         axs.legend(loc=0)
-        cbar = mpl.colorbar.ColorbarBase(cbaxes, cmap = "hsv", norm = my_norm, orientation = 'vertical', ticks = yticks )  
+        cbar = mpl.colorbar.ColorbarBase(cbaxes, cmap = "CMRmap", norm = my_norm, orientation = 'vertical', ticks = yticks )  
         cbar.ax.set_yticklabels(xticks)
         cbar.set_label('$Redshift$', fontsize=30 )
         

@@ -177,9 +177,9 @@ plt.rc('axes', titlesize=MEDIUM_SIZE)     # fontsize of the axes title
 plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
 plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
-plt.rc('figure', figsize=(7, 10))
+plt.rc('figure', figsize=(12, 10))
 
-plt.figure(figsize=(7, 10))
+plt.figure(figsize=(12, 10))
 # Plots axial ratios c/a Vs b/a for R = 0.01Rvir 
 plt.plot(axes1[:,1]/axes1[:,0],axes1[:,2]/axes1[:,0], marker = 's',
  c = 'r',markersize =12, alpha = 0.8, linewidth = 0, label = r"$(OUR) R_{MHD} = 0.01R_{200}$" )
@@ -215,9 +215,9 @@ plt.rc('axes', titlesize=MEDIUM_SIZE)     # fontsize of the axes title
 plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
 plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
-plt.rc('figure', figsize=(7, 10))
+plt.rc('figure', figsize=(12, 10))
 
-plt.figure(figsize=(7, 10))
+plt.figure(figsize=(12, 10))
 # Plots axial ratios c/a Vs b/a for R = Rvir 
 plt.plot(axes2[:,1]/axes2[:,0],axes2[:,2]/axes2[:,0], marker = 's', 
  c = 'red',markersize =12, alpha = 0.8, linewidth = 0, label = r"$(OUR) R_{MHD} = R_{200}$" )
@@ -235,7 +235,7 @@ plt.xlim(-0.05,1.05)
 plt.ylim(-0.05,1.05)
 plt.xlabel("b/a")
 plt.ylabel("c/a")
-plt.title("Level 4 Innerskirts DM vs MHD")
+plt.title("Level 4 Outerskirts DM vs MHD")
 plt.legend(loc = 0)
 plt.savefig("../Plots/Triaxiality/"+"/Triaxiality_Outter_lvl4.png",bbox_inches="tight")
 plt.clf()
@@ -251,9 +251,9 @@ plt.rc('axes', titlesize=MEDIUM_SIZE)     # fontsize of the axes title
 plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
 plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
-plt.rc('figure', figsize=(7, 10))
+plt.rc('figure', figsize=(12, 10))
 
-plt.figure(figsize=(7, 10))
+plt.figure(figsize=(12, 10))
 # Plots axial ratios c/a Vs b/a for R = Rvir and R= 0.01Rvir
 plt.plot(axes1no[:,1]/axes1no[:,0],axes1no[:,2]/axes1no[:,0], marker = 's',
 c = 'r',markersize =12, alpha = 0.8, linewidth = 0, label = r"$(OUR) R_{DM} = 0.01R_{200}$" )
@@ -288,9 +288,9 @@ plt.rc('axes', titlesize=MEDIUM_SIZE)     # fontsize of the axes title
 plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
 plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
-plt.rc('figure', figsize=(7, 10))
+plt.rc('figure', figsize=(12, 10))
 
-plt.figure(figsize=(7, 10))
+plt.figure(figsize=(12, 10))
 
 # Plots axial ratios c/a Vs b/a for R = Rvir and R= 0.01Rvir
 plt.plot(axes1[:,1]/axes1[:,0],axes1[:,2]/axes1[:,0], marker = 's', 

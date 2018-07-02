@@ -12,5 +12,6 @@
 # Redshift dependence of semiaxes at virial radius (each redshift)
 source /home/pradajs/Heidelberg/HITS_Project/Code/Jobs/bashrc
 #python ./Z_axes.py level3_MHD 63
-python get_Axes.py level3_MHD 6
+python Z_axes.py level3_MHD 63
+python Z_axes.py level3_DM 127
 

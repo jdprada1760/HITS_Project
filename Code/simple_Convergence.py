@@ -50,7 +50,7 @@ with PdfPages("../Plots/Simple_Convergence_lvl34_"+sys.argv[1]+".pdf") as pdf:
 
         # Graphics
         ylabel = ['b/a','c/a','c/b']
-        fig, axs = plt.subplots(figsize=(10,10),nrows=len(yvals3))
+        fig, axs = plt.subplots(figsize=(10,15),nrows=len(yvals3))
         for ax,yval3,yval4,ylab,indi in zip(axs,yvals3,yvals4,ylabel,range(3)):
             
             # Hide axes
@@ -108,5 +108,5 @@ with PdfPages("../Plots/Simple_Convergence_lvl34_"+sys.argv[1]+".pdf") as pdf:
         axs[-1].yaxis.set_major_formatter(FormatStrFormatter('%.1f'))
         plt.setp( axs[-1].get_xticklabels(), visible=True)                
         axs[0].set_title(halo)        
-        pdf.savefig(fig)
+        pdf.savefig(fig,bbox_inches='tight')
         plt.close()

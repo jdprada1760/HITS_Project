@@ -49,11 +49,11 @@ with PdfPages("../Plots/Redshift_"+lvl3+".pdf") as pdf:
             
         # Plots    
         ylabel = ['b/a','c/a','c/b']
-        fig, axs = plt.subplots(figsize=(10,10),nrows=3)
+        fig, axs = plt.subplots(figsize=(10,15),nrows=3)
        
         # Color settings
-        my_norm = colors.Normalize(0.2,1)
-        mapa = cm.ScalarMappable(norm=my_norm, cmap='hsv')
+        my_norm = colors.Normalize(0.0,0.8)
+        mapa = cm.ScalarMappable(norm=my_norm, cmap="CMRmap")
         
         for direc in listdir:
             
@@ -77,7 +77,7 @@ with PdfPages("../Plots/Redshift_"+lvl3+".pdf") as pdf:
             for ax,yval,ylab in zip(axs,yvals,ylabel):
                 
                 
-                my_col = mapa.to_rgba((1.0/(1.0+redshift)))
+                my_col = mapa.to_rgba(1.-(1.0/(1.0+redshift)))
                 if(redshift < 1e-6):
                     mappable = ax.plot(xvals,yval, color = my_col, linewidth=1, label = "Radial shape", alpha = 1,zorder=10)
                     ax.plot([rvir,rvir],[0,0.5], color = my_col, linestyle = '-.',label = r"$R_{500}$",zorder =1)
@@ -118,11 +118,11 @@ with PdfPages("../Plots/Redshift_"+lvl3+".pdf") as pdf:
         #axs[0].legend(loc='upper left', bbox_to_anchor=(1, 0.5))  
         
         xticks = [0, 0.5, 1, 2]
-        yticks = [1.0/(1.0+x) for x in xticks]
+        yticks = [1.- 1.0/(1.0+x) for x in xticks]
         
         # Colorbar ax
         cbaxes = fig.add_axes([0.95, 0.1, 0.02, 0.8]) 
-        cbar = mpl.colorbar.ColorbarBase(cbaxes, cmap = "hsv", norm = my_norm, orientation = 'vertical', ticks = yticks )  
+        cbar = mpl.colorbar.ColorbarBase(cbaxes, cmap = "CMRmap", norm = my_norm, orientation = 'vertical', ticks = yticks )  
         cbar.ax.set_yticklabels(xticks)
         cbar.set_label('$Redshift$', fontsize=30 )
 

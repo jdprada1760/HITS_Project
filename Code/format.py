@@ -22,7 +22,7 @@ import ctypes as ct
 inertia = ct.cdll.LoadLibrary('./C_Libs/inertia.so')
 
 def main():
-
+    '''
     lvl = 'level3_'
     snapnum = 63 # MHD snapshot
     snapnumDM = 127 # DM snapshot
@@ -33,7 +33,7 @@ def main():
     snapnum = 127 # MHD snapshot
     snapnumDM = 127 # DM snapshot
     halo_nums = range(1,31)
-    '''
+    
 
     # The corresponding list and their filenames
     params = []
