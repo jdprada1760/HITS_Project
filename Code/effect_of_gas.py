@@ -16,11 +16,11 @@ import os
 
 #########################################################################################################
 
-#lvl = 'level4_'# level of the simullation
-#nhalos = 30 # number of halos
+lvl = 'level4_'# level of the simullation
+nhalos = 30 # number of halos
 
-lvl = 'level3_'# level of the simullation
-nhalos = 6 # number of halos
+#lvl = 'level3_'# level of the simullation
+#nhalos = 6 # number of halos
 
 folder = '../Plots/' # The folder containing all files
 
@@ -96,10 +96,6 @@ def main():
     T_MHD = get_T(axesMHD) #shape: (nhalos,5)
     T_DM  = get_T(axesDM)
     
-    # Defines Asphericity
-    asph_MHD = asphericity(axesMHD) #shape: (nhalos,5)
-    asph_DM  = asphericity(axesDM)
-    
     # Define deviation from sphericity 
     
     
@@ -125,117 +121,83 @@ def main():
     vecsPot = np.reshape(vecs,(nhalos,5,3,3))
 
     ####################
-    # Some graphics    #
+    # Lasso Fit        #
     ####################
-    quant = T_MHD - T_DM# Some measure of symmetry
-    # np.abs(2*(0.5 - T_DM)) is 1 when object is axisymetric and 0 when it is maximally triaxial
-    name = 'Delta Triaxiality'
     
     
-    import matplotlib.pyplot as plt
-    #plt.plot(axesMHD[:,0,1]/axesMHD[:,0,0],axesMHD[:,0,2]/axesMHD[:,0,0], 'ro' )
-    #plt.plot(axesDM[:,0,1]/axesDM[:,0,0],axesDM[:,0,2]/axesDM[:,0,0], 'bo' )
-    #plt.show()
+    # Defines Sphericity
+    asph_MHD = asphericity(axesMHD) #shape: (nhalos,5)
+    asph_DM  = asphericity(axesDM)
+    y = (asph_MHD - asph_DM)[:,0] # 0 -> only calculated at 0.125 Rvir
     
+    #y1 = axesMHD[:,0,1]/axesMHD[:,0,0] # this is b/a MHD for all haloes
+    #y2 = axesMHD[:,0,2]/axesMHD[:,0,0] # c/a MHD
     
-    simple_plot(GasDiskRad,quant[:,0],'GasDiskRad',name, name+' Vs GasDiskRad')
-    simple_plot(StarDiskRad,quant[:,0],'StarDiskRad',name, name+' Vs StarDiskRad')
-    simple_plot(SFRD,quant[:,0],'SFR density',name, name+' Vs SFR density', logx =True)
-    simple_plot(gas_den,quant[:,0],'Gas Density',name, name+' Vs Gas Density', logx =True)
-    simple_plot(star_den,quant[:,0],'Star Density',name, name +' Vs Star Density', logx =True)
-    simple_plot(BH_den,quant[:,0],'BH Density',name, name+' Vs BH Density', logx =True)
-    simple_plot(bar_frac,quant[:,0],'Baryonic fraction',name, name+' Vs Baryonic fraction')  
+    # The X values (Parameters of the fit)
     
-    
-    quant = asph_MHD - asph_DM
-    name = 'Delta asphericity'
-    simple_plot(GasDiskRad,quant[:,0],'GasDiskRad',name, name+' Vs GasDiskRad')
-    simple_plot(StarDiskRad,quant[:,0],'StarDiskRad',name, name+' Vs StarDiskRad')
-    simple_plot(SFRD,quant[:,0],'SFR density',name, name+' Vs SFR density', logx =True)
-    simple_plot(gas_den,quant[:,0],'Gas Density',name, name+' Vs Gas Density', logx =True)
-    simple_plot(star_den,quant[:,0],'Star Density',name, name +' Vs Star Density', logx =True)
-    simple_plot(BH_den,quant[:,0],'BH Density',name, name+' Vs BH Density', logx =True)
-    simple_plot(bar_frac,quant[:,0],'Baryonic fraction',name, name+' Vs Baryonic fraction') 
-    
-    
-    # We Want to study the alignment between the different vectorss
-    radii = ['12','25','50','1','Disk']
-    radii = ['Rad_'+ra for ra in radii]
-    
-    from matplotlib.backends.backend_pdf import PdfPages
-    
-    with PdfPages("./pics/alignments_level3"+".pdf") as pdf:
-        halos = range(nhalos)
-        #halos = [11,10]
-        for j in halos:
-            # Graphics
-            rads = (axesMHD[j,:,0]*axesMHD[j,:,1]*axesMHD[j,:,2])**(1./3.)
-            polar_graphs(pdf,vecsMHD[j],disk_vec[j],radii,"halo_"+str(j), radii_vals= rads, mode = 'all_in_1')
+    # Just to see if the increase is related to the unperturbed state of the halo
+    #x1 = axesDM[:,0,1]/axesDM[:,0,0] #b/a DM (q)
+    #x2 = axesDM[:,0,2]/axesDM[:,0,0] #c/a MHD (s)
+    X = np.array([GasDiskRad,StarDiskRad,np.log10(SFRD),np.log10(gas_den),np.log10(star_den),np.log10(BH_den),bar_frac]).T
         
-            
-            # Text 
-            print "______________________________________________________________"
-            print "____________" + "halo_"+str(j)+"______________________________"
-            print "______________________________________________________________\n"
-            
-            for i in range(5):
-                print "############        " + radii[i] +"             ###############\n\n"
-                print "b/a = " + str(axesMHD[j,i,1]/axesMHD[j,i,0]) 
-                print "c/a = " + str(axesMHD[j,i,2]/axesMHD[j,i,0]) + "\n"
-                
-                print "Angle with Major axis"
-                print (180.0/np.pi)*np.arccos(np.abs(np.sum(vecsMHD[j,i,0]*disk_vec[j]))) # both are normalized vectors
-                #print vecsMHD[j,i,0], np.linalg.norm(vecsMHD[j,i,0])
-                #print disk_vec[j], np.linalg.norm(disk_vec[j])
-                print "\n"
-                print "Mid axis"
-                print (180.0/np.pi)*np.arccos(np.abs(np.sum(vecsMHD[j,i,1]*disk_vec[j]))) # both are normalized vectors
-                print "\n"
-                print "Minor axis"
-                print (180.0/np.pi)*np.arccos(np.abs(np.sum(vecsMHD[j,i,2]*disk_vec[j]))) # both are normalized vectors
-                print "\n"
-            
+    Xnames = ['Gas Radius','StarDisk Radius','SFR density','Gas density','Star density','BH density',
+                'Baryonic fraction']
+    Xlog = [0,0,1,1,1,1,0,0,0,0] # To know if scales are logarithmic
+
+
     
-    
-    # We study the axial ratios between different measurements
-    #halos = range(30)
-    halos = range(nhalos)
-    for j in halos:
-        # Text 
-        print "______________________________________________________________"
-        print "____________" + "halo_"+str(j)+"______________________________"
-        print "______________________________________________________________\n"
-        
-        for i in range(5):
-                print "############        " + radii[i] +"             ###############\n\n"
-                print "Volume"
-                print "b/a = " + str(axesMHD[j,i,1]/axesMHD[j,i,0]) 
-                print "c/a = " + str(axesMHD[j,i,2]/axesMHD[j,i,0]) + "\n"
-                
-                '''
-                print "IsoDensity"
-                print "b/a = " + str(axesDen[j,i,1]/axesDen[j,i,0]) 
-                print "c/a = " + str(axesDen[j,i,2]/axesDen[j,i,0]) + "\n"
-                '''
-                
-                print "IsoPotential"
-                print "b/a = " + str(axesPot[j,i,1]/axesPot[j,i,0]) 
-                print "c/a = " + str(axesPot[j,i,2]/axesPot[j,i,0]) + "\n"
-                
-                
-                print "IsoPotential Formula Isodensity"
-                axesPot[j,i] = get_potential_axes(axesPot[j,i])
-                print "b/a = " + str(axesPot[j,i,1]/axesPot[j,i,0]) 
-                print "c/a = " + str(axesPot[j,i,2]/axesPot[j,i,0]) + "\n"
-                
-                print "error b/a = " + str(abs((axesPot[j,i,1]/axesPot[j,i,0])-(axesMHD[j,i,1]/axesMHD[j,i,0]))/(axesMHD[j,i,1]/axesMHD[j,i,0])) 
-                print "error c/a = " + str(abs((axesPot[j,i,2]/axesPot[j,i,0])-(axesMHD[j,i,2]/axesMHD[j,i,0]))/(axesMHD[j,i,2]/axesMHD[j,i,0])) 
-                print "Triaxiality = " + str(T_MHD[j,i])
-               
-    
-    
+    LASSO_fit(X,y,Xnames=Xnames, yname = 'Delta sphericity', Xlog = Xlog)
+    #LASSO_fit(np.array([x1]).T,y,['q'])
     
 
+
+    
+
+# REturns the LASSO fit according the given yparams and xparams
+# Plots important projections over the x space to see accuracy of fit.
+# Returns parameters of the fit.
+
+def LASSO_fit(X,y,Xnames='',yname='',Xlog = None):        
+    
+    import matplotlib.pyplot as plt
+    # Import scikit learn
+    from sklearn import linear_model
+    # We apply lasso with cross validation to choose an optimal weight for penalty (alpha) (Not good results)
+    clf = linear_model.LassoCV(normalize = True)
+    
+    clf = linear_model.Lasso(alpha = 0.002, normalize = True)
+    
+    # Asuming array x is of size (npoints,mparams) and array y is of size (npoints)
+    clf.fit(X,y)
+    
+    Xs = np.array([np.linspace(min(x)-0.01,max(x)+0.01,100) for x in X.T])
+    #print Xs
+    
+    ypredict = clf.predict(X)
+    for i in range(len(Xnames)):
+        print Xnames[i],
+        print '\n',
+        print clf.coef_[i],'\n'
+        
+        '''
+        plt.plot(X[:,i],y,'bo')
+        xmin = min(X[:,i])-0.05
+        xmax = max(X[:,i])+0.05
+        Xd = np.linspace(xmin,xmax,100)
+        plt.plot(X[:,i],ypredict,'ro')
+        plt.xlabel(Xnames[i])
+        plt.show()
+        plt.close() 
+        '''
+        
+      
+    print clf.intercept_      
+    
+    
+    
+    
+    
+    
 def simple_plot(x,y,xlabel,ylabel,title, mode = 'scatter', logx = False, folder = ''):
     
     import matplotlib.pyplot as plt
@@ -500,14 +462,156 @@ def get_potential_axes(axes):
     axes[2] = axes[0]/A
     
     return axes        
+    
+    
+# given axes from volumetric density, returns the estimated axes of the potential.
+def get_potential_axes2(axes):
+    A = axes[0]/axes[2]
+    B = axes[1]/axes[2]
+    
+    A = A*np.sqrt(2*A**2-1)
+    B = B*np.sqrt(2*B**2-1)
+    
+    axes[1] = axes[0]*B/A
+    axes[2] = axes[0]/A
+    
+    return axes 
+    
+    
+# given axes from volumetric density, returns the estimated axes of the potential.
+def get_potential_axes3(axes):
+    A = axes[1]/axes[0]
+    B = axes[2]/axes[0]
+    
+    A = A*np.sqrt(2*A**2-1)
+    B = B*np.sqrt(2*B**2-1)
+    
+    axes[1] = A*axes[0]
+    axes[2] = B*axes[0]
+    
+    return axes        
         
 
 
 
 main()
+'''
+quant = T_MHD - T_DM# Some measure of symmetry
+    # np.abs(2*(0.5 - T_DM)) is 1 when object is axisymetric and 0 when it is maximally triaxial
+    name = 'Delta Triaxiality'
+    
+    
+    import matplotlib.pyplot as plt
+    #plt.plot(axesMHD[:,0,1]/axesMHD[:,0,0],axesMHD[:,0,2]/axesMHD[:,0,0], 'ro' )
+    #plt.plot(axesDM[:,0,1]/axesDM[:,0,0],axesDM[:,0,2]/axesDM[:,0,0], 'bo' )
+    #plt.show()
+    
+    
+    simple_plot(GasDiskRad,quant[:,0],'GasDiskRad',name, name+' Vs GasDiskRad')
+    simple_plot(StarDiskRad,quant[:,0],'StarDiskRad',name, name+' Vs StarDiskRad')
+    simple_plot(SFRD,quant[:,0],'SFR density',name, name+' Vs SFR density', logx =True)
+    simple_plot(gas_den,quant[:,0],'Gas Density',name, name+' Vs Gas Density', logx =True)
+    simple_plot(star_den,quant[:,0],'Star Density',name, name +' Vs Star Density', logx =True)
+    simple_plot(BH_den,quant[:,0],'BH Density',name, name+' Vs BH Density', logx =True)
+    simple_plot(bar_frac,quant[:,0],'Baryonic fraction',name, name+' Vs Baryonic fraction')  
+    
+    
+    quant = asph_MHD - asph_DM
+    name = 'Delta asphericity'
+    simple_plot(GasDiskRad,quant[:,0],'GasDiskRad',name, name+' Vs GasDiskRad')
+    simple_plot(StarDiskRad,quant[:,0],'StarDiskRad',name, name+' Vs StarDiskRad')
+    simple_plot(SFRD,quant[:,0],'SFR density',name, name+' Vs SFR density', logx =True)
+    simple_plot(gas_den,quant[:,0],'Gas Density',name, name+' Vs Gas Density', logx =True)
+    simple_plot(star_den,quant[:,0],'Star Density',name, name +' Vs Star Density', logx =True)
+    simple_plot(BH_den,quant[:,0],'BH Density',name, name+' Vs BH Density', logx =True)
+    simple_plot(bar_frac,quant[:,0],'Baryonic fraction',name, name+' Vs Baryonic fraction') 
+    
+    
+    # We Want to study the alignment between the different vectorss
+    radii = ['12','25','50','1','Disk']
+    radii = ['Rad_'+ra for ra in radii]
+    
+    from matplotlib.backends.backend_pdf import PdfPages
+    
+    with PdfPages("./pics/alignments_level3"+".pdf") as pdf:
+        halos = range(nhalos)
+        #halos = [11,10]
+        for j in halos:
+            # Graphics
+            rads = (axesMHD[j,:,0]*axesMHD[j,:,1]*axesMHD[j,:,2])**(1./3.)
+            polar_graphs(pdf,vecsMHD[j],disk_vec[j],radii,"halo_"+str(j), radii_vals= rads, mode = 'all_in_1')
+        
+            
+            # Text 
+            print "______________________________________________________________"
+            print "____________" + "halo_"+str(j)+"______________________________"
+            print "______________________________________________________________\n"
+            
+            for i in range(5):
+                print "############        " + radii[i] +"             ###############\n\n"
+                print "b/a = " + str(axesMHD[j,i,1]/axesMHD[j,i,0]) 
+                print "c/a = " + str(axesMHD[j,i,2]/axesMHD[j,i,0]) + "\n"
+                
+                print "Angle with Major axis"
+                print (180.0/np.pi)*np.arccos(np.abs(np.sum(vecsMHD[j,i,0]*disk_vec[j]))) # both are normalized vectors
+                #print vecsMHD[j,i,0], np.linalg.norm(vecsMHD[j,i,0])
+                #print disk_vec[j], np.linalg.norm(disk_vec[j])
+                print "\n"
+                print "Mid axis"
+                print (180.0/np.pi)*np.arccos(np.abs(np.sum(vecsMHD[j,i,1]*disk_vec[j]))) # both are normalized vectors
+                print "\n"
+                print "Minor axis"
+                print (180.0/np.pi)*np.arccos(np.abs(np.sum(vecsMHD[j,i,2]*disk_vec[j]))) # both are normalized vectors
+                print "\n"
+            
+    
+    
+    # We study the axial ratios between different measurements
+    #halos = range(30)
+    halos = range(nhalos)
+    ba_err= []
+    ca_err= []
+    for j in halos:
+        # Text 
+        print "______________________________________________________________"
+        print "____________" + "halo_"+str(j)+"______________________________"
+        print "______________________________________________________________\n"
+        
+        for i in range(5):
+                print "############        " + radii[i] +"             ###############\n\n"
+                print "Volume"
+                print "b/a = " + str(axesMHD[j,i,1]/axesMHD[j,i,0]) 
+                print "c/a = " + str(axesMHD[j,i,2]/axesMHD[j,i,0]) + "\n"
+                
+               
+                print "IsoDensity"
+                print "b/a = " + str(axesDen[j,i,1]/axesDen[j,i,0]) 
+                print "c/a = " + str(axesDen[j,i,2]/axesDen[j,i,0]) + "\n"
+                
+                print "IsoPotential"
+                print "b/a = " + str(axesPot[j,i,1]/axesPot[j,i,0]) 
+                print "c/a = " + str(axesPot[j,i,2]/axesPot[j,i,0]) + "\n"
+                
+                
+                print "IsoPotential Formula Isodensity"
+                axesPot1 = np.copy(axesPot)
+                axesPot1[j,i] = get_potential_axes(np.copy(axesPot[j,i]))
+                print "b/a = " + str(axesPot1[j,i,1]/axesPot1[j,i,0]) 
+                print "c/a = " + str(axesPot1[j,i,2]/axesPot1[j,i,0]) + "\n"
+                
+                ba_err.append(abs((axesPot1[j,i,1]/axesPot1[j,i,0])-(axesMHD[j,i,1]/axesMHD[j,i,0]))/(axesMHD[j,i,1]/axesMHD[j,i,0])) 
+                ca_err.append(abs((axesPot1[j,i,2]/axesPot1[j,i,0])-(axesMHD[j,i,2]/axesMHD[j,i,0]))/(axesMHD[j,i,2]/axesMHD[j,i,0]))
+                
+                
+                
+                print "\nTriaxiality = " + str(T_MHD[j,i])
 
+    ba_err = np.array(ba_err).reshape(nhalos,5)
+    ca_err = np.array(ca_err).reshape(nhalos,5)                              
+    print np.mean(ba_err,axis=0),np.std(ba_err,axis=0)
+    print np.mean(ca_err,axis=0),np.std(ca_err,axis=0)    
 
-
+'''
 
 
 
