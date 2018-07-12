@@ -142,61 +142,92 @@ def main():
         
     Xnames = ['Gas Radius','StarDisk Radius','SFR density','Gas density','Star density','BH density',
                 'Baryonic fraction']
-    Xlog = [0,0,1,1,1,1,0,0,0,0] # To know if scales are logarithmic
-
-
+    Xlog = [0,0,1,1,1,1,0,0,0,0] # To know if scales are logarithm
     
-    LASSO_fit(X,y,Xnames=Xnames, yname = 'Delta sphericity', Xlog = Xlog)
-    #LASSO_fit(np.array([x1]).T,y,['q'])
-    
+    # Halos to discard
+    i_discard = np.where(y<0.1)[0]
+    # i_discard = [10,13,16]
+    badX = X[i_discard]
+    bady = y[i_discard]
+    X = np.delete(X,i_discard,axis=0)
+    y = np.delete(y,i_discard)
+        
+    SVReg(X,y,Xnames=Xnames, yname = 'Delta sphericity', Xlog = Xlog, badX=badX, bady=bady)
 
 
-    
 
-# REturns the LASSO fit according the given yparams and xparams
+
+# Performs a Support vector regression according the given yparams and xparams
 # Plots important projections over the x space to see accuracy of fit.
-# Returns parameters of the fit.
-
-def LASSO_fit(X,y,Xnames='',yname='',Xlog = None):        
+# Returns parameters of the fit.    
+def SVReg(X,y,Xnames='',yname='',Xlog = None, badX=None, bady=None):        
     
     import matplotlib.pyplot as plt
     # Import scikit learn
-    from sklearn import linear_model
-    # We apply lasso with cross validation to choose an optimal weight for penalty (alpha) (Not good results)
-    clf = linear_model.LassoCV(normalize = True)
+    from sklearn.svm import SVR
+    from sklearn.ensemble import RandomForestRegressor
+    from sklearn.linear_model import LassoCV
     
-    clf = linear_model.Lasso(alpha = 0.002, normalize = True)
+    # We apply SVR 
+    svr = SVR(kernel='linear', C = 1,epsilon = 0.075)
+    # And random forest
+    rf = RandomForestRegressor(n_estimators=100)
+    # And LassoCV
+    lasso = LassoCV()
+    
+    
+    # Mean values
+    meanX = np.mean(X, axis = 0)
+    # STD but with the signs of the coeficients
+    sigmaX = np.std(X, axis = 0)
+    
+    X = ((X-meanX)/sigmaX)
+    badX =  ((badX-meanX)/sigmaX)
     
     # Asuming array x is of size (npoints,mparams) and array y is of size (npoints)
-    clf.fit(X,y)
+    svr.fit(X,y)
+    rf.fit(X,y)
+    lasso.fit(X,y)
     
-    Xs = np.array([np.linspace(min(x)-0.01,max(x)+0.01,100) for x in X.T])
+    # Linspaces for each variable
+    linspcX = np.array([np.linspace(min(x)-0.01,max(x)+0.01,100) for x in X.T])
     #print Xs
     
-    ypredict = clf.predict(X)
     for i in range(len(Xnames)):
+        # Names and slopes
         print Xnames[i],
         print '\n',
-        print clf.coef_[i],'\n'
+        print 'Mean',svr.coef_[0,i]
+        print 'Feature Importance',rf.feature_importances_[i],'\n'
         
-        '''
+        # Plot dataset projection over variable i
         plt.plot(X[:,i],y,'bo')
-        xmin = min(X[:,i])-0.05
-        xmax = max(X[:,i])+0.05
-        Xd = np.linspace(xmin,xmax,100)
-        plt.plot(X[:,i],ypredict,'ro')
+        plt.plot(badX[:,i],bady,'ro')
+        
+        # We produce a generic space of with the linspace of the projected variable
+        # and the mean in the other variables.
+        # We also take the uppper and lower bounds in the other variables
+        
+        X_proj_mean = np.zeros((100,len(meanX)))
+        X_proj_mean[:,i] = linspcX[i]
+
+        yproj_svr = svr.predict(X_proj_mean)
+        yproj_rf = rf.predict(X_proj_mean)
+        yproj_lasso = lasso.predict(X_proj_mean)
+        
+        plt.plot(linspcX[i],yproj_svr,'black',linewidth=1.2,label='SVR') # Mean
+        plt.plot(linspcX[i],yproj_rf,'g',linewidth=1.2,label='Random Forest') # Mean
+        plt.plot(linspcX[i],yproj_lasso,'r',linewidth=1.2,label='Lasso') # Mean
+
+        plt.legend(loc=0)
         plt.xlabel(Xnames[i])
         plt.show()
         plt.close() 
-        '''
+        
         
       
-    print clf.intercept_      
-    
-    
-    
-    
-    
+    print svr.coef_,svr.intercept_          
+
     
 def simple_plot(x,y,xlabel,ylabel,title, mode = 'scatter', logx = False, folder = ''):
     
@@ -380,7 +411,6 @@ def polar_graphs(pdf,vecs,disk_vec,radii,title, radii_vals = None, mode = 'all_i
             midp = (np.pi/180.)*midp
             majp = (np.pi/180.)*majp
             
-            '''
             print "Minor: "
             print vecs[0,[1,0,2],:].dot(vecs[i,2,:])
             print to_Cartesians(mint,minp)
@@ -391,7 +421,7 @@ def polar_graphs(pdf,vecs,disk_vec,radii,title, radii_vals = None, mode = 'all_i
             print vecs[0,[1,0,2],:].dot(vecs[i,0,:])
             print to_Cartesians(majt,majp)
             print "____________________________________________________"
-            '''
+ 
             
             #print mint, ec[int(mint>90)], int(mint>90), int(mint<90), ec
             ax.scatter([minp],[90-np.abs(90-mint)], marker = '*', c = my_col,s = 450, alpha = 0.7, 
