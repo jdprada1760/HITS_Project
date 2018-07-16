@@ -68,8 +68,8 @@ Jaime E. Forero-Romero,$^{1}$
 Volker Springel$^{2}$
 \\
 % List of institutions
-$^{1}$Departamento de Física, Universidad de los Andes, Cra. 1 No.
-18A-10, Edificio Ip, Bogotá, Colombia.\\
+$^{1}$Departamento de F\'sica, Universidad de los Andes, Cra. 1 No.
+18A-10, Edificio Ip, Bogot\', Colombia.\\
 $^{2}$Heidelberg Institute for Theoretical Studies, Schloss-Wolfsbrunnenweg 35, D-69118 Heidelberg
 Germany.\\
 }
@@ -91,7 +91,13 @@ Germany.\\
 This is a simple template for authors to write new MNRAS papers.
 The abstract should briefly describe the aims, methods, and main results of the paper.
 It should be a single paragraph not more than 250 words (200 words for Letters).
-No references should appear in the abstract.
+No references should appear in the abstract.This is a simple template for authors to write new MNRAS papers.
+The abstract should briefly describe the aims, methods, and main results of the paper.
+It should be a single paragraph not more than 250 words (200 words for Letters).
+No references should appear in the abstractThis is a simple template for authors to write new MNRAS papers.
+The abstract should briefly describe the aims, methods, and main results of the paper.
+It should be a single paragraph not more than 250 words (200 words for Letters).
+No references should appear in the abstract
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
@@ -106,57 +112,50 @@ keyword1 -- keyword2 -- keyword3
 
 \section{Introduction}
 
-This is a simple template for authors to write new MNRAS papers.
-See \texttt{mnras\_sample.tex} for a more complex example, and \texttt{mnras\_guide.tex}
-for a full user guide.
+%This is a simple template for authors to write new MNRAS papers.
+%See \texttt{mnras\_sample.tex} for a more complex example, and \texttt{mnras\_guide.tex}
+%for a full user guide.
 
 All papers should start with an Introduction section, which sets the work
 in context, cites relevant earlier studies in the field by \citet{Others2013},
-and describes the problem the authors aim to solve \citep[e.g.][]{Author2012}.
+and describes the problem the authors aim to solve \citep[e.g.][]{Author2012}.\\
+
+Introduce/ Motivation simulations, sphereical top hat collapse.\\
+
+One of the principal predictions of the CDM model is that DM halos are ellipsoidal and very well characterized by the principal axes $a>b>c$. This is due, among other causes, to the anisotropical and clumpy accretion of matter influenced by environmental structures \citep[see?][]{environment-shape}. The general concensus in numerical simulations \citep[e.g.][]{TriaxialHalos1,TriaxialHalos2,etc} is that halos tend to be prolate with axial ratios b/a ~ \textit{number}, c/a ~ \textit{number} and small differences may arise by the use different methods in numerical recipies for the simulations and the shape-calculation methods  \citep[see][]{Allgood et al. 2006}. Some studies have gone a step further as for analyzing the dependence of shape of the DM halo on the radius and redshift \citep[e.g.][]{Shape-radius-papers, including Allgood}, generally finding that halos are rounder at the outerskirts and at lower redshift.\\
+
+Due to the evasive nature of DM, properly constraining the shape of DM halos is a very difficult endeavour.\\
+
+Better connector with observations of distant galaxies. Gravitational lensing and star tracers. (Talk about discrepancy with simulations, perhaps later) and state that the preference for axisymmetrical shapes may arise from the observational restrictions (projection) look for citations about this .\\
+
+In the case of the Milky Way, where we have a three-dimensional view from the inside, there seems to be a general agreement for oblate (i.e. a=b>c) configurations at small distances around \~ <20kpc \citep[see][]{LM10,Bovy2016,Loebman,Vera-Ciro, RobOllingMerrifield,Bovy,BanerjeeChanda}, and more triaxial and prolate configurations on the outter distances \~>20kpc \citep[see][]{Vera-Ciro,LMJ09,Deg,BanerjeeChanda}. However, some studies are inclined towards prolate configurations even at the inner parts of the halo \citep[see][]{BowdenEvansWilliams,Findothers}, and although it previously seemed that a triaxial DM halo on the outerskirts would be necessary to fully explain the characterization of the Sagittarius stream \citep[see][]{LMJ09}, more recent studies put into doubt (question) this claim by reporting inconsistencies with narrow stellar streams \citet{PearsonKupperJohtnston, MoreLikeThis} or finding that the relaxation of other constraints may make this claim unnecessary (wording) \citet{IbataLewisMartin}.\\
+
+Although observations predict more symmetric halos than DM-only simulations, this may be an effect of not taking into account the gravitational effects of baryonic matter. The collapse of baryonic matter generate denser structures than those of DM only, whose potential may affect the kinematics that give shape to DM halos by making them more axisymmetrical. Regarding the specifics of this rounding effect and stability, there is much to be known as the simulation of baryonic dynamics in the whole cosmological context to galactic-scale resolution is not a trivial task and is usually subject to simplifications to analyze extreme cases as boundary constrains. Simple study the adiabatical growth of a disk potential in DM halos of different triaxiality and in different orientations \cite{Debattista-Moore,Debattista-Roskar}. While these studies are elucidating about dynamical aspects that may play important roles in the shape rounding, they neglect some important galactic properties that may also contribute to this rounding that can be only analyzed with more sophisticated hydrodynamical simulations with restricted models of feedback \cite{Abadi-Navarro,Bryan-Kay}. In this way, it can be demonstrated that the galaxy formation efficiency \cite{Abadi} and the history of formation may also determine the extent of this rounding.\\
+
+In this work, we analyze the Auriga simulations wich etc, where we can analyze the effect of dynamical properties of baryons together with galactic features, that are involved in the shaping of the DM halo shape of realistic MW-like galaxies.
 
 \section{Numerical Simulations}
-In this work we use the results of the state-of-the art Auriga simulations \cite{auriga}. It selected a set of 30 isolated halos from the Evolution and Assembly of GaLaxies and their Environments (EAGLE) project \cite{Eagle}. Each halo was identified with the algorithm "Friend of Friends" (FOF) \cite{Davis_et_al._1985}, that recursively links particles if they are closer than some distance threshold referred as linking length. EAGLE follows the evolution of fixed-mass particles of $m_{\text{DM}} = 1.15\cdot 10^7\text{M}_{\odot}$ from $z=127$ to $z=0$, adopting the $\Lambda$CDM model from the \cite[Planck Collaboration et al. (2014)]{Planck_Collaboration_2014}, which is characterized by the parameters: $\Omega_\Lambda=0.693$, $\Omega_\text{m}=0.307$, $\Omega_\text{b}=0.048$ \& $\text{H}_0=67.77\text{kms} ^{-1}\text{Mpc}^{-1}$. 
+In this work we use the results of the state-of-the art Auriga simulations \cite{auriga}. It selected a set of 30 isolated halos from the Evolution and Assembly of GaLaxies and their Environments (EAGLE) project \cite{Eagle}. Each halo was identified with the algorithm "Friend of Friends" (FOF) \cite{Davis_et_al._1985}, which recursively links particles if they are closer than some threshold distance referred as linking length. EAGLE follows the evolution of fixed-mass particles of $m_{\text{DM}} = 1.15\cdot 10^7\text{M}_{\odot}$ from $z=127$ to $z=0$, adopting the $\Lambda$CDM model from the \cite[Planck Collaboration et al. (2014)]{Planck_Collaboration_2014}, which is characterized by $\Omega_\Lambda=0.693$, $\Omega_\text{m}=0.307$, $\Omega_\text{b}=0.048$ \& $\text{H}_0=67.77\text{kms} ^{-1}\text{Mpc}^{-1}$. 
 
-These halos were randomly selected from a sample of the most isolated quartile of halos whose virial mass $M_{200}$ varied between $10^{12}M_\odot$ and $2\cdot 10^{12}M_\odot$. \textbf{This mass is defined as the mass enclosed within the virial radius $R_{200}$ at which the density becomes 200 times the critical density of the universe. \huge FOOTNOTE \normalsize}. These halos were re-simulated with the (AREPOOO HERE) by increasing the mass resolution of the particles belonging to them and diminishing the resolution of the rest of the particles. This would efficiently simulate external gravitational effects over the studied structure while focusing on a high-resolution version of it.\\
+These halos were randomly selected from a sample of the most isolated quartile of halos whose virial mass $M_{200}$ varied between $10^{12}M_\odot$ and $2\cdot 10^{12}M_\odot$. \textbf{\tiny This mass is defined as the mass enclosed within the virial radius $R_{200}$ at which the density becomes 200 times the critical density of the universe. \huge FOOTNOTE \normalsize}. These halos were re-simulated with the (AREPOOO HERE) by increasing the mass resolution of the particles belonging to them and diminishing the resolution of the rest of the particles.\\
 
-Various versions of the same halo were simulated for different degrees of realism. All 30 halos were simulated within a level-4-degree of resolution defined for Aquarius simulations corresponding to $\tilde 3\cdot 10^6$ high resolution particles of $\tilde 2.5 \cdot 10^5 M_\odot$. The principal details of each of these halos are consigned on the table \ref{tab:level4}. From these halos, 6 of them where re-simulated at level 3 (higher) resolution taking into account a spatial factor of 2 in each dimension. For more information about level 3 halos, their details are printed on table \ref{tab:level3}. Furthermore, fore each halo in each level of resolution there are two versions of the simulation. One of tracks the evolution of DM-only particles while the remaining one evolves DM and baryions with magneto-hydrodynamical (MHD) physics, including DM.\\
+Various versions of each halo were modelled with different degrees of realism. All 30 halos were simulated within a level-4-degree of resolution defined for Aquarius simulations corresponding to $\tilde 3\cdot 10^6$ high resolution particles of $\tilde 2.5 \cdot 10^5 M_\odot$. The principal details of each of these halos are consigned on the table \ref{tab:level4}. From these halos, 6 of them where re-simulated at level 3 (higher) resolution taking into account a spatial factor of 2 in each dimension. For more information about level 3 halos, their details are printed on table \ref{tab:level3}. Furthermore, fore each halo in each level of resolution there are two versions of the simulation. One of tracks the evolution of DM-only particles while the remaining one evolves DM and baryions with magneto-hydrodynamical (MHD) physics, including DM.\\
 
 
 \section{Determining the halo shape}
 
 %\subsection{The solid ellipsoid method}
 
-The discretization of the DM density field into particles makes it difficult  to perform some calculations that would require a more continuous distribution. Therefore, there is no trivial way to calculate the DM halo shape at a determined radius. There are different approaches \textbf{ \large ISODENSITY, ISOPOTENTIAL, potential gets rounder, cite binney \normalsize }
-\textbf{\large Talk about difference between volume method and isodensity contour at least for DM halos \normalsize} \cite{Vera-Ciro_et_al._2011}. In this work we follow the guidelines by \cite[Vera-Ciro et al. 2011]{Vera-Ciro_et_al._2011} which includes the use of the shape method proposed by \cite[Allgood et al. 2006]{Allgood_et_al._2006}.\\
-
-To calculate the DM halo shape, we initially consider particles enclosed within a sphere of radius $r$. We calculate the reduced inertia tensor:
+There is no trivial way to calculate the DM halo shape at a determined radius due to the discretization of particles. For practical effects, observational models focus on the shape of the DM isopotential \cite{isopotential} or isodensity \cite{isodensity} contours. In cosmological simulations, it is preferred to work with the isodensity contours which is directly calculated from particle positions. However, these density contours are not smooth and are very sensitive to the presence of small satelites \cite{Springel Isodensity}. For this reason we determine the shape taking into account volume-enclosed particles, rather than shell-enclosed. While this approach allows the cumulative influence of outter shells on the outter shapes, it has been demonstrated for DM-only simulations that this effect becomes important only for big radii \cite{vera-Ciro aquarius}.  We therefore follow the method of \cite[Allgood et al. 2006]{Allgood_et_al._2006} that consits in the use of the reduced inertia tensor,   \\
 
 \begin{equation}
 I_{ij} = \sum_k \frac{x_k^{(i)}x_k^{(j)}}{d^2_k},
 \label{eq:inertia}
 \end{equation}
 
-whose components are weighted by the distance $d^2=x^2+y^2+z^2$, so that each particle contribute with same importance to the sum regardless of their radius from the center.\\
+with components weighted by the k-th particle distance $d^2=x^2+y^2+z^2$.\\
 
-The diagonalization of this tensor yields the principal axes of the structure, as well as the eigen-quantities which are proportional to the squared principal axes $a>b>c$. \textbf{\large SUMARIZE \normalsize} However, if we characterize an ellipsoid taking into account only particles enclosed within a sphere, we are effectively miscalculating its triaxiality \cite{Allgood_et_al._2006}. For this reason, we iteratively recalculate the inertia tensor taking into account the previously characterized ellipsoid.\\
-
-AllGood et al. propose to use the eigenvalues $a>b>c$ and their respective eigen-axes $v_a,v_b,v_c$ to recalculate the inertia tensor over the particles enclosed by the ellipsoid with principal axes (along the respective eigenvectors) equal to $r,r/q,r/s$, where ere $q = b/a$ and $s=c/a$ are the axial ratios. In other words, we repeat the process of calculating the inertia matrix by taking into account particles within an ellipsoid with axial ratios given by the previous diagonalization. In this case, as the constant of proportionality is a free parameter, we choose to hold the size (not the direction) of the principal axis constant.\\
-
-This method looks reliable and it would eventually converge to a more accurate characterization of the halo ellipsoid. However, we are computing the reduced inertia tensor by weighting the contributions with the spherical-metric distance $d^2=x^2+y^2+z^2$, where particles within the same spherical surface are given the same importance. This means we are again introducing some error in the triaxiality of the structure. For this reason, on each iteration we must calculate the inertia tensor taking into account an elliptic metric: $\bar{d}^2 = x^2+y^2/q^2+z^2/s^2$, assuming $x,y,z$ are the corresponding principal axes.\\
-
-In case this concept of an elliptic metric is difficult to grasp, let us consider that, instead of converting the initial enclosing sphere to the halo ellipse, we are converting the halo ellipsoid into a sphere by performing scale transforms along the respective eigen-axes. From this point of view, we start our first-guess calculation of the ellipsoid by computing the reduced inertia tensor \eqref{eq:inertia} for particles enclosed within a sphere of radius $r$. Then with the results of this first guess, we perform the following scale transform:
-  
-\begin{align}
-(x,y,z) &\rightarrow (x',y',z')=(x,y/q,z/s) \label{eq:scale}\\
-q &=  b/a \nonumber \\
-s &= c/a \nonumber ,
-\end{align}
-
-where we assumed the unit vectors $\hat{x},\hat{y},\hat{z}$ are oriented at the principal elliptic axes. We then repeat the process of calculating the reduced inertia tensor and performing the scale transformation until we achieve a certain convergence criterion. We stop this iterative process when the sum of the fractional change in axes is less than $10^{-6}$. Finally, we obtain the shape of the halo at the geometric mean radius $(abc)^{1/3}$, which is not much different from the initial radius.\\
-
-Notice that, for diagonalization purposes, calculating the inertia tensor with the scaled coordinates $x',y',z'$ is equivalent to calculating it with the un-scaled coordinates $x,y,z$, using the elliptic-metric distance $\bar{d}^2 = x^2+y^2/q^2+z^2/s^2$.\\
-
-
+The diagonalization of this tensor yields the principal axes of the structure as well as the eigen-quantities which are proportional to the squared principal axes $a>b>c$. We start our calculations taking into account particles within a sphere of radius $R$ and then recharacterize the triaxial parameters by taking into account particles within an ellipsoid of semi-axes $r,r/q,r/s$ and weighted distance $d^2=x^2+(y/q)^2+(z/s)^2$, where ere $q = b/a$ and $s=c/a$ are the previously calculated axial ratios. We repeat this process until the average deviation of semi-axes is less than $10^{-6}$.\\
 
 \section{Results}
 Here we present our principal results blah blah blah.
