@@ -113,6 +113,9 @@ def main():
     T_MHD = get_T(axesMHD) #shape: (nhalos,5)
     T_DM  = get_T(axesDM)
     
+    Table(axesDM[:,:-1,:],"./pics/Triax_DM.png")
+    
+    
     # Define deviation from sphericity 
     
     
@@ -145,10 +148,10 @@ def main():
     # Defines Sphericity
     asph_MHD = asphericity(axesMHD) #shape: (nhalos,5)
     asph_DM  = asphericity(axesDM)
-    #y = (asph_MHD - 0*asph_DM)[:,1] # 0 -> only calculated at 0.125 Rvir
+    y = (asph_MHD - 0*asph_DM)[:,1] # 0 -> only calculated at 0.125 Rvir
     
     #y1 = axesMHD[:,0,1]/axesMHD[:,0,0] # this is b/a MHD for all haloes
-    y = ((axesMHD[:,0,2]/axesMHD[:,0,0]))**(-1) #- (axesDM[:,0,2]/axesDM[:,0,0])) # c/a MHD
+    #y = ((axesMHD[:,0,2]/axesMHD[:,0,0]))**(-1) #- (axesDM[:,0,2]/axesDM[:,0,0])) # c/a MHD
 
     # Just to see if the increase is related to the unperturbed state of the halo
     x1 = axesDM[:,0,1]/axesDM[:,0,0] #b/a DM (q)
@@ -178,29 +181,89 @@ def main():
     sigmaX = np.std(X, axis = 0)
     
     #X = ((X-meanX)/sigmaX)
+    
 
 
-    MCMC(X,y,X_names=Xnames)
+    #MCMC(X,y,X_names=Xnames)
+
+
+def Table(axes,plot_name):
+
+    import matplotlib.pyplot as plt
+    plt.rc('text', usetex=True)
+    plt.rc('font', family='serif')
+
+    # for the table (PAPER)
+    T = get_T(axes)
+    summary = np.array([axes[:,:,1]/axes[:,:,0], axes[:,:,2]/axes[:,:,0],T])
+    mean = np.percentile(summary,50,axis=1)
+    std1  = np.percentile(summary,84,axis=1)-mean
+    std2  = mean - np.percentile(summary,16,axis=1)
+    nmean = ['$\\bar{q}$','$\\bar{s}$','$\\bar{T}$']
+    nstd = ['$\\sigma_{q}$','$\\sigma_{s}$','$\\sigma_{T}$']  
+    tostr = lambda arr,s1,s2: ['%1.2f^{+%.2f}_{-%.2f}'%(arr[i],s1[i],s2[i]) for i in range(len(arr))]
+    # pritns the table format
+    for i in range(len(mean)):
+        print nmean[i]+'&$'+'$&$'.join(tostr(mean[i],std1[i],std2[i]))+'$','\\\\'
+        #print nstd[i]+'&'+'&'.join(tostr(std[i])),'\\\\'
+    
+    # Fonts 
+    MEDIUM_SIZE = 30
+    SMALL_SIZE = 30
+    SSSMALL_SIZE = 16
+
+    plt.rc('font', size=SSSMALL_SIZE)          # controls default text sizes
+    plt.rc('axes', titlesize=MEDIUM_SIZE)     # fontsize of the axes title
+    plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
+    plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+    plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 
     
+    fig = plt.figure(figsize=(10,10))
+    ax = fig.add_subplot(111,aspect='equal')
     
-    '''
-    print meanX[1]
-     
-    from scipy.optimize import curve_fit
-    def fun( x,a,b,c,n): 
-        return a/((x-b)**n)+c
-    popt,pcov = curve_fit(fun, X[:,1],X[:,-1])
-        
-    #scatter3d(X[:,-2], X[:,-1], y, y)    
-    plt.plot(X[:,1],X[:,-1],'ro')
-    xspc = np.linspace(min(X[:,1])-0.1, max(X[:,1])+0.1, 100)
-    print popt
-    plt.plot(xspc,fun(xspc,popt[0],popt[1],popt[2],popt[3]))   
+    ax.plot(summary[0,:,0],summary[1,:,0],'ro',markersize=10,label= r"$R_{1/8}$" ) # 1/8 R 
+    ax.errorbar(mean[0,0],mean[1,0],fmt='o', color='crimson' ,xerr=[[std1[0,0],std2[0,0]]],yerr=[[std1[1,0],std2[1,0]]])  
+    #ax.plot(summary[0,:,-3],summary[1,:,-3],'^',color='springgreen',markersize=10,label= r"$R_{1/2}$" ) # 1 R 
+    ax.plot(summary[0,:,-1],summary[1,:,-1],'s',color='midnightblue',markersize=10,label= r"$R$" ) # 1 R
+    ax.errorbar(mean[0,-1],mean[1,-1],fmt='s',color='darkblue',xerr=[[std1[0,-1],std2[0,-1]]],yerr=[[std1[1,-1],std2[1,-1]]])
+    
+    
+    
+    ax.set_xlim(0,1)
+    ax.set_ylim(0,1)
+    
+    # Rotate angle
+    angle_pro = 45
+    pos_pro = np.array([0.4,0.45])
+    trans_angle_pro = ax.transData.transform_angles(np.array((angle_pro,)),
+                                                       pos_pro.reshape((1, 2)))[0]
+                                                       
+                                                       # Rotate angle
+    angle_ob = 90
+    pos_ob = np.array([1.06,0.35])
+    trans_angle_ob = ax.transData.transform_angles(np.array((angle_ob,)),
+                                                       pos_ob.reshape((1, 2)))[0]
+    # Plot text
+    prolate = ax.text(pos_pro[0],pos_pro[1], '\\textbf{Prolate}', fontsize=SMALL_SIZE-2,
+               rotation=trans_angle_pro, rotation_mode='anchor')
+    # Plot text
+    oblate = ax.text(pos_ob[0],pos_ob[1], '\\textbf{Oblate}', fontsize=SMALL_SIZE-2,
+               rotation=trans_angle_ob, rotation_mode='anchor')
+               
+    # Plot text
+    sphere = ax.text(0.82,1.02
+    , '\\textbf{Sphere}', fontsize=SMALL_SIZE-5)           
+               
 
-    plt.show()
-    '''
-
+    
+    ax.set_xlabel(r"$b/a$")
+    ax.set_ylabel(r"$c/a$")
+    
+    ax.plot([0,1],[0,1],color='black')
+    plt.legend(loc=0)
+    #plt.show()
+    plt.savefig(plot_name,bbox_inches='tight')
 
 
 def MCMC(X,y,X_names='',yname=''):
