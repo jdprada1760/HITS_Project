@@ -158,12 +158,12 @@ with components weighted by the k-th particle distance $d^2=x^2+y^2+z^2$.\\
 The diagonalization of this tensor yields the principal axes of the structure as well as the eigen-quantities which are proportional to the squared principal axes $a>b>c$. We start our calculations taking into account particles within a sphere of radius $R$ and then recharacterize the triaxial parameters by taking into account particles within an ellipsoid of semi-axes $r,r/q,r/s$ and weighted distance $d^2=x^2+(y/q)^2+(z/s)^2$, where ere $q = b/a$ and $s=c/a$ are the previously calculated axial ratios. We repeat this process until the average deviation of semi-axes is less than $10^{-6}$.\\
 
 \section{Results}
-For convergence reasons and seeking to make our results observation-comparable, we restrict the sampling of the ellipsoidal parameters to radii between $10\% and 100\%$ of the virial radius $R_500$, defined as the (DEFINITION OF VIRIAL RADIUS). All our results make use of this reference radius unless stritically stated otherwise.\\ 
+For convergence reasons and seeking to make our results observation-comparable, we restrict the sampling of the ellipsoidal parameters to radii between $1/16 R_{vir} and 2R_{vir}$ of the virial radius $R_{500}$, defined as the (DEFINITION OF VIRIAL RADIUS). All our results make use of this reference radius unless strictly stated otherwise.\\ 
 
 \subsection{The radial tendency of axial ratios}
 To have a more complete picture about the effect of baryons on the DM halo shape, we begin by verifying/understanding the radial evolution (dependence?) of the shape. In the case of DM-only simulations, it is expected that halos get monotonically rounder at larger radii due to the gravitational effect of inner shells \citep{Vera-Ciro et al. 2012}. A graphic example of this rounding can be checked on figure \ref{fig:DM_MHD}, where we plot the a projection of a DM-only halo aligned with the calculated minor axis at two different radius together with the estimated projected ellipsoidal. Formally, this effect is reflected in the axial ratios $b/a,c/a$, which tend to unity on the outerskirts of the halo. As a representative sample of this relations, we show on figure \ref{fig:DM relation} the evolution of the axial ratios $b/a,c/a$ and the triaxiality parameter $T=\frac{a^2-b^2}{a^2-c^2}$ in a wide range of radii.\\
 
-In general, we find that DM-only halos are shaped with parameters in table \ref{table:DM-only parameters}. To show this relation is real and not a result of strong peculiarities of particular DM halos, we resume the results of the 30 auriga simulations on the figure \ref{fig: triaxial plane} where each shape represents a point in the triaxiality plane $c/a Vs b/a$. Check Vera-ciro onthis.\\
+In general, we find that DM-only halos are shaped with parameters in table \ref{table:DM table}. To show this relation is real and not a result of strong peculiarities of particular DM halos, we resume the results of the 30 auriga simulations on the figure \ref{fig: triaxial plane} where each shape represents a point in the triaxiality plane $c/a Vs b/a$. Check Vera-ciro onthis.\\
 
  
 
@@ -178,12 +178,13 @@ In general, we find that DM-only halos are shaped with parameters in table \ref{
 \end{figure}
 
 \begin{table}
-\begin{tabular}{l|cccc}
-Measure / Radius& $R_{1/8}$& $R_{1/4}$& $R_{1/2}$& $R$\\
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{l|cccccc}
+ &$R_{1/16}$& $R_{1/8}$& $R_{1/4}$& $R_{1/2}$& $R_1$ & $R_2$\\
 \hline \hline
-$\bar{q}$&$0.57^{+0.09}_{-0.08}$&$0.61^{+0.15}_{-0.08}$&$0.65^{+0.18}_{-0.10}$&$0.70^{+0.13}_{-0.10}$ \\ [0.1cm]
-$\bar{s}$&$0.45^{+0.11}_{-0.04}$&$0.49^{+0.09}_{-0.05}$&$0.52^{+0.10}_{-0.05}$&$0.56^{+0.10}_{-0.05}$ \\ [0.1cm]
-$\bar{T}$&$0.88^{+0.04}_{-0.12}$&$0.84^{+0.08}_{-0.23}$&$0.81^{+0.08}_{-0.29}$&$0.75^{+0.14}_{-0.25}$ \\ 
+$\bar{q}$&$0.55^{+0.07}_{-0.07}$&$0.57^{+0.09}_{-0.08}$&$0.61^{+0.15}_{-0.08}$&$0.65^{+0.18}_{-0.10}$&$0.70^{+0.13}_{-0.10}$&$0.75^{+0.10}_{-0.10}$ \\ [0.1cm]
+$\bar{s}$&$0.42^{+0.12}_{-0.03}$&$0.45^{+0.11}_{-0.04}$&$0.49^{+0.09}_{-0.05}$&$0.52^{+0.10}_{-0.05}$&$0.56^{+0.10}_{-0.05}$&$0.59^{+0.11}_{-0.06}$ \\ [0.1cm]
+$\bar{T}$&$0.89^{+0.03}_{-0.08}$&$0.88^{+0.04}_{-0.12}$&$0.84^{+0.08}_{-0.23}$&$0.81^{+0.08}_{-0.29}$&$0.75^{+0.14}_{-0.25}$&$0.71^{+0.16}_{-0.19}$ \\ [0.1cm]
 
 \hline
 \end{tabular}
@@ -191,21 +192,27 @@ $\bar{T}$&$0.88^{+0.04}_{-0.12}$&$0.84^{+0.08}_{-0.23}$&$0.81^{+0.08}_{-0.29}$&$
 \label{tabe:DM table}
 \end{table}
 
-Concerning MHD halos, the expected tendency is not clear. Some studies claim that the DM halo must be oblate, at least in the vicinities of the disk, to ensure its stability. However, not much is said about its dependence with radius as these studies focus rather on the effects of baryons on the dynamics of the halo. Taking a look at some representative graphics similar to those presented before, \ref{fig:,fig:}, some things are noticeable: first, the halo is almost perfectly oblate around $\approx 10-30$Kpc and secong: its axial ratios start decreasing very slowly after $50$Kpce. Overall, our results are sumarized on table \ref{table:MHD}, where we included some extra measurement at twice the size of the stelar disk HalfRad.\\
+Concerning MHD halos, the expected tendency is not clear. Some studies claim that the DM halo must be oblate, at least in the vicinities of the disk, to ensure its stability. However, not much is said about its dependence with radius as these studies focus rather on the effects of baryons on the dynamics of the halo. Taking a look at some representative graphics similar to those presented before, \ref{fig:,fig:}, some things are noticeable: first, the halo is almost perfectly oblate around $\approx 10-30$Kpc and second: its axial ratios start decreasing very slowly after $50$ and below $10Kpc$. Overall, our results are sumarized on table \ref{MHD table}, where we included some extra measurement at twice the size of the gas disk HalfRad.\\
+
+\begin{table}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{l|ccccccc}
+ &$R_{1/16}$& $R_{1/8}$& $R_{1/4}$& $R_{1/2}$& $R_1$ & $R_2$& $R_{Disk}$\\
+\hline \hline
+$\bar{q}$&$0.93^{+0.04}_{-0.04}$&$0.95^{+0.03}_{-0.03}$&$0.95^{+0.02}_{-0.05}$&$0.93^{+0.04}_{-0.06}$&$0.93^{+0.04}_{-0.10}$&$0.92^{+0.03}_{-0.09}$&$0.94^{+0.03}_{-0.09}$ \\[0.1cm]
+$\bar{s}$&$0.73^{+0.05}_{-0.09}$&$0.73^{+0.07}_{-0.10}$&$0.73^{+0.08}_{-0.10}$&$0.73^{+0.09}_{-0.08}$&$0.75^{+0.07}_{-0.11}$&$0.74^{+0.07}_{-0.10}$&$0.71^{+0.11}_{-0.06}$ \\[0.1cm]
+$\bar{T}$&$0.31^{+0.15}_{-0.22}$&$0.20^{+0.24}_{-0.12}$&$0.24^{+0.20}_{-0.12}$&$0.30^{+0.26}_{-0.16}$&$0.36^{+0.23}_{-0.23}$&$0.39^{+0.26}_{-0.13}$&$0.24^{+0.37}_{-0.10}$ \\[0.1cm]
+\hline
+\end{tabular}
+\caption{Median values of axial ratios $q,s$ and triaxiality parameter $T$ for DM halos in MHD simulations at different radii (columns). }
+\label{tabe:MHD table}
+\end{table}
+
+Talk about source of triaxiality at the inner parts of the halos (bar?). This source of triaxiality at the inner parts explains why the axial ratios are $\approx 0.95$ and not exactly $1$. We should also discuss that the decrease in the axial ratios for bigger radii may be actually bigger/steeper but it is dimmed by the contribution of inner parts.\\
 
 If we compare with obervational values, we must at least take isodensity contours (). We present this comparison  at two different radii for MHD simulations on figure \ref{fig:}. \\
 
 Little discussion: Are our results congruent with observations? at which radii, does the DM halo shape vary that much?.\\
-
-
-\begin{figure}
-\centering
-\subfloat[halo 16]{\includegraphics[width=0.5\columnwidth]{./pics/halo16.png}}
-  \hfill
-  \subfloat[halo 27]{\includegraphics[width=0.5\columnwidth]{./pics/halo27.png}}
-\caption{Radial profile for axial ratios and the triaxiality parameter $T=\frac{1-b/a}{1-c/a}$ from halo 27 and halo 16. These halos have a clear radial tendence towards sphericity (for smaller radii until $\approx 3$Kpc), which can be confirmed with the triaxiality parameter. (Merged Column)}
-\label{fig:DM_MHD}
-\end{figure} 
 
 \begin{figure}
   \centering
@@ -217,7 +224,15 @@ Little discussion: Are our results congruent with observations? at which radii, 
 \end{figure}
 
 \subsection{The rounding effect of baryons}
-Now that we have characterize the shapes of DM-only and MHD halos at different radii 
+
+\begin{figure}
+\centering
+{\includegraphics[width=0.8\columnwidth]{./pics/halo16.png}}
+\caption{Radial profile for axial ratios and the triaxiality parameter $T=\frac{1-b/a}{1-c/a}$ from halo 16 and halo 16. These halos have a clear radial tendence towards sphericity (for smaller radii until $\approx 3$Kpc), which can be confirmed with the triaxiality parameter. (Merged Column)}
+\label{fig:DM_MHD}
+\end{figure} 
+
+It is expected etc. show an example? or compare statistics? 
 
 \begin{figure}
   \centering
@@ -239,7 +254,10 @@ Now that we have characterize the shapes of DM-only and MHD halos at different r
 \end{figure}
 
 \subsection{The historical shape}
-Here we study the memory shape and how it can be deduced from the historic radial shapes. Also why it is lost for MHD even when radial profiles have the same historic tendencies.
+One of the principal motivations to study the radial dependence of the DM halo shape is that it may encode some clues about its formation history. We have already shown that DM-only halos seem to exhibit a steady and monotonous growth in its axial ratios when sampled at bigger radii. One similar effect can be found if we sample the shape at the virial radius, this time at varying redshift. It is easy to see that the axial ratios increase with decreasing redshift, which is expected by the continuous influence of the gravitational potential \cite{VeraCiro}. \\   
+
+
+Interestingly, these two parametic plots i.e. $(b/a,c/a)(z=0,r)$ and $(b/a,c/a)(z,r=R_{vir})$ are very correlated for DM only halos \ref{fig:redshift correlation}. This means that, for DM-only halos, one can approximate its shape at the virial radius at higher redshift by simply sampling its current shape at a smaller radius. This relationship relies strongly on the steady and monotonous tendency of DM halos towards sphericity for bigger radii and smaller redshift.\\
 
 \begin{figure}
   \centering
@@ -250,8 +268,13 @@ Here we study the memory shape and how it can be deduced from the historic radia
   \label{fig:RedshiftGood}
 \end{figure}
 
+MHD halos, on the other hand, do not exhibit tendency towards sphericity with bigger radii, but they do get sistematically rounder at lower redshift \ref{fig:MHD profile radius and redshift}. This effectively vanishes this correlation as seen from a DM halo \ref{fig:MHD Z Triax}.\\
+
+Discuss if this correlation may be recovered if compared for example at Disk radius in stead of virial radius.\\
+
+
 \subsection{The orientation of the principa axes}
-This is an important result of our study. We study the radial evolution of the principal axes, compared also to the angular momentum vector from the disk. We found that while the angular momentum tend to be aligned with the minor axis of the ellipsoid, this may not be the case all times. When there is an alignment it is usually within 20 degrees. When there is not an alignment, then there is no simple way to determine toward which axis it is oriented. Furthermore, the principal axes alignment usually change with radius (rotation, swap). This really questions the strong constrains on the MW DM halo models. 
+This is an important result of our study. We study the radial evolution of the principal axes, compared also to the angular momentum vector from the disk. We found that while the angular momentum tend to be aligned with the minor axis of the ellipsoid, this may not be the case all times. When there is an alignment it is usually within 20 degrees (get a histogram of this. and an evolution of this histogram with time). When there is not an alignment, then there is no simple way to determine towards which axis it is oriented. Furthermore, the principal axes alignment usually change with radius (rotation, swap, verify). This ask for relaxation on the strong constrains on the MW DM halo models. 
 
 
 \begin{figure}
