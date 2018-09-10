@@ -22,22 +22,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Basic setup. Most papers should leave these options alone.
 \documentclass[a4paper,fleqn,usenatbib]{mnras}
-
-% MNRAS is set in Times font. If you don't have this installed (most LaTeX
-% installations will be fine) or prefer the old Computer Modern fonts, comment
-% out the following line
-\usepackage{newtxtext,newtxmath}
-% Depending on your LaTeX fonts installation, you might get better results with one of these:
-%\usepackage{mathptmx}
-%\usepackage{txfonts}
-
-% Use vector fonts, so it zooms properly in on-screen viewing software
-% Don't change these lines unless you know what you are doing
 \usepackage[T1]{fontenc}
 \usepackage{ae,aecompl}
-
-
-%%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
 
 % Only include extra packages if you really need them. Common packages are:
 \usepackage{graphicx}	% Including figure files
@@ -88,16 +74,7 @@ Germany.\\
 
 % Abstract of the paper
 \begin{abstract}
-This is a simple template for authors to write new MNRAS papers.
-The abstract should briefly describe the aims, methods, and main results of the paper.
-It should be a single paragraph not more than 250 words (200 words for Letters).
-No references should appear in the abstract.This is a simple template for authors to write new MNRAS papers.
-The abstract should briefly describe the aims, methods, and main results of the paper.
-It should be a single paragraph not more than 250 words (200 words for Letters).
-No references should appear in the abstractThis is a simple template for authors to write new MNRAS papers.
-The abstract should briefly describe the aims, methods, and main results of the paper.
-It should be a single paragraph not more than 250 words (200 words for Letters).
-No references should appear in the abstract
+We measure the shape of the dark matter halos of Milky Way type galaxies.
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
@@ -116,11 +93,13 @@ keyword1 -- keyword2 -- keyword3
 %See \texttt{mnras\_sample.tex} for a more complex example, and \texttt{mnras\_guide.tex}
 %for a full user guide.
 
-All papers should start with an Introduction section, which sets the work
-in context, cites relevant earlier studies in the field by \citet{Others2013},
-and describes the problem the authors aim to solve \citep[e.g.][]{Author2012}.\\
+\citep{2011MNRAS.416.1377V}
 
-Introduce/ Motivation simulations, sphereical top hat collapse.\\
+\bibliographystyle{mnras}
+\bibliography{references}
+
+\end{document}
+
 
 One of the principal predictions of the CDM model is that DM halos are ellipsoidal and very well characterized by the principal axes $a>b>c$. This is due, among other causes, to the anisotropical and clumpy accretion of matter influenced by environmental structures \citep[see?][]{environment-shape}. The general concensus in numerical simulations \citep[e.g.][]{TriaxialHalos1,TriaxialHalos2,etc} is that halos tend to be prolate with axial ratios b/a ~ \textit{number}, c/a ~ \textit{number} and small differences may arise by the use different methods in numerical recipies for the simulations and the shape-calculation methods  \citep[see][]{Allgood et al. 2006}. Some studies have gone a step further as for analyzing the dependence of shape of the DM halo on the radius and redshift \citep[e.g.][]{Shape-radius-papers, including Allgood}, generally finding that halos are rounder at the outerskirts and at lower redshift.\\
 
@@ -367,8 +346,6 @@ This project has received funding from the European Union’s Horizon 2020 Resea
 
 % The best way to enter references is to use BibTeX:
 
-%\bibliographystyle{mnras}
-%\bibliography{example} % if your bibtex file is called example.bib
 
 
 % Alternatively you could enter them by hand, like this:
