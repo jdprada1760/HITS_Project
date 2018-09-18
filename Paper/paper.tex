@@ -131,31 +131,96 @@ the relaxation of other constraints may make this claim unnecessary
 \end{document}
 
 
+Although observations predict more symmetric halos than DM-only
+simulations, there is strong evidence claiming that the presence of
+baryons need/make more axisymmetrical halos. Some studies have shown
+that to ensure the stability of a hydrodynamical (numeric) disk
+artificially embeded in a static(non-changing) DM halo, its shape must
+be axisymmetrical \cite{}. Other works have studied this rounding
+effect by emulating a disk as an adiabatically growing potential
+inside an N-body triaxial DM halo
+\cite{Debattista-Moore,Debattista-Roskar, katzantzidis}, finding that
+(findings of this study -debattista-). Other works of this type?
 
+While these studies are elucidating about dynamical aspects that may
+play important roles in the rounding of the DM halo shape, they do not
+follow baryons in the whole cosmological context. Abadi-Navarro and
+Bryan-Kay studied the evolution of galaxies in hydrodynamical
+simulations with restricted models of feedback
+\cite{Abadi-Navarro,Bryan-Kay} finding that the galaxy formation
+efficiency \cite{Abadi} and the history of formation may also
+determine the extent of this rounding. 
 
+In general, there is much to be known about the specifics of the
+rounding effec of baryons. (There are have been no realistic
+simulations of MW-like galaxies to a resolution/realism that allows us
+to obtain stronger conslusions) 
 
-
-Although observations predict more symmetric halos than DM-only simulations, there is strong evidence claiming that the presence of baryons need/make more axisymmetrical halos. Some studies have shown that to ensure the stability of a hydrodynamical (numeric) disk artificially embeded in a static(non-changing) DM halo, its shape must be axisymmetrical \cite{}. Other works have studied this rounding effect by emulating a disk as an adiabatically growing potential inside an N-body triaxial DM halo \cite{Debattista-Moore,Debattista-Roskar, katzantzidis}, finding that (findings of this study -debattista-). Other works of this type?\\
-
-While these studies are elucidating about dynamical aspects that may play important roles in the rounding of the DM halo shape, they do not follow baryons in the whole cosmological context. Abadi-Navarro and Bryan-Kay studied the evolution of galaxies in hydrodynamical simulations with restricted models of feedback \cite{Abadi-Navarro,Bryan-Kay} finding that the galaxy formation efficiency \cite{Abadi} and the history of formation may also determine the extent of this rounding.\\
-
-In general, there is much to be known about the specifics of the rounding effec of baryons. (There are have been no realistic simulations of MW-like galaxies to a resolution/realism that allows us to obtain stronger conslusions)
-
-In this work, we analyze the Auriga simulations wich etc, where we can analyze the effect baryons together with galactic features, that are involved in the shaping of the DM halo shape of realistic MW-like galaxies.
+In this work, we analyze the Auriga simulations wich etc, where we can
+analyze the effect baryons together with galactic features, that are
+involved in the shaping of the DM halo shape of realistic MW-like
+galaxies. 
 
 \section{Numerical Simulations}
-In this work we use the results of the state-of-the art Auriga simulations \cite{auriga}. It selected a set of 30 isolated halos from the Evolution and Assembly of GaLaxies and their Environments (EAGLE) project \cite{Eagle}. Each halo was identified with the algorithm "Friend of Friends" (FOF) \cite{Davis_et_al._1985}, which recursively links particles if they are closer than some threshold distance referred as linking length. EAGLE follows the evolution of fixed-mass particles of $m_{\text{DM}} = 1.15\cdot 10^7\text{M}_{\odot}$ from $z=127$ to $z=0$, adopting the $\Lambda$CDM model from the \cite[Planck Collaboration et al. (2014)]{Planck_Collaboration_2014}, which is characterized by $\Omega_\Lambda=0.693$, $\Omega_\text{m}=0.307$, $\Omega_\text{b}=0.048$ \& $\text{H}_0=67.77\text{kms} ^{-1}\text{Mpc}^{-1}$. 
+In this work we use the results of the state-of-the art Auriga
+simulations \cite{auriga}. It selected a set of 30 isolated halos from
+the Evolution and Assembly of GaLaxies and their Environments (EAGLE)
+project \cite{Eagle}. Each halo was identified with the algorithm
+"Friend of Friends" (FOF) \cite{Davis_et_al._1985}, which recursively
+links particles if they are closer than some threshold distance
+referred as linking length. EAGLE follows the evolution of fixed-mass
+particles of $m_{\text{DM}} = 1.15\cdot 10^7\text{M}_{\odot}$ from
+$z=127$ to $z=0$, adopting the $\Lambda$CDM model from the
+\cite[Planck Collaboration et al. (2014)]{Planck_Collaboration_2014},
+which is characterized by $\Omega_\Lambda=0.693$,
+$\Omega_\text{m}=0.307$, $\Omega_\text{b}=0.048$ \&
+$\text{H}_0=67.77\text{kms} ^{-1}\text{Mpc}^{-1}$.  
 
-These halos were randomly selected from a sample of the most isolated quartile of halos whose virial mass $M_{200}$ varied between $10^{12}M_\odot$ and $2\cdot 10^{12}M_\odot$. \textbf{\tiny This mass is defined as the mass enclosed within the virial radius $R_{200}$ at which the density becomes 200 times the critical density of the universe. \huge FOOTNOTE \normalsize}. These halos were re-simulated with the (AREPOOO HERE) by increasing the mass resolution of the particles belonging to them and diminishing the resolution of the rest of the particles.\\
+These halos were randomly selected from a sample of the most isolated
+quartile of halos whose virial mass $M_{200}$ varied between
+$10^{12}M_\odot$ and $2\cdot 10^{12}M_\odot$. \textbf{\tiny This mass
+  is defined as the mass enclosed within the virial radius $R_{200}$
+  at which the density becomes 200 times the critical density of the
+  universe. \huge FOOTNOTE \normalsize}. These halos were re-simulated
+with the (AREPOOO HERE) by increasing the mass resolution of the
+particles belonging to them and diminishing the resolution of the rest
+of the particles.
 
-Various versions of each halo were modelled with different degrees of realism. All 30 halos were simulated within a level-4-degree of resolution defined for Aquarius simulations corresponding to $\tilde 3\cdot 10^6$ high resolution particles of $\tilde 2.5 \cdot 10^5 M_\odot$. The principal details of each of these halos are consigned on the table \ref{tab:level4}. From these halos, 6 of them where re-simulated at level 3 (higher) resolution taking into account a spatial factor of 2 in each dimension. For more information about level 3 halos, their details are printed on table \ref{tab:level3}. Furthermore, fore each halo in each level of resolution there are two versions of the simulation. One of tracks the evolution of DM-only particles while the remaining one evolves DM and baryions with magneto-hydrodynamical (MHD) physics, including DM.\\
+Various versions of each halo were modelled with different degrees of
+realism. All 30 halos were simulated within a level-4-degree of
+resolution defined for Aquarius simulations corresponding to $\tilde
+3\cdot 10^6$ high resolution particles of $\tilde 2.5 \cdot 10^5
+M_\odot$. The principal details of each of these halos are consigned
+on the table \ref{tab:level4}. From these halos, 6 of them where
+re-simulated at level 3 (higher) resolution taking into account a
+spatial factor of 2 in each dimension. For more information about
+level 3 halos, their details are printed on table
+\ref{tab:level3}. Furthermore, fore each halo in each level of
+resolution there are two versions of the simulation. One of tracks the
+evolution of DM-only particles while the remaining one evolves DM and
+baryions with magneto-hydrodynamical (MHD) physics, including DM.
 
 
 \section{Determining the halo shape}
 
 %\subsection{The solid ellipsoid method}
 
-There is no trivial way to calculate the DM halo shape at a determined radius due to the discretization of particles. For practical effects, observational models focus on the shape of the DM isopotential \cite{isopotential} or isodensity \cite{isodensity} contours. In cosmological simulations, it is preferred to work with the isodensity contours which is directly calculated from particle positions. However, these density contours are not smooth and are very sensitive to the presence of small satelites \cite{Springel Isodensity}. For this reason we determine the shape taking into account volume-enclosed particles, rather than shell-enclosed. While this approach allows the cumulative influence of outter shells on the outter shapes, it has been demonstrated for DM-only simulations that this effect becomes important only for big radii \cite{vera-Ciro aquarius}.  We therefore follow the method of \cite[Allgood et al. 2006]{Allgood_et_al._2006} that consits in the use of the reduced inertia tensor,   \\
+There is no trivial way to calculate the DM halo shape at a determined
+radius due to the discretization of particles. For practical effects,
+observational models focus on the shape of the DM isopotential
+\cite{isopotential} or isodensity \cite{isodensity} contours. In
+cosmological simulations, it is preferred to work with the isodensity
+contours which is directly calculated from particle
+positions. However, these density contours are not smooth and are very
+sensitive to the presence of small satelites \cite{Springel
+  Isodensity}. For this reason we determine the shape taking into
+account volume-enclosed particles, rather than shell-enclosed. While
+this approach allows the cumulative influence of outter shells on the
+outter shapes, it has been demonstrated for DM-only simulations that
+this effect becomes important only for big radii \cite{vera-Ciro
+  aquarius}.  We therefore follow the method of \cite[Allgood et
+  al. 2006]{Allgood_et_al._2006} that consits in the use of the
+reduced inertia tensor,    
 
 \begin{equation}
 I_{ij} = \sum_k \frac{x_k^{(i)}x_k^{(j)}}{d^2_k},
@@ -164,13 +229,39 @@ I_{ij} = \sum_k \frac{x_k^{(i)}x_k^{(j)}}{d^2_k},
 
 with components weighted by the k-th particle distance $d^2=x^2+y^2+z^2$.\\
 
-The diagonalization of this tensor yields the principal axes of the structure as well as the eigen-quantities which are proportional to the squared principal axes $a>b>c$. We start our calculations taking into account particles within a sphere of radius $R$ and then recharacterize the triaxial parameters by taking into account particles within an ellipsoid of semi-axes $r,r/q,r/s$ and weighted distance $d^2=x^2+(y/q)^2+(z/s)^2$, where ere $q = b/a$ and $s=c/a$ are the previously calculated axial ratios. We repeat this process until the average deviation of semi-axes is less than $10^{-6}$.\\
+The diagonalization of this tensor yields the principal axes of the
+structure as well as the eigen-quantities which are proportional to
+the squared principal axes $a>b>c$. We start our calculations taking
+into account particles within a sphere of radius $R$ and then
+recharacterize the triaxial parameters by taking into account
+particles within an ellipsoid of semi-axes $r,r/q,r/s$ and weighted
+distance $d^2=x^2+(y/q)^2+(z/s)^2$, where ere $q = b/a$ and $s=c/a$
+are the previously calculated axial ratios. We repeat this process
+until the average deviation of semi-axes is less than $10^{-6}$. 
 
 \section{Results}
-For convergence reasons and seeking to make our results observation-comparable, we restrict the sampling of the ellipsoidal parameters to radii between $1/16 R_{vir} and 2R_{vir}$ of the virial radius $R_{500}$, defined as the (DEFINITION OF VIRIAL RADIUS). All our results make use of this reference radius unless strictly stated otherwise.\\ 
+For convergence reasons and seeking to make our results
+observation-comparable, we restrict the sampling of the ellipsoidal
+parameters to radii between $1/16 R_{vir} and 2R_{vir}$ of the virial
+radius $R_{500}$, defined as the (DEFINITION OF VIRIAL RADIUS). All
+our results make use of this reference radius unless strictly stated
+otherwise. 
 
 \subsection{The radial tendency of axial ratios}
-To have a more complete picture about the effect of baryons on the DM halo shape, we begin by verifying/understanding the radial evolution (dependence?) of the shape. In the case of DM-only simulations, it is expected that halos get monotonically rounder at larger radii due to (the gravitational effect of inner shells?) \citep{Vera-Ciro et al. 2012}. A graphic example of this rounding can be checked on figure \ref{fig:slices}, where we plot the a projection of a DM-only halo aligned with the calculated minor axis at two different radius together with the estimated projected ellipsoidal. Formally, this effect is reflected in the axial ratios $b/a,c/a$, which tend to unity on the outerskirts of the halo. As a representative sample of this relations, we show on figure \ref{fig:DM relation} the evolution, for a specific halo, of the axial ratios $b/a,c/a$ and the triaxiality parameter $T=\frac{a^2-b^2}{a^2-c^2}$ in a wide range of radii.\\
+To have a more complete picture about the effect of baryons on the DM
+halo shape, we begin by verifying/understanding the radial evolution
+(dependence?) of the shape. In the case of DM-only simulations, it is
+expected that halos get monotonically rounder at larger radii due to
+(the gravitational effect of inner shells?) \citep{Vera-Ciro et
+  al. 2012}. A graphic example of this rounding can be checked on
+figure \ref{fig:slices}, where we plot the a projection of a DM-only
+halo aligned with the calculated minor axis at two different radius
+together with the estimated projected ellipsoidal. Formally, this
+effect is reflected in the axial ratios $b/a,c/a$, which tend to unity
+on the outerskirts of the halo. As a representative sample of this
+relations, we show on figure \ref{fig:DM relation} the evolution, for
+a specific halo, of the axial ratios $b/a,c/a$ and the triaxiality
+parameter $T=\frac{a^2-b^2}{a^2-c^2}$ in a wide range of radii. 
 
 \begin{figure}
   \centering
@@ -182,7 +273,16 @@ To have a more complete picture about the effect of baryons on the DM halo shape
   \label{fig:slices}
 \end{figure}
 
-We found that most halos exhibit a monotonically-increasing somewhat steady tendency of its axial ratios $b/a,c/a$  with radius, which is well exemplified on figure \ref{fig:DM_MHD}. There are some special cases in which fluctuations of the local DM density field affects this relation, but in average, this monotonic and steady tendency is clear and can be consulted on table \ref{table:DM table}. To ilustrate the average behavior, as well as some peculiarities, we resume the results of the 30 auriga simulations on the figure \ref{fig:Triax_DM} where each shape represents a point in the triaxiality plane $c/a$ Vs $b/a$. Check Vera-ciro onthis.\\
+We found that most halos exhibit a monotonically-increasing somewhat
+steady tendency of its axial ratios $b/a,c/a$  with radius, which is
+well exemplified on figure \ref{fig:DM_MHD}. There are some special
+cases in which fluctuations of the local DM density field affects this
+relation, but in average, this monotonic and steady tendency is clear
+and can be consulted on table \ref{table:DM table}. To ilustrate the
+average behavior, as well as some peculiarities, we resume the results
+of the 30 auriga simulations on the figure \ref{fig:Triax_DM} where
+each shape represents a point in the triaxiality plane $c/a$ Vs
+$b/a$. Check Vera-ciro onthis. 
 
 \begin{figure}
 \centering
@@ -216,13 +316,27 @@ $\bar{T}$&$0.89^{+0.03}_{-0.08}$&$0.88^{+0.04}_{-0.12}$&$0.84^{+0.08}_{-0.23}$&$
 \label{tabe:DM table}
 \end{table}
 
-Concerning MHD halos, \textit{prescindible?(((the expected tendency is not clear. Some studies claim that the DM halo must be oblate, at least in the vicinities of the disk, to ensure its stability \cite{disk stability}. However,)))} not much is said about its dependence with radius as previous studies focus rather on the effects of baryons on the dynamics of the halo at fixed radii. Examining the representative behaviour of a MHD halo on figure \ref{fig:DM_MHD}, some things are noticeable: first, the DM halo is almost perfectly oblate around $\approx 10-30$Kpc, second, its axial ratio $b/a$ start decreasing very slowly after $50Kpc$ and below $10Kpc$ and third, its axial ratio $c/a$ does not exhibit noticeable change in the whole radial domain. (Pass from representative case to averaged values) These results are statistically supported and sumarized on table \ref{MHD table} and figure \ref{fig:Triax_MHD}\\
+Concerning MHD halos, \textit{prescindible?(((the expected tendency is
+  not clear. Some studies claim that the DM halo must be oblate, at
+  least in the vicinities of the disk, to ensure its stability
+  \cite{disk stability}. However,)))} not much is said about its
+dependence with radius as previous studies focus rather on the effects
+of baryons on the dynamics of the halo at fixed radii. Examining the
+representative behaviour of a MHD halo on figure \ref{fig:DM_MHD},
+some things are noticeable: first, the DM halo is almost perfectly
+oblate around $\approx 10-30$Kpc, second, its axial ratio $b/a$ start
+decreasing very slowly after $50Kpc$ and below $10Kpc$ and third, its
+axial ratio $c/a$ does not exhibit noticeable change in the whole
+radial domain. (Pass from representative case to averaged values)
+These results are statistically supported and sumarized on table
+\ref{MHD table} and figure \ref{fig:Triax_MHD} 
 
 \begin{figure}
   \centering
  \includegraphics[width=0.9\columnwidth]{./pics/Triaxial_Plane/Triax_MHD.png}
   \hfill
-  \caption{Shape of each halo on the plane $c/a$ Vs $b/a$. Errorbar shows median and errors for each sampled radii. }
+  \caption{Shape of each halo on the plane $c/a$ Vs $b/a$. Errorbar
+    shows median and errors for each sampled radii. } 
   \label{fig:Triax_MHD}
 \end{figure}
 
@@ -258,16 +372,54 @@ $\bar{T}$&$0.18^{+0.23}_{-0.10}$&$0.36^{+0.19}_{-0.21}$&$0.40^{+0.26}_{-0.20}$&$
 \label{tabe:isopotential}
 \end{table}
 
-As a check of consistency, we compare our new isopotential shape results with the analytic expression of the $(1-q_{\phi})\frac{1}{3}(1-q_{\rho})$ \citep[Binney and Tremaine year]{Binney and tremaine}, taking the volume-enclosed axial ratios as an approximation for the isodensity contour ratios $q_{\rho}$. Although this analytic expression if meant to be used for logarithmic axisymmetric halos, it works well as a first approximation for nearly axisymmetric halos as those produced by our disced galaxies. We find that the difference between the real and the analytic isopotential axial ratios is not bigger than $quantity percent$. With this, we may now present on table \ref{tabe:isopotential} our observationally-comparable results for MHD halos at two important radii one corresponding to the approximate regimes where the MW DM halo is usually constrained.\\   
+As a check of consistency, we compare our new isopotential shape
+results with the analytic expression of the
+$(1-q_{\phi})\frac{1}{3}(1-q_{\rho})$ \citep[Binney and Tremaine
+  year]{Binney and tremaine}, taking the volume-enclosed axial ratios
+as an approximation for the isodensity contour ratios
+$q_{\rho}$. Although this analytic expression if meant to be used for
+logarithmic axisymmetric halos, it works well as a first approximation
+for nearly axisymmetric halos as those produced by our disced
+galaxies. We find that the difference between the real and the
+analytic isopotential axial ratios is not bigger than $quantity
+percent$. With this, we may now present on table
+\ref{tabe:isopotential} our observationally-comparable results for MHD
+halos at two important radii one corresponding to the approximate
+regimes where the MW DM halo is usually constrained. 
 
-Little discussion: Are our results congruent with observations? at which radii, does the DM halo shape vary that much?. Which models are favored?\\
+Little discussion: Are our results congruent with observations? at
+which radii, does the DM halo shape vary that much?. Which models are
+favored? 
 
 
 \subsection{The rounding effect of baryons}
 
-From the previous characterization of radial shapes it is clear that MHD halos are rounder than DM halos (i.e. axial ratios are bigger) at every sampled radii. This can be compared on tables \ref{tabe:DM table} and \ref{tabe:MHD table} or at the representative example on figure \ref{fig:DM_MHD}. From there, it is also noticeable that the rounding effect of baryons is stronger at the disk regime, where the DM halo is almost perfectly oblate. Furthermore, MHD halos tend towards more oblate shapes (T < 0.5) despite DM halos tendency towards more prolate shapes (T>0.5).\\
+From the previous characterization of radial shapes it is clear that
+MHD halos are rounder than DM halos (i.e. axial ratios are bigger) at
+every sampled radii. This can be compared on tables \ref{tabe:DM
+  table} and \ref{tabe:MHD table} or at the representative example on
+figure \ref{fig:DM_MHD}. From there, it is also noticeable that the
+rounding effect of baryons is stronger at the disk regime, where the
+DM halo is almost perfectly oblate. Furthermore, MHD halos tend
+towards more oblate shapes (T < 0.5) despite DM halos tendency towards
+more prolate shapes (T>0.5). 
 
-This rounding effect is expected from the gravitational effect of the flattened axisymmetric galactic disk. It is also reasonable that this effect is not as strong at $\approx 100$Kpc, where the disk potential is dimmer compared to the DM halo potential. Keeping this in mind, one would expect that the rounding effect of baryons is related to some galactic parameters such as its component masses and radii. However, even for the parameter of highest correlation with this rounding effect (the baryonic fraction), the relation is not clear nor conclusive due to the dispersion from galaxy peculiarities. In figure \ref{fig:Star_Density_effect} we plot the ratios $c/a$ compared to the baryonic fraction of each galaxy. Although some linear tendency is suggested qualitatively, the dispersion of the sample is very high to obtain some conclusive relation. This is an evidence that adiabatic-contraction models are not realistic as they may neglect some effects of the galaxy evolution in the whole cosmological context. \\
+This rounding effect is expected from the gravitational effect of the
+flattened axisymmetric galactic disk. It is also reasonable that this
+effect is not as strong at $\approx 100$Kpc, where the disk potential
+is dimmer compared to the DM halo potential. Keeping this in mind, one
+would expect that the rounding effect of baryons is related to some
+galactic parameters such as its component masses and radii. However,
+even for the parameter of highest correlation with this rounding
+effect (the baryonic fraction), the relation is not clear nor
+conclusive due to the dispersion from galaxy peculiarities. In figure
+\ref{fig:Star_Density_effect} we plot the ratios $c/a$ compared to the
+baryonic fraction of each galaxy. Although some linear tendency is
+suggested qualitatively, the dispersion of the sample is very high to
+obtain some conclusive relation. This is an evidence that
+adiabatic-contraction models are not realistic as they may neglect
+some effects of the galaxy evolution in the whole cosmological
+context.  
 
 \begin{figure}
 	% To include a figure from a file named example.*
@@ -278,11 +430,24 @@ This rounding effect is expected from the gravitational effect of the flattened 
     \label{fig:Star_Density_effect}
 \end{figure}
 
-\textbf{Actually we have not examined the relation of c/a in MHD halos with some measure of c/a from the disk, that is something like Zdisk/Rdisk. This actually would make more sense from a physical point of view: effect of the potential.}
+\textbf{Actually we have not examined the relation of c/a in MHD halos
+  with some measure of c/a from the disk, that is something like
+  Zdisk/Rdisk. This actually would make more sense from a physical
+  point of view: effect of the potential.} 
 
-Although the effect of the baryonic disk on the shape of the DM halo is a reasonable explanation for the rounding effect, it does not actually explain the deviation from oblateness of MHD halos at $r<10$Kpc. In other words, if the disk is perfectly axisymmetric, there must be some source of triaxiality at $r<10$Kpc to explain the low axial ratios.\\   
+Although the effect of the baryonic disk on the shape of the DM halo
+is a reasonable explanation for the rounding effect, it does not
+actually explain the deviation from oblateness of MHD halos at
+$r<10$Kpc. In other words, if the disk is perfectly axisymmetric,
+there must be some source of triaxiality at $r<10$Kpc to explain the
+low axial ratios. 
 
-\textit{ Talk about source of triaxiality at the inner parts of the halos (bar?). This source of triaxiality at the inner parts explains why the axial ratios are $\approx 0.95$ and not exactly $1$. We should also discuss that the decrease in the axial ratios for bigger radii may actually be bigger/steeper but it is dimmed by the contribution of inner parts.}\\
+\textit{ Talk about source of triaxiality at the inner parts of the
+  halos (bar?). This source of triaxiality at the inner parts explains
+  why the axial ratios are $\approx 0.95$ and not exactly $1$. We
+  should also discuss that the decrease in the axial ratios for bigger
+  radii may actually be bigger/steeper but it is dimmed by the
+  contribution of inner parts.} 
 %
 %\begin{figure}
 %  \centering
@@ -296,7 +461,16 @@ Although the effect of the baryonic disk on the shape of the DM halo is a reason
 
 
 \subsection{The historical shape}
-One of the principal motivations to study the radial dependence of the DM halo shape is that it may encode some clues about its formation history. We have already shown that DM-only halos seem to exhibit a steady and monotonous growth in its axial ratios when sampled at bigger radii. One similar effect can be found if we sample the shape at the virial radius, this time at varying redshift. It is easy to see that the axial ratios increase with decreasing redshift, which is expected by the continuous influence of the gravitational potential \cite{VeraCiro}. In figure \ref{fig:RedshiftGood} we present a representative example. \\  
+One of the principal motivations to study the radial dependence of the
+DM halo shape is that it may encode some clues about its formation
+history. We have already shown that DM-only halos seem to exhibit a
+steady and monotonous growth in its axial ratios when sampled at
+bigger radii. One similar effect can be found if we sample the shape
+at the virial radius, this time at varying redshift. It is easy to see
+that the axial ratios increase with decreasing redshift, which is
+expected by the continuous influence of the gravitational potential
+\cite{VeraCiro}. In figure \ref{fig:RedshiftGood} we present a
+representative example.  
  
 \begin{figure}
   \centering
@@ -308,7 +482,13 @@ One of the principal motivations to study the radial dependence of the DM halo s
 \end{figure}
 
 
-Interestingly, these two parametic plots i.e. $(b/a,c/a)(z=0,r)$ and $(b/a,c/a)(z,r=R_{vir})$ are very correlated for DM-only halos \ref{fig:DM Z Triax}. This means that, for DM-only halos, one can approximate its shape at higher redshift by simply sampling its current shape at a smaller radius \textbf{wording}. This relationship relies strongly on the steady and monotonous tendency of DM halos towards sphericity for bigger radii and smaller redshift.\\
+Interestingly, these two parametic plots i.e. $(b/a,c/a)(z=0,r)$ and
+$(b/a,c/a)(z,r=R_{vir})$ are very correlated for DM-only halos
+\ref{fig:DM Z Triax}. This means that, for DM-only halos, one can
+approximate its shape at higher redshift by simply sampling its
+current shape at a smaller radius \textbf{wording}. This relationship
+relies strongly on the steady and monotonous tendency of DM halos
+towards sphericity for bigger radii and smaller redshift. 
 
 
 \begin{figure}
@@ -318,13 +498,17 @@ Interestingly, these two parametic plots i.e. $(b/a,c/a)(z=0,r)$ and $(b/a,c/a)(
     
 \end{figure}
 
-MHD halos, on the other hand, do not exhibit tendency towards sphericity with bigger radii, but they do get sistematically rounder at lower redshift as seen in figure \ref{fig:RedshiftGood}. This effectively vanishes this correlation as seen from a DM halo \ref{fig:MHD Z Triax}.\\
+MHD halos, on the other hand, do not exhibit tendency towards
+sphericity with bigger radii, but they do get sistematically rounder
+at lower redshift as seen in figure \ref{fig:RedshiftGood}. This
+effectively vanishes this correlation as seen from a DM halo
+\ref{fig:MHD Z Triax}. 
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{./pics/Redshift/halo_24_level3_MHD_Z_Triax.png}
-    \caption{Difference in asphericities between MHD and DM shapes Vs Star Density of the simulation.}
-    \label{fig:MHD Z Triax}
-    
+    \caption{Difference in asphericities between MHD and DM shapes Vs
+      Star Density of the simulation.} 
+    \label{fig:MHD Z Triax} 
 \end{figure}
 
 Better graphics.
@@ -334,14 +518,41 @@ Better graphics.
 
 \subsection{The orientation of the principa axes}
 
-One of the principal assumptions of observational models of the MW's DM halo is that its minor axis is perfectly aligned with the disk axis. Although this is a reasonable assumption to guarantee the stability of the galactic disk in simplified models of isolated galaxies, it may not be the case for galaxies evolved in the whole cosmological context nor at every radii at which the shape is sampled.\\
+One of the principal assumptions of observational models of the MW's
+DM halo is that its minor axis is perfectly aligned with the disk
+axis. Although this is a reasonable assumption to guarantee the
+stability of the galactic disk in simplified models of isolated
+galaxies, it may not be the case for galaxies evolved in the whole
+cosmological context nor at every radii at which the shape is
+sampled. 
 
-Therefore, it is of special interest to us to examin the strength of this alignment assumption in the context of simulations. For this purpose, we sampled the shape at 5 different radii and plotted the axial directions, as well as the disk direction in the \textbf{name} diagrams \cite{} (explain diagrams). Explain disk direction calculation.\\
+Therefore, it is of special interest to us to examin the strength of
+this alignment assumption in the context of simulations. For this
+purpose, we sampled the shape at 5 different radii and plotted the
+axial directions, as well as the disk direction in the \textbf{name}
+diagrams \cite{} (explain diagrams). Explain disk direction
+calculation. 
 
-We found that there is not a representative example of what happens in terms of alignments. We found that the majority of the disks are aligned with the minor axis of their DM halo within $\approx 30^o$; in some special cases, this alignment was almost perfect and in some other cases, the DM halo minor axis changed substantially to be able to determine an alignment. In figure \ref{fig:alignment} we present these three cases. \textbf{occurrencies for each case?}
+We found that there is not a representative example of what happens in
+terms of alignments. We found that the majority of the disks are
+aligned with the minor axis of their DM halo within $\approx 30^o$; in
+some special cases, this alignment was almost perfect and in some
+other cases, the DM halo minor axis changed substantially to be able
+to determine an alignment. In figure \ref{fig:alignment} we present
+these three cases. \textbf{occurrencies for each case?} 
 
 
-\textit{This is an important result of our study. We study the radial evolution of the principal axes, compared also to the angular momentum vector from the disk. We found that while the angular momentum tend to be aligned with the minor axis of the ellipsoid, this may not be the case all times. When there is an alignment it is usually within 20 degrees (get a histogram of this. and an evolution of this histogram with time). When there is not an alignment, then there is no simple way to determine towards which axis it is oriented. Furthermore, the principal axes alignment usually change with radius (rotation, swap, verify). This ask for relaxation on the strong constrains on the MW DM halo models.}
+\textit{This is an important result of our study. We study the radial
+  evolution of the principal axes, compared also to the angular
+  momentum vector from the disk. We found that while the angular
+  momentum tend to be aligned with the minor axis of the ellipsoid,
+  this may not be the case all times. When there is an alignment it is
+  usually within 20 degrees (get a histogram of this. and an evolution
+  of this histogram with time). When there is not an alignment, then
+  there is no simple way to determine towards which axis it is
+  oriented. Furthermore, the principal axes alignment usually change
+  with radius (rotation, swap, verify). This ask for relaxation on the
+  strong constrains on the MW DM halo models.} 
 
 
 \begin{figure}
@@ -356,14 +567,17 @@ We found that there is not a representative example of what happens in terms of 
   \label{fig:alignment}
 \end{figure}
 
-\textbf{Discussion about the distribution of alignments and their evolution in time: Precesion or temporary instabilities?}
+\textbf{Discussion about the distribution of alignments and their
+  evolution in time: Precesion or temporary instabilities?} 
 
 \section{Conclusions}
 
 \section{Discussion}
 
 \section*{Acknowledgements}
-This project has received funding from the European Union’s Horizon 2020 Research and Innovation Programme under the Marie Sk\l{}odowska-Curie grant agreement No 734374
+This project has received funding from the European Union’s Horizon
+2020 Research and Innovation Programme under the Marie
+Sk\l{}odowska-Curie grant agreement No 734374. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
