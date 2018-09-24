@@ -30,6 +30,17 @@
 \usepackage{amsmath}	% Advanced maths commands
 \usepackage{amssymb}	% Extra maths symbols
 \usepackage{subfig}
+\usepackage{array}
+
+% Included by user
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{blindtext}
+\newcolumntype{?}{!{\vrule width 1pt}}
+
+\newenvironment{Table}
+   {\par\bigskip\noindent\minipage{\columnwidth}\centering}
+   {\endminipage\par\bigskip}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
@@ -127,6 +138,31 @@ the relaxation of other constraints may make this claim unnecessary
 
 \bibliographystyle{mnras}
 \bibliography{references}
+
+\newpage
+%\begin{multicols}{2}
+\begin{Table}
+%\setlength{\tabcolsep}{3pt}
+\begin{tabular}{l|cc|cc|c|c|c}
+Refference&$q_{\rho}$&$s_{\rho}$&$q_{\phi}$&$s_{\phi}$&$R$&$\theta$&comment\\ \hline \hline
+\citet{Law_and_Majewski_2009}&&&$\mathbf{0.83}$&$\mathbf{0.67}$& $\lesssim 60$kpc&$90^{\circ}$&\multicolumn{1}{p{4.5cm}}{\raggedright Mid-axis orientation\\Method: Sagittarius stream}\\
+%
+\citet{Law_and_Majewski_2010}&&&$\mathbf{0.99}$&$\mathbf{0.72}$& $[20$kpc,$60$kpc$]$&$90^{\circ}$&\multicolumn{1}{p{4.5cm}}{\raggedright Mid-axis orientation \\ Method: Sagittarius stream}\\
+%
+\citet{Deg_and_Widrow_2013}&$0.72$&$0.28$&$0.82$&$0.40$&$[20$kpc,$60$kpc$]$&$90^{\circ}$&\multicolumn{1}{p{4.5cm}}{\raggedright Mid-axis orientation\\ Method: Sagittarius stream}\\
+%
+\citet{Olling_and_Merrifield_2000}&$\mathbf{1.00}$&$\mathbf{0.80}$&&&$\simeq 8$kpc&$0^{\circ}$&\multicolumn{1}{p{4.5cm}}{\raggedright Method: Stellar dynamics and HI density.}\\
+%
+\citet{Bovy_et_el._2016}&$\mathbf{0.95}$&$\mathbf{0.95}$&&&$\lesssim 20$kpc&$90^{\circ}$&\multicolumn{1}{p{4.5cm}}{\raggedright Method: Stellar streams}\\
+%
+\citet{Loebman_et_al._2012}&$\mathbf{1.00}$&$\mathbf{0.47}$&&&$\sim 20$kpc &$0^{\circ}$&\multicolumn{1}{p{4.5cm}}{\raggedright Method: SDSS statistics}\\
+%
+\multirow{2}{*}{\citet{Vera-Ciro_and_Helmi_2013}}&&&$\mathbf{1.00}$&$\mathbf{0.90}$&$\lesssim 10$kpc&$0^{\circ}$&\multicolumn{1}{p{4.5cm}}{\raggedright Method: Sagittarius stream \& LMC }\\
+&&&$\mathbf{0.90}$&$\mathbf{0.80}$&$\gtrsim 10$kpc&$90^{\circ}$&\multicolumn{1}{p{4.5cm}}{\raggedright Mid-axis orientation on the outside. }\\
+\end{tabular}
+\end{Table}
+%\end{multicols}
+
 
 \end{document}
 
