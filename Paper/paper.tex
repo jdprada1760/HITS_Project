@@ -168,20 +168,9 @@ All these difficulties (enough numerical resolution, explicit
 cosmological context, appropriate feedback physics to produce
 realistic MW disks) have limited the studies that want to study the
 rounding effect of baryons in MW-like galaxies.
-
-
 In this work we overcome these three limitation by analyzing the
-Our objective is to quantify the DM halo shape and investigate the
-effect of baryons.
-
- 
-%Better connector with observations of distant galaxies. Gravitational
-%lensing and star tracers. (Talk about discrepancy with simulations,
-%perhaps later) and state that the preference for axisymmetrical shapes
-%may arise from the observational restrictions (projection) look for
-%citations about this.
-
-
+results of state-of-the-art hydrodynamical simulations of isolated
+halos that resemble the Milky Way.
 
 
 %\begin{multicols}{2}
@@ -207,6 +196,37 @@ Reference&$q_{\rho}$&$s_{\rho}$&$q_{\phi}$&$s_{\phi}$&$R$&$\theta$&comment\\ \hl
 \end{table*}
 %\end{multicols}
 
+
+
+\section{Numerical Simulations}
+
+In this work we use the results of the state-of-the art Auriga
+simulations \cite{auriga}. 
+The sample starts with a set of 30 isolated halos from the Evolution
+and Assembly of GaLaxies and their Environments (EAGLE) project \cite{Eagle}. 
+These halos were randomly selected from a sample of the most isolated
+quartile of halos whose virial mass $M_{200}$ (200 times the critical
+density of the Universe) varied between $10^{12}M_\odot$ and $2\cdot
+10^{12}M_\odot$.
+These halos were re-simulated with the moving mesh code AREPO
+\citep{arepo} using different degrees of resolution and physics.
+All 30 halos were simulated within a level-4-degree of
+resolution defined for Aquarius simulations corresponding to $\sim
+3\times 10^6$ high resolution particles of mass $\sim 2.5 \times 10^5
+M_\odot$. 
+%The principal details of each of these halos are consigned
+%on the table \ref{tab:level4}. 
+From these halos, 6 were re-simulated at a higher resolution (Level-3)
+by increasing the number of particles by a factor of $8$.
+For each ach halo in Level-3 and Level-4 there are two version: one
+only includes DM particles, while the other also includes baryons with
+magneto-hydrodynamicl (MHD) physics.
+%re-simulated at level 3 (higher) resolution taking into account a
+%spatial factor of 2 in each dimension. For more information about
+%level 3 halos, their details are printed on table
+%\ref{tab:level3}. 
+
+
 \bibliographystyle{mnras}
 \bibliography{references}
 
@@ -214,44 +234,6 @@ Reference&$q_{\rho}$&$s_{\rho}$&$q_{\phi}$&$s_{\phi}$&$R$&$\theta$&comment\\ \hl
 
 
 
-\section{Numerical Simulations}
-In this work we use the results of the state-of-the art Auriga
-simulations \cite{auriga}. It selected a set of 30 isolated halos from
-the Evolution and Assembly of GaLaxies and their Environments (EAGLE)
-project \cite{Eagle}. Each halo was identified with the algorithm
-"Friend of Friends" (FOF) \cite{Davis_et_al._1985}, which recursively
-links particles if they are closer than some threshold distance
-referred as linking length. EAGLE follows the evolution of fixed-mass
-particles of $m_{\text{DM}} = 1.15\cdot 10^7\text{M}_{\odot}$ from
-$z=127$ to $z=0$, adopting the $\Lambda$CDM model from the
-\cite[Planck Collaboration et al. (2014)]{Planck_Collaboration_2014},
-which is characterized by $\Omega_\Lambda=0.693$,
-$\Omega_\text{m}=0.307$, $\Omega_\text{b}=0.048$ \&
-$\text{H}_0=67.77\text{kms} ^{-1}\text{Mpc}^{-1}$.  
-
-These halos were randomly selected from a sample of the most isolated
-quartile of halos whose virial mass $M_{200}$ varied between
-$10^{12}M_\odot$ and $2\cdot 10^{12}M_\odot$. \textbf{\tiny This mass
-  is defined as the mass enclosed within the virial radius $R_{200}$
-  at which the density becomes 200 times the critical density of the
-  universe. \huge FOOTNOTE \normalsize}. These halos were re-simulated
-with the (AREPOOO HERE) by increasing the mass resolution of the
-particles belonging to them and diminishing the resolution of the rest
-of the particles.
-
-Various versions of each halo were modelled with different degrees of
-realism. All 30 halos were simulated within a level-4-degree of
-resolution defined for Aquarius simulations corresponding to $\tilde
-3\cdot 10^6$ high resolution particles of $\tilde 2.5 \cdot 10^5
-M_\odot$. The principal details of each of these halos are consigned
-on the table \ref{tab:level4}. From these halos, 6 of them where
-re-simulated at level 3 (higher) resolution taking into account a
-spatial factor of 2 in each dimension. For more information about
-level 3 halos, their details are printed on table
-\ref{tab:level3}. Furthermore, fore each halo in each level of
-resolution there are two versions of the simulation. One of tracks the
-evolution of DM-only particles while the remaining one evolves DM and
-baryions with magneto-hydrodynamical (MHD) physics, including DM.
 
 
 \section{Determining the halo shape}
