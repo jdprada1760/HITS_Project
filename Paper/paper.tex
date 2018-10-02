@@ -187,7 +187,7 @@ effect of baryons.
 %\begin{multicols}{2}
 \begin{table*}
 %\setlength{\tabcolsep}{3pt}
-\begin{tabular}{|c|cc|cc|c|c|p{4cm}|}\hline
+\begin{tabular}{|l|cc|cc|c|c|p{4cm}|}\hline
 Reference&$q_{\rho}$&$s_{\rho}$&$q_{\phi}$&$s_{\phi}$&$R$&$\theta$&comment\\ \hline \hline
 \citet{Olling_and_Merrifield_2000}& $\mathbf{1.00}$ & $\mathbf{0.80}$ & & & $\simeq 8$kpc & $0^{\circ}$&Method: Stellar dynamics and HI density. \\\hline
 \citet{Law_and_Majewski_2009}&&&$\mathbf{0.83}$&$\mathbf{0.67}$& $\lesssim 60$kpc&$90^{\circ}$&Mid-axis orientation. Method: Sagittarius stream\\\hline
@@ -202,17 +202,37 @@ Reference&$q_{\rho}$&$s_{\rho}$&$q_{\phi}$&$s_{\phi}$&$R$&$\theta$&comment\\ \hl
 &&&$\mathbf{0.90}$&$\mathbf{0.80}$&$\gtrsim 10$kpc&$90^{\circ}$& Mid-axis orientation on the outside. \\\hline
 %
 \citet{Bovy_et_el._2016}&$\mathbf{0.95}$&$\mathbf{0.95}$&&&$\lesssim 20$kpc&$90^{\circ}$ & Method: Stellar streams\\\hline
-
+%
+\citet{Bowden_et_al._2016}&&&$\mathbf{[0.5,0.66]}$&$\mathbf{[0.5,0.66]}$&$[5$kpc,$10$kpc$]$&$90^{\circ}$& Weak constraint on prolate halo. Method: SDSS stars dynamics.\\\hline
+%
+\multirow{2}{*}{\citet{Banerjee_and_Chanda_2011}}&$\mathbf{1}$&$\mathbf{1}$&&&$9$kpc&$0^{\circ}$&Method: HI gas. \\
+&$\mathbf{0.5}$&$\mathbf{0.5}$&&&$24$kpc&$0^{\circ}$&Monotonical change between radial regimes.\\\hline
+%
+\cite{Johnston_et_al._2005}&$\mathbf{1}$&$\mathbf{[0.83-0.92]}$&&&$\lesssim 60$kpc&$0^{\circ}$&Method: Sagittarius stream\\\hline\hline
 \end{tabular}
+\caption{Caption explaining table columns and bold meaning (TODO: compute analogues in isopotential or isodensity according to Binney and Tremaine)}
 \end{table*}
 %\end{multicols}
+
+\begin{table*}
+%\setlength{\tabcolsep}{3pt}
+\begin{tabular}{|l|cc|cc|c|p{4cm}|}\hline
+Reference&$q_{\rho}$&$s_{\rho}$&$q_{\phi}$&$s_{\phi}$&$R$&comment\\ \hline \hline
+\citet{Chua_et_al._2018}&$\mathbf{0.88\pm0.10}$&$\mathbf{0.70\pm0.11}$&&&$0.15R_{200}$& Illustris\\\hline
+%
+\citet{Bryan_et_al._2013}&$\mathbf{[0.84,0.86]}$&$\mathbf{[0.66,0.70]}$&&&$R_{200}$& For different cosmologies and feedback recipies. Calculated from a fit at $M_\odot=10^12$\\\hline
+%
+\multirow{2}{*}{\citet{Abadi_et_al._2010}}&&&$\mathbf{0.98}$&$\mathbf{0.85}$&-& Almost independent of radius. No feedback: boundary case\\\hline
+\end{tabular}
+\caption{Caption explaining table columns and bold meaning (TODO: compute analogues in isopotential or isodensity according to Binney and Tremaine)}
+\end{table*}
+
+
 
 \bibliographystyle{mnras}
 \bibliography{references}
 
 \end{document}
-
-
 
 \section{Numerical Simulations}
 In this work we use the results of the state-of-the art Auriga
