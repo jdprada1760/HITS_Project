@@ -203,36 +203,6 @@ Reference&$q_{\rho}$&$s_{\rho}$&$q_{\phi}$&$s_{\phi}$&$R$&$\theta$&comment\\ \hl
 \end{table*}
 %\end{multicols}
 
- 
-\section{Numerical Simulations}
-
-In this work we use the results of the state-of-the art Auriga
-simulations \cite{auriga}. 
-The sample starts with a set of 30 isolated halos from the Evolution
-and Assembly of GaLaxies and their Environments (EAGLE) project \cite{Eagle}. 
-These halos were randomly selected from a sample of the most isolated
-quartile of halos whose virial mass $M_{200}$ (200 times the critical
-density of the Universe) varied between $10^{12}M_\odot$ and $2\cdot
-10^{12}M_\odot$.
-These halos were re-simulated with the moving mesh code AREPO
-\citep{arepo} using different degrees of resolution and physics.
-All 30 halos were simulated within a level-4-degree of
-resolution defined for Aquarius simulations corresponding to $\sim
-3\times 10^6$ high resolution particles of mass $\sim 2.5 \times 10^5
-M_\odot$. 
-%The principal details of each of these halos are consigned
-%on the table \ref{tab:level4}. 
-From these halos, 6 were re-simulated at a higher resolution (Level-3)
-by increasing the number of particles by a factor of $8$.
-For each ach halo in Level-3 and Level-4 there are two version: one
-only includes DM particles, while the other also includes baryons with
-magneto-hydrodynamicl (MHD) physics.
-%re-simulated at level 3 (higher) resolution taking into account a
-%spatial factor of 2 in each dimension. For more information about
-%level 3 halos, their details are printed on table
-%\ref{tab:level3}. 
-
-
 \begin{table*}
 %\setlength{\tabcolsep}{3pt}
 \begin{tabular}{|l|cc|cc|c|p{4cm}|}\hline
@@ -276,47 +246,55 @@ versions of the simulation.
 One of tracks theevolution of DM-only particles while the remaining
 one evolves DM and baryons with magneto-hydrodynamical (MHD) physics. 
 
- \bibliographystyle{mnras}
- \bibliography{references}
-\end{document}
+
 
 \section{Determining the halo shape}
 
 %\subsection{The solid ellipsoid method}
 
-There is no trivial way to calculate the DM halo shape at a determined
-radius due to the discretization of particles. For practical effects,
-observational models focus on the shape of the DM isopotential
-\cite{isopotential} or isodensity \cite{isodensity} contours. In
-cosmological simulations, it is preferred to work with the isodensity
-contours which is directly calculated from particle
-positions. However, these density contours are not smooth and are very
-sensitive to the presence of small satelites \cite{Springel
-  Isodensity}. For this reason we determine the shape taking into
-account volume-enclosed particles, rather than shell-enclosed. While
-this approach allows the cumulative influence of outter shells on the
-outter shapes, it has been demonstrated for DM-only simulations that
-this effect becomes important only for big radii \cite{vera-Ciro
-  aquarius}.  We therefore follow the method of \cite[Allgood et
-  al. 2006]{Allgood_et_al._2006} that consits in the use of the
-reduced inertia tensor,    
+There are two main ways to estimate the DM halo shape at a fixed
+radius: by computing isopotential or isodensity surfaces.
+Observational inference models estimate the shape from the
+isopotential contours, while simulations work with the isodensity
+contours which can be  directly calculated from particle positions.  
+However, the density contours are not smooth and are very 
+sensitive to the presence of small satelites.
+For this reason we choose to measure the shape by taking
+volume-enclosed particles, rather than shell-enclosed.  
+
+We follow the shape measurement method presented by
+\cite{Allgood_et_al._2006} that consits in the using the reduced
+inertia tensor,     
 
 \begin{equation}
 I_{ij} = \sum_k \frac{x_k^{(i)}x_k^{(j)}}{d^2_k},
 \label{eq:inertia}
 \end{equation}
 
-with components weighted by the k-th particle distance $d^2=x^2+y^2+z^2$.\\
+with the positions components weighted by the k-th particle distance
+$d_k^2=x_k^2+y_k^2+z_k^2$, the particle positions are measured from
+the minimum of the gravitational potential in each halo.
 
 The diagonalization of this tensor yields the principal axes of the
 structure as well as the eigen-quantities which are proportional to
-the squared principal axes $a>b>c$. We start our calculations taking
+the squared principal axes $a>b>c$. 
+We start our calculations taking
 into account particles within a sphere of radius $R$ and then
 recharacterize the triaxial parameters by taking into account
 particles within an ellipsoid of semi-axes $r,r/q,r/s$ and weighted
-distance $d^2=x^2+(y/q)^2+(z/s)^2$, where ere $q = b/a$ and $s=c/a$
-are the previously calculated axial ratios. We repeat this process
-until the average deviation of semi-axes is less than $10^{-6}$. 
+distance $d^2=x^2+(y/q)^2+(z/s)^2$, where $q = b/a$ and $s=c/a$
+are the previously calculated axial ratios. 
+We repeat this process until the average deviation of semi-axes is
+less than $10^{-6}$.  
+
+This is the same method used to estimate the halo shape in the DM-only
+Aquarius simulations \citep{Vera-Ciro_et_al._2011}. 
+
+
+ \bibliographystyle{mnras}
+ \bibliography{references}
+\end{document}
+
 
 \section{Results}
 For convergence reasons and seeking to make our results
