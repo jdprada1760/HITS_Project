@@ -55,7 +55,7 @@
 
 % Title of the paper, and the short title which is used in the headers.
 % Keep the title short and informative.
-\title[Title]{The expected shape of the Milky Way's Dark Matter halo}
+\title[MW DM halo shape in AURIGA]{The expected shape of the Milky Way's Dark Matter halo}
 
 % The list of authors, and the short list which is used in the headers.
 % If you need two or more lines of authors, add an extra line using \newauthor
@@ -201,7 +201,7 @@ Reference&$q_{\rho}$&$s_{\rho}$&$q_{\phi}$&$s_{\phi}$&$R$&$\theta$&comment\\ \hl
 %
 \cite{Johnston_et_al._2005}&$\mathbf{1}$&$\mathbf{[0.83-0.92]}$&&&$\lesssim 60$kpc&$0^{\circ}$&Method: Sagittarius stream\\\hline\hline
 \end{tabular}
-\caption{Caption explaining table columns and bold meaning (TODO: compute analogues in isopotential or isodensity according to Binney and Tremaine)}
+\caption{(TODO: compute analogues in isopotential or isodensity according to Binney and Tremaine)}
 \end{table*}
 %\end{multicols}
 
@@ -215,7 +215,7 @@ Reference&$q_{\rho}$&$s_{\rho}$&$q_{\phi}$&$s_{\phi}$&$R$&comment\\ \hline \hlin
 %
 \multirow{2}{*}{\citet{Abadi_et_al._2010}}&&&$\mathbf{0.98}$&$\mathbf{0.85}$&-& Almost independent of radius. No feedback: boundary case\\\hline
 \end{tabular}
-\caption{Caption explaining table columns and bold meaning (TODO: compute analogues in isopotential or isodensity according to Binney and Tremaine)}
+\caption{(TODO: compute analogues in isopotential or isodensity according to Binney and Tremaine)}
 \end{table*}
 
 
@@ -235,8 +235,8 @@ These halos were re-simulated with higher resolution an varying
 physical realism using the AREPO code \citep{arepo}.
  
 All 30 halos were simulated within resolution defined for Aquarius
-simulations corresponding to $\sim 3\times 10^6$ high resolution particles of $\sim 2.5 \times 10^5
-M_\odot$.  
+simulations corresponding to $\sim 3\times 10^6$ high resolution DM
+particles of $\sim 2.5 \times 10^5 M_\odot$.  
 This resolution is labeled as Level 4, the main details for each halo
 are consigned in Table \ref{tab:level4}. 
 From these 30 halos, 6 of them where re-simulated at higher resolution
@@ -244,9 +244,8 @@ From these 30 halos, 6 of them where re-simulated at higher resolution
 dimension.   
 Details of Level 3 halos are in Table \ref{tab:level3}. 
 Furthermore, for each halo in each level of resolution there are two
-versions of the simulation. 
-One of tracks theevolution of DM-only particles while the remaining
-one evolves DM and baryons with magneto-hydrodynamical (MHD) physics. 
+versions of the simulation: DM-only and DM plus baryons with
+magneto-hydrodynamical (MHD) physics.  
 
 
 
@@ -265,7 +264,7 @@ For this reason we choose to measure the shape by taking
 volume-enclosed particles, rather than shell-enclosed.  
 
 We follow the shape measurement method presented by
-\cite{Allgood_et_al._2006} that consits in the using the reduced
+\cite{Allgood_et_al._2006} that uses the reduced
 inertia tensor,     
 
 \begin{equation}
@@ -276,61 +275,67 @@ I_{ij} = \sum_k \frac{x_k^{(i)}x_k^{(j)}}{d^2_k},
 with the positions components weighted by the k-th particle distance
 $d_k^2=x_k^2+y_k^2+z_k^2$, the particle positions are measured from
 the minimum of the gravitational potential in each halo.
-
 The diagonalization of this tensor yields the principal axes of the
 structure as well as the eigen-quantities which are proportional to
 the squared principal axes $a>b>c$. 
-We start our calculations taking
-into account particles within a sphere of radius $R$ and then
-recharacterize the triaxial parameters by taking into account
+
+We start the calculations taking into account particles within a
+sphere of radius $R$ and then  recharacterize the triaxial parameters by taking into account
 particles within an ellipsoid of semi-axes $r,r/q,r/s$ and weighted
 distance $d^2=x^2+(y/q)^2+(z/s)^2$, where $q = b/a$ and $s=c/a$
 are the previously calculated axial ratios. 
 We repeat this process until the average deviation of semi-axes is
 less than $10^{-6}$.  
-
 This is the same method used to estimate the halo shape in the DM-only
 Aquarius simulations \citep{Vera-Ciro_et_al._2011}. 
 
+We restrict the sampling of the ellipsoidal parameters to radii
+between $1/16 R_{vir}$ and $2R_{vir}$, where  $R_{vir}$ is taken as the
+radius enclosing a sphere with 500 times the average dark matter
+density of the Universe. All our results use of this reference radius
+unless strictly stated otherwise. 
+We peform the shape measurements both as a function of radius and
+redshift for all halos in the sample.
+
+
+\section{Results}
+
+\subsection{Radial trends}
+
+
+In DM-only simulations halos are monotonically rounder with increasing
+radius, this confirms results already reported in the literature
+\citep{Vera-Ciro_et_al._2011}. 
+Figure \ref{fig:slices} illustrates this effect.
+There we show the DM density of a DM-only halo at redshift zero.
+The halo is aligned with the minor axis. 
+The ellipsoid shows the outermost boundary of the estimated shape ellipsoid.
+Formally, this effect is reflected in the axial ratios $b/a,c/a$, which tend to unity
+on the outerskirts of the halo. As a representative sample of this
+relations, we show on figure \ref{fig:DM relation} the evolution, for
+a specific halo, of the axial ratios $b/a,c/a$ and the triaxiality
+parameter $T=\frac{a^2-b^2}{a^2-c^2}$ in a wide range of radii. 
+
+
+\begin{figure*}
+  \centering
+  \subfloat[halo 27 DM shape at small radius]{\includegraphics[width=0.5\textwidth]{./pics/MHD_Vs_DM/level4_DM_halo_27_inner.png}}
+  \hfill
+  \subfloat[halo 27 DM shape at big radius]{\includegraphics[width=0.5\textwidth]{./pics/MHD_Vs_DM/level4_DM_halo_27_outter.png}}
+  \hfill
+  \caption{DM density for inner/outer (left/right panel) DM halo regions.}
+  \label{fig:slices}
+\end{figure*}
 
  \bibliographystyle{mnras}
  \bibliography{references}
 \end{document}
 
 
-\section{Results}
-For convergence reasons and seeking to make our results
-observation-comparable, we restrict the sampling of the ellipsoidal
-parameters to radii between $1/16 R_{vir} and 2R_{vir}$ of the virial
-radius $R_{500}$, defined as the (DEFINITION OF VIRIAL RADIUS). All
-our results make use of this reference radius unless strictly stated
-otherwise. 
 
 \subsection{The radial tendency of axial ratios}
-To have a more complete picture about the effect of baryons on the DM
-halo shape, we begin by verifying/understanding the radial evolution
-(dependence?) of the shape. In the case of DM-only simulations, it is
-expected that halos get monotonically rounder at larger radii due to
-(the gravitational effect of inner shells?) \citep{Vera-Ciro et
-  al. 2012}. A graphic example of this rounding can be checked on
-figure \ref{fig:slices}, where we plot the a projection of a DM-only
-halo aligned with the calculated minor axis at two different radius
-together with the estimated projected ellipsoidal. Formally, this
-effect is reflected in the axial ratios $b/a,c/a$, which tend to unity
-on the outerskirts of the halo. As a representative sample of this
-relations, we show on figure \ref{fig:DM relation} the evolution, for
-a specific halo, of the axial ratios $b/a,c/a$ and the triaxiality
-parameter $T=\frac{a^2-b^2}{a^2-c^2}$ in a wide range of radii. 
 
-\begin{figure}
-  \centering
-  \subfloat[halo 27 DM shape at small radius]{\includegraphics[width=0.5\columnwidth]{./pics/MHD_Vs_DM/level4_DM_halo_27_inner.png}}
-  \hfill
-  \subfloat[halo 27 DM shape at big radius]{\includegraphics[width=0.5\columnwidth]{./pics/MHD_Vs_DM/level4_DM_halo_27_outter.png}}
-  \hfill
-  \caption{DM density for inner (outer) parts of the halo 27 on the left (right) part. The horizontal (vertical) axes are aligned to the major (medium) axes. (optimaze space and description) }
-  \label{fig:slices}
-\end{figure}
+
 
 We found that most halos exhibit a monotonically-increasing somewhat
 steady tendency of its axial ratios $b/a,c/a$  with radius, which is
