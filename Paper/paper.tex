@@ -385,7 +385,15 @@ parameter $T=\frac{a^2-b^2}{a^2-c^2}$ in a wide range of radii.
   \hfill
   \subfloat[halo 27 DM shape at big radius]{\includegraphics[width=0.5\textwidth]{./pics/MHD_Vs_DM/level4_DM_halo_27_outter.png}}
   \hfill
-  \caption{DM density for inner/outer (left/right panel) DM halo regions.}
+  \caption{DM density for inner/outer (left/right panel) DM halo regions.
+  
+  Slice 20 percent of the max-min range in the "z" position of particles belonging to the main structure, centered at halo defined position (calculated with most bounded particle) }
+  % definition of the input positions
+  % Gets the length of the main structure particles /// 0 - Principal halo, 1 - DM
+  %  cut = subSn.group.GroupLenType[0,1]
+  % graphs are calculated using the following YT command
+  % p = yt.ProjectionPlot(ds, 'z', nn_density, center=c, weight_field=nn_density, width=(0.2*(npos.max()-npos.min()), 'kpc'))
+
   \label{fig:slices}
 \end{figure*}
 
@@ -411,7 +419,9 @@ $b/a$. Check Vera-ciro onthis.
 \begin{figure}
 \centering
 {\includegraphics[width=0.8\columnwidth]{./pics/halo16.png}}
-\caption{Radial profile for axial ratios and the triaxiality parameter $T=\frac{1-b/a}{1-c/a}$ for halo 16.}
+\caption{Radial profile for axial ratios and the triaxiality parameter $T=\frac{1-b/a}{1-c/a}$ for halo 16.
+
+Radial profile was sampled at redshift 0 and there are two sets of lines showing MHD and DM-only versions of the axial ratios profile}
 \label{fig:DM_MHD}
 \end{figure} 
 
@@ -421,7 +431,10 @@ $b/a$. Check Vera-ciro onthis.
  \includegraphics[width=0.9\columnwidth]{./pics/Triaxial_Plane/Triax_DM.png}
   
   \hfill
-  \caption{Shape of each halo on the plane $c/a$ Vs $b/a$. Errorbar shows median and errors for each sampled radii. }
+  \caption{Shape of each halo on the plane $c/a$ Vs $b/a$. (DM only)\\
+   Each dot represents the shape characterization of each halo at the 2 times the virial radius and a  1/16 fraction of the virial radius differentiated by color.\\   
+  Errorbar shows median and errors for each sampled radii.\\
+  Conclusion: DM halos are rounder on the outerskirts }
   \label{fig:Triax_DM}
 \end{figure}
 
@@ -459,8 +472,10 @@ These results are statistically supported and sumarized on table
   \centering
  \includegraphics[width=0.9\columnwidth]{./pics/Triaxial_Plane/Triax_MHD.png}
   \hfill
-  \caption{Shape of each halo on the plane $c/a$ Vs $b/a$. Errorbar
-    shows median and errors for each sampled radii. } 
+  \caption{Shape of each halo on the plane $c/a$ Vs $b/a$. (MHD only)\\
+   Each dot represents the shape characterization of each halo at the 2 times the virial radius and a  1/16 fraction of the virial radius differentiated by color.\\   
+  Errorbar shows median and errors for each sampled radii.\\
+  Conclusion: MHD halos are more oblate on the outer skirts: b/a changes while c/a remains practically constant (on average) } 
   \label{fig:Triax_MHD}
 \end{figure}
 
@@ -550,7 +565,9 @@ context.
 	% Allowable file formats are eps or ps if compiling using latex
 	% or pdf, png, jpg if compiling using pdflatex
 	\includegraphics[width=\columnwidth]{./pics/Delta asphericity Vs Star Density.png}
-    \caption{Difference in asphericities between MHD and DM shapes Vs Star Density of the simulation.}
+    \caption{Difference in asphericities between MHD and DM shapes Vs Star Density of the simulation.\\
+    Unsure about this graphic.\\
+    Take delta asphericity as the strength of the rounding effect of baryons.}
     \label{fig:Star_Density_effect}
 \end{figure}
 
@@ -601,7 +618,13 @@ representative example.
   \subfloat[halo 16 DM]{\includegraphics[width=0.5\columnwidth]{./pics/Redshift/halo_16_level3_DM_Z.png}}
   \hfill
   \subfloat[halo 16 MHD]{\includegraphics[width=0.5\columnwidth]{./pics/Redshift/halo_16_level3_MHD_Z.png}}
-  \caption{Radial profile (comoving) of axial ratios for halo 16 in terms of redshift (color). This halo maintains its shape until $z\approx 1$ obviating the systematic rounding effect in time from asymmetric potentials. }
+  \caption{Radial profile (comoving) of axial ratios for halo 16 in terms of redshift (color). This halo maintains its shape until $z\approx 1$ obviating the systematic rounding effect in time from asymmetric potentials.\\
+  
+Each plot-line represents the radial profile at a determined redshift.\\
+Conclussion: Mainly for b/a, it increases for:\\ (1) for bigger radii (fixed redshift) \\
+												 (2) for lower redshift (fixed radius)\\
+
+It explains the correlation between radial profile and history, but does not require that curves match in the triaxial plane.  }
   \label{fig:RedshiftGood}
 \end{figure}
 
@@ -617,7 +640,12 @@ towards sphericity for bigger radii and smaller redshift.
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{./pics/Redshift/halo_27_DM_Z_correlation.png}
-    \caption{Difference in asphericities between MHD and DM shapes Vs Star Density of the simulation.}
+    \caption{DM only\\
+    		 Radial profile at redshift 0 (dashed line)\\
+    		 Historical profile at virial radius R500 (colour line)\\
+    		 Example of a halo where there is some correlation between these two profiles, as usually happens for DM only simulations.\\
+    		 Conclusion: DM only halos usually (fraction?) have correlated shape profiles 
+    		 }
     \label{fig:DM Z Triax}
     
 \end{figure}
@@ -630,8 +658,12 @@ effectively vanishes this correlation as seen from a DM halo
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{./pics/Redshift/halo_24_level3_MHD_Z_Triax.png}
-    \caption{Difference in asphericities between MHD and DM shapes Vs
-      Star Density of the simulation.} 
+    \caption{MHD\\
+    		 Radial profile at redshift 0 (dashed line)\\
+    		 Historical profile at virial radius R500 (colour line)\\
+    		 Example of a halo where there is no correlation between these two profiles, as usually happens in MHD\\
+    		 Conclusion: MHD halos usually (fraction?) have uncorrelated shape profiles 
+    		 } 
     \label{fig:MHD Z Triax} 
 \end{figure}
 
@@ -687,7 +719,13 @@ these three cases. \textbf{occurrencies for each case?}
   \hfill
   \subfloat[Chaotic Axes]{\includegraphics[width=1\columnwidth]{./pics/chaotic_axes.png}}
   \hfill
-  \caption{Description of axes alignments }
+  \caption{Star: Minor Axis\\
+  		   Triangle: Medium Axis\\
+  		   Square: Major Axis\\
+  		   Color: Radii at which shape was sampled (show radii sampled)\\
+  		   Contour color: If orientation is above or below in this projection\\
+  		   Cross (black): Orientation of the stellar disk\\
+  		   Conclusion: Axes (minor) are not (generally) aligned with the stellar disk nor are they usually aligned with each other from different radii. We show some cases that may happen\\  }
   \label{fig:alignment}
 \end{figure}
 
