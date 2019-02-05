@@ -1,38 +1,15 @@
-% mnras_template.tex
-%
-% LaTeX template for creating an MNRAS paper
-%
-% v3.0 released 14 May 2015
-% (version numbers match those of mnras.cls)
-%
-% Copyright (C) Royal Astronomical Society 2015
-% Authors:
-% Keith T. Smith (Royal Astronomical Society)
-
-% Change log
-%
-% v3.0 May 2015
-%    Renamed to match the new package name
-%    Version number matches mnras.cls
-%    A few minor tweaks to wording
-% v1.0 September 2013
-%    Beta testing only - never publicly released
-%    First version: a simple (ish) template for creating an MNRAS paper
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Basic setup. Most papers should leave these options alone.
 \documentclass[a4paper,fleqn,usenatbib]{mnras}
 \usepackage[T1]{fontenc}
 \usepackage{ae,aecompl}
 
-% Only include extra packages if you really need them. Common packages are:
+
 \usepackage{graphicx}	% Including figure files
 \usepackage{amsmath}	% Advanced maths commands
 \usepackage{amssymb}	% Extra maths symbols
 \usepackage{subfig}
 \usepackage{array}
 
-% Included by user
+
 \usepackage{multirow}
 \usepackage{multicol}
 \usepackage{blindtext}
@@ -41,24 +18,10 @@
 \newenvironment{Table}
    {\par\bigskip\noindent\minipage{\columnwidth}\centering}
    {\endminipage\par\bigskip}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
-
-% Please keep new commands to a minimum, and use \newcommand not \def to avoid
-% overwriting existing commands. Example:
-%\newcommand{\pcm}{\,cm$^{-2}$}	% per cm-squared
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
-
-% Title of the paper, and the short title which is used in the headers.
-% Keep the title short and informative.
 \title[MW DM halo shape in AURIGA]{The expected shape of the Milky Way's Dark Matter halo}
 
-% The list of authors, and the short list which is used in the headers.
-% If you need two or more lines of authors, add an extra line using \newauthor
+
 \author[Jesus Prada,  Jaime E. Forero-Romero, Volker Springel ]{
 Jesus Prada,$^{1}$\thanks{E-mail: jd.prada1760@uniandes.edu.co}
 Jaime E. Forero-Romero,$^{1}$
@@ -225,12 +188,12 @@ Reference&$q_{\rho}$&$s_{\rho}$&$q_{\phi}$&$s_{\phi}$&$R$&comment\\ \hline \hlin
 
 In this work we use the results of the state-of-the art Auriga
 simulations \citep{auriga}. 
-The objects in those simulations were selected from a set of 30 isolated halos in
-the Evolution and Assembly of GaLaxies and their Environments (EAGLE)
-project \citep{Eagle}. 
+The objects in those simulations were selected from a set of 30
+isolated halos in the Evolution and Assembly of GaLaxies and their
+Environments (EAGLE)  project \citep{Eagle}.   
 These halos were randomly selected from a sample of the most isolated
-quartile of halos whose virial mass $M_{200}$ varied between
-$10^{12}M_\odot$ and $2\times 10^{12}M_\odot$. 
+halos whose virial mass $M_{200}$ varied between $10^{12}M_\odot$ and
+$2\times 10^{12}M_\odot$. 
 These halos were re-simulated with higher resolution an varying
 physical realism using the AREPO code \citep{arepo}.
  
@@ -247,19 +210,20 @@ Furthermore, for each halo in each level of resolution there are two
 versions of the simulation: DM-only and DM plus baryons with
 magneto-hydrodynamical (MHD) physics.  
 
-\begin{table}[h]
+\begin{table*}
 \centering
-\begin{tabular}{l?cc?cc?cc?cc}
+\begin{tabular}{l|cc|cc|cc|cc}
 \hline
 \hline
-Halo & \multicolumn{2}{c?}{$N_P$/$10^6$} & \multicolumn{2}{c?}{$M_P$/$10^5M_\odot$} & \multicolumn{2}{c?}{$R_{vir}$/Kpc}&\multicolumn{2}{c}{$M_{vir}$/$10^{14}M_\odot$}  \\ \hdashline
+Halo & \multicolumn{2}{c}{$N_P$/$10^6$} & \multicolumn{2}{c}{$M_P$/$10^5M_\odot$} & 
+\multicolumn{2}{c}{$R_{vir}$/Kpc} & \multicolumn{2}{c}{$M_{vir}$/$10^{14} M_\odot$}  \\ \hline
 & DM & MHD& DM & MHD& DM & MHD& DM & MHD\\ \hline \hline
 halo 1&4.068&2.447&2.397&2.022&196.927&187.674&9.062&7.844\\
 halo 2&5.625&5.457&2.481&2.093&235.094&233.934&15.418&15.191\\
 halo 3&3.826&3.852&2.645&2.231&210.693&210.955&11.099&11.141\\
 halo 4&4.585&4.530&2.590&2.185&219.378&215.438&12.529&11.866\\
-halo 5&3.262&3.290&2.533&2.137&196.984&197.246&9.071&9.106\\ \hdashline
-\rowcolor{blue!30} halo 6&3.184&3.110&2.337&1.972&191.840&189.342&8.378&8.054\\ \hdashline
+halo 5&3.262&3.290&2.533&2.137&196.984&197.246&9.071&9.106\\ \hline
+halo 6&3.184&3.110&2.337&1.972&191.840&189.342&8.378&8.054\\ \hline
 halo 7&3.878&3.729&2.296&1.937&197.864&196.509&9.193&9.005\\
 halo 8&2.772&2.796&2.451&2.068&190.716&191.764&8.231&8.368\\
 halo 9&3.038&3.010&2.738&2.310&195.826&190.640&8.911&8.222\\
@@ -268,19 +232,19 @@ halo 11&4.146&4.116&2.541&2.144&221.821&219.568&12.952&12.560\\
 halo 12&2.865&2.908&2.645&2.231&192.280&192.038&8.436&8.404\\
 halo 13&3.520&3.600&2.393&2.019&202.139&203.815&9.801&10.048\\
 halo 14&4.200&4.475&2.499&2.108&215.535&218.927&11.882&12.453\\
-halo 15&2.888&2.845&2.541&2.144&199.848&200.658&9.471&9.588\\ \hdashline
-\rowcolor{blue!30} halo 16&3.821&3.871&2.499&2.108&212.590&212.632&11.401&11.408\\ \hdashline
+halo 15&2.888&2.845&2.541&2.144&199.848&200.658&9.471&9.588\\ \hline
+halo 16&3.821&3.871&2.499&2.108&212.590&212.632&11.401&11.408\\ \hline
 halo 17&2.752&2.781&2.552&2.153&188.067&187.404&7.893&7.811\\
 halo 18&3.770&3.624&2.738&2.310&201.124&207.293&9.655&10.571\\
 halo 19&2.989&3.086&2.645&2.231&200.244&200.325&9.527&9.540\\
-halo 20&3.903&3.822&2.481&2.093&210.097&211.423&11.005&11.214\\ \hdashline
-\rowcolor{blue!30} halo 21&4.105&4.075&2.640&2.227&219.527&219.823&12.555&12.604\\ \hdashline
-halo 22&2.794&2.766&2.625&2.215&188.363&184.801&7.931&7.489\\ \hdashline
-\rowcolor{blue!30} halo 23&3.977&4.073&2.795&2.358&217.768&215.959&12.254&11.952\\\hdashline
-\rowcolor{blue!30} halo 24&4.466&4.426&2.522&2.127&217.440&215.147&12.199&11.817\\ \hdashline
+halo 20&3.903&3.822&2.481&2.093&210.097&211.423&11.005&11.214\\ \hline
+halo 21&4.105&4.075&2.640&2.227&219.527&219.823&12.555&12.604\\ \hline
+halo 22&2.794&2.766&2.625&2.215&188.363&184.801&7.931&7.489\\ \hline
+halo 23&3.977&4.073&2.795&2.358&217.768&215.959&12.254&11.952\\\hline
+halo 24&4.466&4.426&2.522&2.127&217.440&215.147&12.199&11.817\\ \hline
 halo 25&2.902&2.806&2.645&2.231&199.922&198.299&9.482&9.254\\
-halo 26&4.610&4.716&2.506&2.115&219.984&218.939&12.633&12.454\\\hdashline
-\rowcolor{blue!30} halo 27&5.060&5.018&2.590&2.185&228.036&226.225&14.071&13.740\\ \hdashline
+halo 26&4.610&4.716&2.506&2.115&219.984&218.939&12.633&12.454\\\hline
+halo 27&5.060&5.018&2.590&2.185&228.036&226.225&14.071&13.740\\ \hline
 halo 28&4.184&4.276&2.645&2.231&216.979&217.997&12.121&12.294\\
 halo 29&4.827&4.613&2.499&2.108&225.791&219.935&13.660&12.625\\
 halo 30&3.268&3.112&2.579&2.176&195.043&194.741&8.805&8.763\\
@@ -289,14 +253,14 @@ halo 30&3.268&3.112&2.579&2.176&195.043&194.741&8.805&8.763\\
 \end{tabular}
 \caption{Specifications of each level 4 galaxy (halo). The DM and MHD versions of each parameters are presented together. The columns of this table indicate: (1) Halo name, (2,3) Number of (millions) of DM particles belonging to the halo, (4,5) Mass per particle in $10^5M_\odot$, (6,7) Virial radius (R TopHat 200) of the halo in Kpc, (8,9) Virial mass of the halo in $10^{14}M_\odot$.}
 \label{tab:level4}
-\end{table} 
+\end{table*} 
 
-\begin{table}[h!]
+\begin{table*}
 \centering
 \begin{tabular}{l?cc?cc?cc?cc}
 \hline
 \hline
-Halo & \multicolumn{2}{c?}{$N_P$/$10^6$} & \multicolumn{2}{c?}{$M_P$/$10^5M_\odot$} & \multicolumn{2}{c?}{$R_{vir}$/Kpc}&\multicolumn{2}{c}{$M_{vir}$/$10^{14}M_\odot$}  \\ \hdashline
+Halo & \multicolumn{2}{c?}{$N_P$/$10^6$} & \multicolumn{2}{c?}{$M_P$/$10^5M_\odot$} & \multicolumn{2}{c?}{$R_{vir}$/Kpc}&\multicolumn{2}{c}{$M_{vir}$/$10^{14}M_\odot$}  \\ \hline
 & DM & MHD& DM & MHD& DM & MHD& DM & MHD\\ \hline \hline
 halo 6&24.902&24.185&0.292&0.246&191.741&188.367&8.365&7.932\\
 halo 16&29.750&30.334&0.312&0.263&212.622&212.542&11.406&11.395\\
@@ -309,7 +273,7 @@ halo 27&39.617&39.056&0.324&0.273&227.908&223.484&14.048&13.244\\
 \end{tabular}
 \caption{Specifications of each level 3 galaxy (halo). The DM and MHD versions of each parameters are presented together. The columns of this table indicate: (1) Halo name, (2,3) Number of (millions) of DM particles belonging to the halo, (4,5) Mass per particle in $10^5M_\odot$, (6,7) Virial radius (R TopHat 200) of the halo in Kpc, (8,9) Virial mass of the halo in $10^{14}M_\odot$.}
 \label{tab:level3}
-\end{table} 
+\end{table*} 
 
 \section{Determining the halo shape}
 
@@ -385,15 +349,10 @@ parameter $T=\frac{a^2-b^2}{a^2-c^2}$ in a wide range of radii.
   \hfill
   \subfloat[halo 27 DM shape at big radius]{\includegraphics[width=0.5\textwidth]{./pics/MHD_Vs_DM/level4_DM_halo_27_outter.png}}
   \hfill
-  \caption{DM density for inner/outer (left/right panel) DM halo regions.
-  
-  Slice 20 percent of the max-min range in the "z" position of particles belonging to the main structure, centered at halo defined position (calculated with most bounded particle) }
-  % definition of the input positions
-  % Gets the length of the main structure particles /// 0 - Principal halo, 1 - DM
-  %  cut = subSn.group.GroupLenType[0,1]
-  % graphs are calculated using the following YT command
-  % p = yt.ProjectionPlot(ds, 'z', nn_density, center=c, weight_field=nn_density, width=(0.2*(npos.max()-npos.min()), 'kpc'))
-
+  \caption{DM density for inner/outer (left/right panel) DM halo regions.  
+  Slice 20 percent of the max-min range in the "z" position of
+  particles belonging to the main structure, centered at halo defined
+  position (calculated with most bounded particle) }  
   \label{fig:slices}
 \end{figure*}
 
@@ -420,21 +379,18 @@ $b/a$. Check Vera-ciro onthis.
 \centering
 {\includegraphics[width=0.8\columnwidth]{./pics/halo16.png}}
 \caption{Radial profile for axial ratios and the triaxiality parameter $T=\frac{1-b/a}{1-c/a}$ for halo 16.
-
-Radial profile was sampled at redshift 0 and there are two sets of lines showing MHD and DM-only versions of the axial ratios profile}
+Radial profile was sampled at redshift 0 and there are two sets of
+lines showing MHD and DM-only versions of the axial ratios profile}
 \label{fig:DM_MHD}
 \end{figure} 
 
  
 \begin{figure}
-  \centering
  \includegraphics[width=0.9\columnwidth]{./pics/Triaxial_Plane/Triax_DM.png}
-  
-  \hfill
-  \caption{Shape of each halo on the plane $c/a$ Vs $b/a$. (DM only)\\
-   Each dot represents the shape characterization of each halo at the 2 times the virial radius and a  1/16 fraction of the virial radius differentiated by color.\\   
-  Errorbar shows median and errors for each sampled radii.\\
-  Conclusion: DM halos are rounder on the outerskirts }
+  \caption{Shape of each halo on the plane $c/a$ Vs $b/a$. (DM only)
+   Each dot represents the shape characterization of each halo at the 2 times the virial radius and a  1/16 fraction of the virial radius differentiated by color.
+  Errorbar shows median and errors for each sampled radii.
+  Conclusion: DM halos are rounder on the outskirts}
   \label{fig:Triax_DM}
 \end{figure}
 
@@ -456,7 +412,7 @@ $\bar{T}$&$0.89^{+0.03}_{-0.08}$&$0.88^{+0.04}_{-0.12}$&$0.84^{+0.08}_{-0.23}$&$
 Concerning MHD halos, \textit{prescindible?(((the expected tendency is
   not clear. Some studies claim that the DM halo must be oblate, at
   least in the vicinities of the disk, to ensure its stability
-  \cite{disk stability}. However,)))} not much is said about its
+  . However,)))} not much is said about its
 dependence with radius as previous studies focus rather on the effects
 of baryons on the dynamics of the halo at fixed radii. Examining the
 representative behaviour of a MHD halo on figure \ref{fig:DM_MHD},
@@ -469,13 +425,14 @@ These results are statistically supported and sumarized on table
 \ref{MHD table} and figure \ref{fig:Triax_MHD} 
 
 \begin{figure}
-  \centering
  \includegraphics[width=0.9\columnwidth]{./pics/Triaxial_Plane/Triax_MHD.png}
-  \hfill
-  \caption{Shape of each halo on the plane $c/a$ Vs $b/a$. (MHD only)\\
-   Each dot represents the shape characterization of each halo at the 2 times the virial radius and a  1/16 fraction of the virial radius differentiated by color.\\   
-  Errorbar shows median and errors for each sampled radii.\\
-  Conclusion: MHD halos are more oblate on the outer skirts: b/a changes while c/a remains practically constant (on average) } 
+  \caption{Shape of each halo on the plane $c/a$ Vs $b/a$. (MHD only)
+   Each dot represents the shape characterization of each halo at the
+   2 times the virial radius and a  1/16 fraction of the virial radius
+   differentiated by color. 
+  Errorbar shows median and errors for each sampled radii.
+  Conclusion: MHD halos are more oblate on the outer skirts: b/a
+  changes while c/a remains practically constant (on average)}
   \label{fig:Triax_MHD}
 \end{figure}
 
@@ -513,8 +470,7 @@ $\bar{T}$&$0.18^{+0.23}_{-0.10}$&$0.36^{+0.19}_{-0.21}$&$0.40^{+0.26}_{-0.20}$&$
 
 As a check of consistency, we compare our new isopotential shape
 results with the analytic expression of the
-$(1-q_{\phi})\frac{1}{3}(1-q_{\rho})$ \citep[Binney and Tremaine
-  year]{Binney and tremaine}, taking the volume-enclosed axial ratios
+$(1-q_{\phi})\frac{1}{3}(1-q_{\rho})$ \citep{Binney_and_Tremaine_2008}, taking the volume-enclosed axial ratios
 as an approximation for the isodensity contour ratios
 $q_{\rho}$. Although this analytic expression if meant to be used for
 logarithmic axisymmetric halos, it works well as a first approximation
@@ -561,14 +517,12 @@ some effects of the galaxy evolution in the whole cosmological
 context.  
 
 \begin{figure}
-	% To include a figure from a file named example.*
-	% Allowable file formats are eps or ps if compiling using latex
-	% or pdf, png, jpg if compiling using pdflatex
-	\includegraphics[width=\columnwidth]{./pics/Delta asphericity Vs Star Density.png}
-    \caption{Difference in asphericities between MHD and DM shapes Vs Star Density of the simulation.\\
-    Unsure about this graphic.\\
-    Take delta asphericity as the strength of the rounding effect of baryons.}
-    \label{fig:Star_Density_effect}
+  \includegraphics[width=\columnwidth]{./pics/Delta asphericity Vs Star Density.png}
+  \caption{Difference in asphericities between MHD and DM shapes Vs
+    Star Density of the simulation. Unsure about this graphic. Take
+    delta asphericity as the strength of the rounding effect of
+    baryons.}  
+  \label{fig:Star_Density_effect}
 \end{figure}
 
 \textbf{Actually we have not examined the relation of c/a in MHD halos
@@ -610,21 +564,21 @@ bigger radii. One similar effect can be found if we sample the shape
 at the virial radius, this time at varying redshift. It is easy to see
 that the axial ratios increase with decreasing redshift, which is
 expected by the continuous influence of the gravitational potential
-\cite{VeraCiro}. In figure \ref{fig:RedshiftGood} we present a
-representative example.  
+\cite{Vera-Ciro_et_al._2011}. In figure \ref{fig:RedshiftGood} we
+present a representative example.
  
 \begin{figure}
-  \centering
   \subfloat[halo 16 DM]{\includegraphics[width=0.5\columnwidth]{./pics/Redshift/halo_16_level3_DM_Z.png}}
-  \hfill
   \subfloat[halo 16 MHD]{\includegraphics[width=0.5\columnwidth]{./pics/Redshift/halo_16_level3_MHD_Z.png}}
-  \caption{Radial profile (comoving) of axial ratios for halo 16 in terms of redshift (color). This halo maintains its shape until $z\approx 1$ obviating the systematic rounding effect in time from asymmetric potentials.\\
-  
-Each plot-line represents the radial profile at a determined redshift.\\
-Conclussion: Mainly for b/a, it increases for:\\ (1) for bigger radii (fixed redshift) \\
-												 (2) for lower redshift (fixed radius)\\
-
-It explains the correlation between radial profile and history, but does not require that curves match in the triaxial plane.  }
+  \caption{Radial profile (comoving) of axial ratios for halo 16 in
+    terms of redshift (color). This halo maintains its shape until
+    $z\approx 1$ obviating the systematic rounding effect in time from
+    asymmetric potentials. Each plot-line represents the radial
+    profile at a determined redshift. Conclussion: Mainly for b/a, it increases for:
+    (1) for bigger radii (fixed redshift)(2) for lower redshift (fixed
+    radius) It explains the correlation between radial profile and
+    history, but does not require that curves match in the triaxial
+    plane.}
   \label{fig:RedshiftGood}
 \end{figure}
 
@@ -639,15 +593,14 @@ towards sphericity for bigger radii and smaller redshift.
 
 
 \begin{figure}
-	\includegraphics[width=\columnwidth]{./pics/Redshift/halo_27_DM_Z_correlation.png}
-    \caption{DM only\\
-    		 Radial profile at redshift 0 (dashed line)\\
-    		 Historical profile at virial radius R500 (colour line)\\
-    		 Example of a halo where there is some correlation between these two profiles, as usually happens for DM only simulations.\\
-    		 Conclusion: DM only halos usually (fraction?) have correlated shape profiles 
-    		 }
-    \label{fig:DM Z Triax}
-    
+  \includegraphics[width=\columnwidth]{./pics/Redshift/halo_27_DM_Z_correlation.png}
+  \caption{DM only Radial profile at redshift 0 (dashed line)
+    Historical profile at virial radius R500 (colour line). Example
+    of a halo where there is some correlation between these two
+    profiles, as usually happens for DM only
+    simulations. Conclusion: DM only halos usually (fraction?) have
+    correlated shape profiles.} 
+  \label{fig:DM Z Triax}
 \end{figure}
 
 MHD halos, on the other hand, do not exhibit tendency towards
@@ -657,13 +610,12 @@ effectively vanishes this correlation as seen from a DM halo
 \ref{fig:MHD Z Triax}. 
 
 \begin{figure}
-	\includegraphics[width=\columnwidth]{./pics/Redshift/halo_24_level3_MHD_Z_Triax.png}
-    \caption{MHD\\
-    		 Radial profile at redshift 0 (dashed line)\\
-    		 Historical profile at virial radius R500 (colour line)\\
-    		 Example of a halo where there is no correlation between these two profiles, as usually happens in MHD\\
-    		 Conclusion: MHD halos usually (fraction?) have uncorrelated shape profiles 
-    		 } 
+  \includegraphics[width=\columnwidth]{./pics/Redshift/halo_24_level3_MHD_Z_Triax.png}
+  \caption{MHD. Radial profile at redshift 0 (dashed line)
+    Historical profile at virial radius R500 (colour line)
+    Example of a halo where there is no correlation
+    between these two profiles, as usually happens in
+    MHD. Conclusion: MHD halos usually (fraction?) have uncorrelated shape profiles.}
     \label{fig:MHD Z Triax} 
 \end{figure}
 
@@ -719,13 +671,15 @@ these three cases. \textbf{occurrencies for each case?}
   \hfill
   \subfloat[Chaotic Axes]{\includegraphics[width=1\columnwidth]{./pics/chaotic_axes.png}}
   \hfill
-  \caption{Star: Minor Axis\\
-  		   Triangle: Medium Axis\\
-  		   Square: Major Axis\\
-  		   Color: Radii at which shape was sampled (show radii sampled)\\
-  		   Contour color: If orientation is above or below in this projection\\
-  		   Cross (black): Orientation of the stellar disk\\
-  		   Conclusion: Axes (minor) are not (generally) aligned with the stellar disk nor are they usually aligned with each other from different radii. We show some cases that may happen\\  }
+  \caption{Star: Minor Axis
+    Triangle: Medium Axis
+    Square: Major Axis
+    Color: Radii at which shape was sampled (show radii sampled)
+    Contour color: If orientation is above or below in this projection
+    Cross (black): Orientation of the stellar disk
+    Conclusion: Axes (minor) are not (generally) aligned with the
+    stellar disk nor are they usually aligned with each other from
+    different radii. We show some cases that may happen.} 
   \label{fig:alignment}
 \end{figure}
 
@@ -741,45 +695,6 @@ This project has received funding from the European Union’s Horizon
 2020 Research and Innovation Programme under the Marie
 Sk\l{}odowska-Curie grant agreement No 734374. 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
-
-% The best way to enter references is to use BibTeX:
-
-
-
-% Alternatively you could enter them by hand, like this:
-% This method is tedious and prone to error if you have lots of references
-\begin{thebibliography}{99}
-\bibitem[\protect\citeauthoryear{Author}{2012}]{Author2012}
-Author A.~N., 2013, Journal of Improbable Astronomy, 1, 1
-\bibitem[\protect\citeauthoryear{Others}{2013}]{Others2013}
-Others S., 2012, Journal of Interesting Stuff, 17, 198
-\end{thebibliography}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%% APPENDICES %%%%%%%%%%%%%%%%%%%%%
-
-\appendix
-
-\section{Some extra material}
-
-If you want to present additional material which would interrupt the flow of the main paper,
-it can be placed in an Appendix which appears after the list of references.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% Don't change these lines
-\bsp	% typesetting comment
-\label{lastpage}
-
  \bibliographystyle{mnras}
  \bibliography{references}
 \end{document}
-
-
-% End of mnras_template.tex
