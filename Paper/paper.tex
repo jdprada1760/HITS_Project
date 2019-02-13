@@ -286,16 +286,17 @@ halo 27&39.617&39.056&0.324&0.273&227.908&223.484&14.048&13.244\\
 
 %\subsection{The solid ellipsoid method}
 
-There are two main ways to estimate the DM halo shape at a fixed
-radius: by computing isopotential or isodensity surfaces.
-Observational inference models estimate the shape from the
-isopotential contours, while simulations work with the isodensity
-contours which can be  directly calculated from particle positions.  
-However, the density contours are not smooth and are very 
-sensitive to the presence of small satelites.
+The DM halo shape at a fixed radius is an estimate of either
+the isopotential or isodensity surfaces.  
+Observational inference models usually estimate the 
+isopotential contours which are probed by tracers (gas, stars), while
+simulations work with the isodensity contours which can be directly
+calculated from particle positions.  
+
+However, in numerical simulations the density contours are not smooth
+and are sensitive to the presence of small satelites. 
 For this reason we choose to measure the shape by taking
 volume-enclosed particles, rather than shell-enclosed.  
-
 We follow the shape measurement method presented by
 \cite{Allgood_et_al._2006} that uses the reduced
 inertia tensor,     
@@ -313,10 +314,10 @@ structure as well as the eigen-quantities which are proportional to
 the squared principal axes $a>b>c$. 
 
 We start the calculations taking into account particles within a
-sphere of radius $R$ and then  recharacterize the triaxial parameters by taking into account
-particles within an ellipsoid of semi-axes $r,r/q,r/s$ and weighted
-distance $d^2=x^2+(y/q)^2+(z/s)^2$, where $q = b/a$ and $s=c/a$
-are the previously calculated axial ratios. 
+sphere of radius $R$ and then  recharacterize the triaxial parameters
+by taking into account particles within an ellipsoid of semi-axes
+$r,r/q,r/s$ and re-scaled distance $d^2=x^2+(y/q)^2+(z/s)^2$, where $q
+= b/a$ and $s=c/a$ are the previously calculated axial ratios. 
 We repeat this process until the average deviation of semi-axes is
 less than $10^{-6}$.  
 This is the same method used to estimate the halo shape in the DM-only
@@ -325,7 +326,8 @@ Aquarius simulations \citep{Vera-Ciro_et_al._2011}.
 We restrict the sampling of the ellipsoidal parameters to radii
 between $1/16 R_{vir}$ and $2R_{vir}$, where  $R_{vir}$ is taken as the
 radius enclosing a sphere with 500 times the average dark matter
-density of the Universe. All our results use of this reference radius
+density of the Universe. 
+All our results use of this reference radius
 unless strictly stated otherwise. 
 We peform the shape measurements both as a function of radius and
 redshift for all halos in the sample.
@@ -333,35 +335,55 @@ redshift for all halos in the sample.
 
 \section{Results}
 
-\subsection{Radial trends}
-
-
-In DM-only simulations halos are monotonically rounder with increasing
-radius, this confirms results already reported in the literature
-\citep{Vera-Ciro_et_al._2011}. 
-Figure \ref{fig:slices} illustrates this effect.
-There we show the DM density of a DM-only halo at redshift zero.
-The halo is aligned with the minor axis. 
-The ellipsoid shows the outermost boundary of the estimated shape ellipsoid.
-Formally, this effect is reflected in the axial ratios $b/a,c/a$, which tend to unity
-on the outerskirts of the halo. As a representative sample of this
-relations, we show on figure \ref{fig:DM relation} the evolution, for
-a specific halo, of the axial ratios $b/a,c/a$ and the triaxiality
-parameter $T=\frac{a^2-b^2}{a^2-c^2}$ in a wide range of radii. 
-
+\subsection{Radial trends at $z=0$}
 
 \begin{figure*}
   \centering
-  \subfloat[halo 27 DM shape at small radius]{\includegraphics[width=0.5\textwidth]{./pics/MHD_Vs_DM/level4_DM_halo_27_inner.png}}
+  \subfloat[halo 27 DM shape at small
+    radius]{\includegraphics[width=0.5\textwidth]{./pics/MHD_Vs_DM/level4_DM_halo_27_inner.png}} 
   \hfill
-  \subfloat[halo 27 DM shape at big radius]{\includegraphics[width=0.5\textwidth]{./pics/MHD_Vs_DM/level4_DM_halo_27_outter.png}}
-  \hfill
+  \subfloat[halo 27 DM shape at big
+    radius]{\includegraphics[width=0.5\textwidth]{./pics/MHD_Vs_DM/level4_DM_halo_27_outter.png}} 
+  \hfill 
   \caption{DM density for inner/outer (left/right panel) DM halo regions.  
   Slice 20 percent of the max-min range in the "z" position of
   particles belonging to the main structure, centered at halo defined
   position (calculated with most bounded particle) }  
   \label{fig:slices}
 \end{figure*}
+
+We find that in DM-only simulations halos are monotonically rounder
+with increasing radius, confirming results already reported in the
+literature \citep{Vera-Ciro_et_al._2011}. 
+Figure \ref{fig:slices} illustrates this effect.
+There we show the density a DM-only halo at redshift zero in a thin
+slice passing through the halo's centre, each panel shows the halo at
+different radii.
+The ellipse plotted over the contours indicates the outermost
+boundary of the estimated shape ellipsoid. 
+Indeed, the ellipse panel on the right (outer halo) is rounder than
+the ellipse on the left (inner halo). 
+
+We quantify this effect by plotting the axial ratios $b/a$, $c/a$,
+$c/b$ and the triaxiality $T\equiv \frac{1-b/a}{1-c/a}$ as a
+function of radius. 
+As a representative sample of this
+relations, we show on figure \ref{fig:triaxial_radius} the evolution, for
+a specific halo, of the axial ratios $b/a,c/a$ and the triaxiality
+parameter $T=\frac{a^2-b^2}{a^2-c^2}$ in a wide range of radii. 
+
+
+\begin{figure}
+\centering
+{\includegraphics[width=0.8\columnwidth]{./pics/halo16.png}}
+\caption{Radial profile for the axial ratios and the triaxiality parameter
+  $T=\frac{1-b/a}{1-c/a}$ at redshift $z=0$. 
+  Radial profile was sampled at
+  redshift 0 and there are two sets of lines showing MHD and DM-only
+  versions of the axial ratios profile} \label{fig:triaxial_radius}
+\end{figure} 
+
+
 
 
 
@@ -382,14 +404,6 @@ of the 30 auriga simulations on the figure \ref{fig:Triax_DM} where
 each shape represents a point in the triaxiality plane $c/a$ Vs
 $b/a$. Check Vera-ciro onthis. 
 
-\begin{figure}
-\centering
-{\includegraphics[width=0.8\columnwidth]{./pics/halo16.png}}
-\caption{Radial profile for axial ratios and the triaxiality parameter $T=\frac{1-b/a}{1-c/a}$ for halo 16.
-Radial profile was sampled at redshift 0 and there are two sets of
-lines showing MHD and DM-only versions of the axial ratios profile}
-\label{fig:DM_MHD}
-\end{figure} 
 
  
 \begin{figure}
