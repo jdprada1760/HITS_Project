@@ -14,6 +14,10 @@
 \usepackage{multicol}
 \usepackage{blindtext}
 \newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\Mpch}{\,{\rm Mpc}\,\ifmmode h^{-1}\else $h^{-1}$\fi}
+\newcommand{\kpch}{\,{\rm kpc}\,\ifmmode h^{-1}\else $h^{-1}$\fi}
+\newcommand{\kpc}{\,{\rm kpc}\,}
+
 
 \newenvironment{Table}
    {\par\bigskip\noindent\minipage{\columnwidth}\centering}
@@ -376,17 +380,32 @@ the ellipse on the left (inner halo).
 \end{figure*} 
 
 
-We quantify this effect by plotting the axial ratios $b/a$, $c/a$,
-$c/b$ and the triaxiality $T\equiv \frac{1-b/a}{1-c/a}$ as a
+We quantify this effect by plotting the axial ratios $q$, $s$,
+$s/q$ and the triaxiality $T\equiv \frac{1-q}{1-s}$ as a
 function of radius. 
-As a representative sample of this relations we show on figure
-\ref{fig:triaxial_radius} the radial trends for an specific halo at
+As a representative sample of this relations we show on Figure
+\ref{fig:triaxial_radius} the radial trends for Halo 16 at
 the highest resolution both for DM and MHD simulations.
-The continouse lines corresponds to the DM simulation and shows how
+The continous lines correspond to the DM simulation and shows how
 the inner part of the halo $r\approx 1$\kpch has values of 
-$b/a=0.5$, $c/a=0.5$ while at the virial radius the same
-quantities increase to $b/a=0.9$, $c/a=0.6$; in turn the triaxiality
-decrease from $T\approx 1.0$\kpch to $T\approx=0.4$. 
+$q=0.5$, $s=0.5$ while at the virial radius the same
+quantities increase to $q=0.85$, $s=0.6$; in turn the triaxiality
+decreases from $T\approx 1.0$ to $T\approx0.4$. 
+
+In the same Figure \ref{fig:triaxial_radius} we also find one of the
+main results of our study: halos in MHD simulations are systematically rounder, at
+every radius, than its DM-only counterparts.  
+The dashed line in Figure \ref{fig:triaxial_radius} shows that at
+$r\approx 1$\kpch  in the MHD simulation we have $q=0.85, s=0.8$
+($q=0.5, s=0.5$ in DM) and at the virial radius $q=0.95, s=0.75$
+($q=0.85, s=0.6$ in DM).  
+However, the triaxiality trend is not as monotonous for MHD halos is
+it is in DM halos. 
+The triaxiality goes almost to zero at an intermediate radius,
+$r\approx 10$\kpc in the case of Halo 16 in Figure
+\ref{fig:triaxial_radius}, to increase again. {\bf pasa lo mismo para
+  todos los halos? es lo mismo para baja y alta resolucion de MHD?}
+    
 
 
 
