@@ -23,9 +23,8 @@
    {\par\bigskip\noindent\minipage{\columnwidth}\centering}
    {\endminipage\par\bigskip}
 
-\title[MW DM halo shape in AURIGA]{The expected shape of the Milky Way's Dark Matter halo}
-
-
+\title[Dark Matter halo shape in the AURIGA simulations]{The shape of dark matter
+  halos in the AURIGA simulations}  
 \author[Jesus Prada,  Jaime E. Forero-Romero, Volker Springel ]{
 Jesus Prada,$^{1}$\thanks{E-mail: jd.prada1760@uniandes.edu.co}
 Jaime E. Forero-Romero,$^{1}$
@@ -408,38 +407,47 @@ $r\approx 10$\kpc in the case of Halo 16 in Figure
     
 
 
+Figure \ref{fig:triax_DM} summarizes this comparizon for all 30 halos
+in the Level 3 simulations. 
+Measurements at $R_{\rm vir}/16$ are represented by circlse while squares 
+are measurements at $R_{\rm vir}$. 
+All halos, except two, show that outer regions rounder than inner
+regions.
+The exceptions are cases where a merging substructures near  the
+halo's center give rise to perturbed axial ratios measurments. 
+Figure \ref{fig:triax_HDM} shows the same information, this time for
+the MHD simulations. 
+The main radial trend continues to hold, albet less pronounced; halos
+in MHD simulations are in general rounder than their DM counterparts
+and the increased roundness in outer regions is less pronounced on
+average.
 
-
-
-
-
-
-
-\subsection{The radial tendency of axial ratios}
-
-
-
-We found that most halos exhibit a monotonically-increasing somewhat
-steady tendency of its axial ratios $b/a,c/a$  with radius, which is
-well exemplified on figure \ref{fig:DM_MHD}. There are some special
-cases in which fluctuations of the local DM density field affects this
-relation, but in average, this monotonic and steady tendency is clear
-and can be consulted on table \ref{table:DM table}. To ilustrate the
-average behavior, as well as some peculiarities, we resume the results
-of the 30 auriga simulations on the figure \ref{fig:Triax_DM} where
-each shape represents a point in the triaxiality plane $c/a$ Vs
-$b/a$. Check Vera-ciro onthis. 
+This situation is summarized Table \ref{table:shape}
+We summarize these resulta in Table \ref{table:shape}
 
 
  
 \begin{figure}
- \includegraphics[width=0.9\columnwidth]{./pics/Triaxial_Plane/Triax_DM.png}
-  \caption{Shape of each halo on the plane $c/a$ Vs $b/a$. (DM only)
+\includegraphics[width=0.9\columnwidth]{./pics/Triaxial_Plane/Triax_DM.png}
+\caption{Axial ratios for the 30 halos in the Level 3 DM simulations.
    Each dot represents the shape characterization of each halo at the 2 times the virial radius and a  1/16 fraction of the virial radius differentiated by color.
   Errorbar shows median and errors for each sampled radii.
-  Conclusion: DM halos are rounder on the outskirts}
-  \label{fig:Triax_DM}
+  Conclusion: DM halos are rounder on the outskirts {\bf Esto necesita
+  correccion. Debe ser a R1/16 y R (no 2R!)}}
+  \label{fig:triax_DM}
 \end{figure}
+
+
+\begin{figure}
+ \includegraphics[width=0.9\columnwidth]{./pics/Triaxial_Plane/Triax_MHD.png}
+  \caption{Axial ratios for the 30 halos in the Level 3 MHD
+    simulations. DM halos are rounder at larger radii than small radii. {\bf Esto
+      necesita correccion para que tambien sea a 
+      R1/16 y R.}}
+  \label{fig:triax_MHD}
+\end{figure}
+
+
 
 \begin{table}
 \setlength{\tabcolsep}{3pt}
@@ -471,17 +479,7 @@ radial domain. (Pass from representative case to averaged values)
 These results are statistically supported and sumarized on table
 \ref{MHD table} and figure \ref{fig:Triax_MHD} 
 
-\begin{figure}
- \includegraphics[width=0.9\columnwidth]{./pics/Triaxial_Plane/Triax_MHD.png}
-  \caption{Shape of each halo on the plane $c/a$ Vs $b/a$. (MHD only)
-   Each dot represents the shape characterization of each halo at the
-   2 times the virial radius and a  1/16 fraction of the virial radius
-   differentiated by color. 
-  Errorbar shows median and errors for each sampled radii.
-  Conclusion: MHD halos are more oblate on the outer skirts: b/a
-  changes while c/a remains practically constant (on average)}
-  \label{fig:Triax_MHD}
-\end{figure}
+
 
 
 \begin{table}
