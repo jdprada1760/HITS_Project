@@ -375,7 +375,8 @@ the ellipse on the left (inner halo).
   $T=\frac{1-b/a}{1-c/a}$ at redshift $z=0$. 
   Radial profile was sampled at
   redshift 0 and there are two sets of lines showing MHD and DM-only
-  versions of the axial ratios profile} \label{fig:triaxial_radius}
+  versions of the axial ratios profile. {\bf Aqui hay que quiar c/b,
+    no es relevante}} \label{fig:triaxial_radius}
 \end{figure*} 
 
 
@@ -406,7 +407,7 @@ $r\approx 10$\kpc in the case of Halo 16 in Figure
   todos los halos? es lo mismo para baja y alta resolucion de MHD?}
     
 
-Figure \ref{fig:triax_DM} summarizes this comparizon for all 30 halos
+Figure \ref{fig:triax_DM_MHD} summarizes this comparizon for all 30 halos
 in the Level 3 simulations. 
 Measurements at $R_{\rm vir}/16$ are represented by circles while squares 
 are measurements at $R_{\rm vir}$. 
@@ -414,7 +415,7 @@ All halos, except two, show that outer regions rounder than inner
 regions.
 The exceptions are cases where a merging substructures near  the
 halo's center gives rise to perturbed axial ratio measurements. 
-Figure \ref{fig:triax_MHD} shows the same information, this time for
+The right panel on Figure \ref{fig:triax_DM_MHD} shows the same information, this time for
 the MHD simulations. 
 In this case, the main radial trend continues to hold, albeit less
 pronounced.
@@ -447,9 +448,12 @@ radius.
 
  
 \begin{figure*}
+\begin{center}
 \includegraphics[width=0.9\columnwidth]{./pics/Triaxial_Plane/Triax_DM.png}
  \includegraphics[width=0.9\columnwidth]{./pics/Triaxial_Plane/Triax_MHD.png}
-\caption{Axial ratios for the 30 halos in the Level 3 DM simulations.
+\end{center}
+\caption{Axial ratios for the 30 halos in the Level 3 DM simulations
+  on the left and MHD simulations on the right.
    Each dot represents the shape characterization of each halo at the
    2 times the virial radius and a  1/16 fraction of the virial radius
    differentiated by color. 
@@ -501,33 +505,22 @@ $T$ &$0.31^{+0.15}_{-0.22}$&$0.20^{+0.24}_{-0.12}$&$0.24^{+0.20}_{-0.12}$&$0.30^
 
 \subsection{Shape evolution with cosmic time}
 
-We have now established that DM-only have a steady and monotonous
-trend towards larger sphericity with increasing radius. 
-This radial trend is mimicked when the shape is measured at the virial
-radius as a function of cosmic time.
-The halo should become rounder with decreasing redshift, this is
-expected by the continuous influence of the gravitational potential on
-a collisionless fluid \citep{Vera-Ciro_et_al._2011}. 
-
-
 
 \begin{figure*}
   \includegraphics[width=\columnwidth]{./pics/Redshift/halo_27_DM_Z_correlation.png}
   \includegraphics[width=\columnwidth]{./pics/Redshift/halo_24_level3_MHD_Z_Triax.png}
   \caption{Radial profile at $z=0$ (dashed line) and 
-    the istorical profile at virial radius R500 (colour line). Example
-    of a halo where there is some correlation between these two
-    profiles, as usually happens for DM only
-    simulations. Conclusion: DM only halos usually (fraction?) have
-    correlated shape profiles. {\bf Aqui la idea es mostrar el mismo
+    the historical profile at the virial radius (colour line). 
+    Results for DM simulations on the left, for MHD on the right.
+    {\bf Aqui la idea es mostrar el mismo
       halo, no halos diferentes!}} 
-  \label{fig:DM Z Triax}
+  \label{fig:redshift_triaxial}
 \end{figure*}
 
  
-\begin{figure}
-  \subfloat[halo 16 DM]{\includegraphics[width=0.5\columnwidth]{./pics/Redshift/halo_16_level3_DM_Z.png}}
-  \subfloat[halo 16 MHD]{\includegraphics[width=0.5\columnwidth]{./pics/Redshift/halo_16_level3_MHD_Z.png}}
+\begin{figure*}
+  \subfloat[halo 16 DM]{\includegraphics[width=\columnwidth]{./pics/Redshift/halo_16_level3_DM_Z.png}}
+  \subfloat[halo 16 MHD]{\includegraphics[width=\columnwidth]{./pics/Redshift/halo_16_level3_MHD_Z.png}}
   \caption{Radial profile (comoving) of axial ratios for halo 16 in
     terms of redshift (color). This halo maintains its shape until
     $z\approx 1$ obviating the systematic rounding effect in time from
@@ -536,37 +529,31 @@ a collisionless fluid \citep{Vera-Ciro_et_al._2011}.
     (1) for bigger radii (fixed redshift)(2) for lower redshift (fixed
     radius) It explains the correlation between radial profile and
     history, but does not require that curves match in the triaxial
-    plane.}
+    plane. {\bf En esta grafica el panel de abajo deberia ser la triaxialidad.}}
   \label{fig:RedshiftGood}
-\end{figure}
+\end{figure*}
 
+We know that DM-only have a steady and monotonous
+trend towards larger sphericity with increasing radius. 
+This radial trend is mimicked when the shape is measured at the virial
+radius as a function of cosmic time.
+The halo should become rounder with decreasing redshift, this is
+expected by the continuous influence of the gravitational potential on
+a collisionless fluid \citep{Vera-Ciro_et_al._2011}. 
 
-Interestingly, these two parametic plots i.e. $(b/a,c/a)(z=0,r)$ and
-$(b/a,c/a)(z,r=R_{vir})$ are very correlated for DM-only halos
-\ref{fig:DM Z Triax}. This means that, for DM-only halos, one can
-approximate its shape at higher redshift by simply sampling its
-current shape at a smaller radius \textbf{wording}. This relationship
-relies strongly on the steady and monotonous tendency of DM halos
-towards sphericity for bigger radii and smaller redshift. 
+We show in the left panel of Figure \ref{fig:redshift_triaxial} an
+example with this effect in Halo 27 of the DM simulations:
+the radial triaxiality at $z=0$ and the historical triaxiality at
+$R_{\rm vir}$ are correlated. 
+The right panel on the same Figure \ref{fig:redshift_triaxial}
+illustrates how this correlation is absent in MHD simulations. 
 
-
-MHD halos, on the other hand, do not exhibit tendency towards
-sphericity with bigger radii, but they do get sistematically rounder
-at lower redshift as seen in figure \ref{fig:RedshiftGood}. This
-effectively vanishes this correlation as seen from a DM halo
-\ref{fig:MHD Z Triax}. 
-
-\begin{figure}
-
-  \caption{MHD. Radial profile at redshift 0 (dashed line)
-    Historical profile at virial radius R500 (colour line)
-    Example of a halo where there is no correlation
-    between these two profiles, as usually happens in
-    MHD. Conclusion: MHD halos usually (fraction?) have uncorrelated shape profiles.}
-    \label{fig:MHD Z Triax} 
-\end{figure}
-
-Better graphics.
+This means that for DM-only halos one can approximate its shape at
+higher redshift by simply sampling its 
+current shape at a smaller radius. 
+This correlation seems to be prompted by the continous inside-out
+build-up of the dark matter halo; baryonic effects seem to jeopardize
+the apparent smoother growth in DM-only simulations.
 
 %Discuss if this correlation may be recovered if compared for example at Disk radius in stead of virial radius.\\
 
