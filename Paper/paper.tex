@@ -140,79 +140,6 @@ We also perform a convergence study with simulation performed at
 different resolution levels and explicitly compare the role of DM only
 vs. DM+hydro on the MW DM halo shape.
 
-
-%\begin{multicols}{2}
-\begin{table*}
-%\setlength{\tabcolsep}{3pt}
-\begin{tabular}{|l|cc|cc|c|c|p{4cm}|}\hline
-Reference&$q_{\rho}$&$s_{\rho}$&$q_{\phi}$&$s_{\phi}$&$R$&$\theta$&comment\\ \hline \hline
-\citet{Olling_and_Merrifield_2000}& $\mathbf{1.00}$ & $\mathbf{0.80}$ & & & $\simeq 8$kpc & $0^{\circ}$&Method: Stellar dynamics and HI density. \\\hline
-\citet{Law_and_Majewski_2009}&&&$\mathbf{0.83}$&$\mathbf{0.67}$& $\lesssim 60$kpc&$90^{\circ}$&Mid-axis orientation. Method: Sagittarius stream\\\hline
-%
-\citet{Law_and_Majewski_2010}&&&$\mathbf{0.99}$&$\mathbf{0.72}$& $[20$kpc,$60$kpc$]$&$90^{\circ}$&Mid-axis orientation, Method: Sagittarius stream\\\hline
-%
-\citet{Loebman_et_al._2012}&$\mathbf{1.00}$&$\mathbf{0.47}$&&&$\sim 20$kpc &$0^{\circ}$&Method: SDSS statistics\\\hline
-%
-\citet{Deg_and_Widrow_2013}&$0.72$&$0.28$&$0.82$&$0.40$&$[20$kpc,$60$kpc$]$&$90^{\circ}$& Mid-axis orientation. Method: Sagittarius stream\\\hline
-%
-\multirow{2}{*}{\citet{Vera-Ciro_and_Helmi_2013}}&&&$\mathbf{1.00}$&$\mathbf{0.90}$&$\lesssim 10$kpc&$0^{\circ}$ & Method: Sagittarius stream \& LMC \\
-&&&$\mathbf{0.90}$&$\mathbf{0.80}$&$\gtrsim 10$kpc&$90^{\circ}$& Mid-axis orientation on the outside. \\\hline
-%
-\citet{Bovy_et_el._2016}&$\mathbf{0.95}$&$\mathbf{0.95}$&&&$\lesssim 20$kpc&$90^{\circ}$ & Method: Stellar streams\\\hline
-%
-\citet{Bowden_et_al._2016}&&&$\mathbf{[0.5,0.66]}$&$\mathbf{[0.5,0.66]}$&$[5$kpc,$10$kpc$]$&$90^{\circ}$& Weak constraint on prolate halo. Method: SDSS stars dynamics.\\\hline
-%
-\multirow{2}{*}{\citet{Banerjee_and_Chanda_2011}}&$\mathbf{1}$&$\mathbf{1}$&&&$9$kpc&$0^{\circ}$&Method: HI gas. \\
-&$\mathbf{0.5}$&$\mathbf{0.5}$&&&$24$kpc&$0^{\circ}$&Monotonical change between radial regimes.\\\hline
-%
-\cite{Johnston_et_al._2005}&$\mathbf{1}$&$\mathbf{[0.83-0.92]}$&&&$\lesssim 60$kpc&$0^{\circ}$&Method: Sagittarius stream\\\hline\hline
-\end{tabular}
-\caption{(TODO: compute analogues in isopotential or isodensity according to Binney and Tremaine)}
-\end{table*}
-%\end{multicols}
-
-\begin{table*}
-%\setlength{\tabcolsep}{3pt}
-\begin{tabular}{|l|cc|cc|c|p{4cm}|}\hline
-Reference&$q_{\rho}$&$s_{\rho}$&$q_{\phi}$&$s_{\phi}$&$R$&comment\\ \hline \hline
-\citet{Chua_et_al._2018}&$\mathbf{0.88\pm0.10}$&$\mathbf{0.70\pm0.11}$&&&$0.15R_{200}$& Illustris\\\hline
-%
-\citet{Bryan_et_al._2013}&$\mathbf{[0.84,0.86]}$&$\mathbf{[0.66,0.70]}$&&&$R_{200}$& For different cosmologies and feedback recipies. Calculated from a fit at $M_\odot=10^12$\\\hline
-%
-\multirow{2}{*}{\citet{Abadi_et_al._2010}}&&&$\mathbf{0.98}$&$\mathbf{0.85}$&-& Almost independent of radius. No feedback: boundary case\\\hline
-\end{tabular}
-\caption{(TODO: compute analogues in isopotential or isodensity according to Binney and Tremaine)}
-\end{table*}
-
-
-
-
-\section{Numerical Simulations}
-
-In this work we use the results of the state-of-the art Auriga
-simulations \citep{auriga}. 
-The objects in those simulations were selected from a set of 30
-isolated halos in the Evolution and Assembly of GaLaxies and their
-Environments (EAGLE)  project \citep{Eagle}.   
-These halos were randomly selected from a sample of the most isolated
-halos whose virial mass $M_{200}$ varied between $10^{12}M_\odot$ and
-$2\times 10^{12}M_\odot$. 
-These halos were re-simulated with higher resolution an varying
-physical realism using the AREPO code \citep{arepo}.
- 
-All 30 halos were simulated within resolution defined for Aquarius
-simulations corresponding to $\sim 3\times 10^6$ high resolution DM
-particles of $\sim 2.5 \times 10^5 M_\odot$.  
-This resolution is labeled as Level 4, the main details for each halo
-are consigned in Table \ref{tab:level4}. 
-From these 30 halos, 6 of them where re-simulated at higher resolution
-(labeled as Level 3) taking into account a spatial factor of 2 in each
-dimension.   
-Details of Level 3 halos are in Table \ref{tab:level3}. 
-Furthermore, for each halo in each level of resolution there are two
-versions of the simulation: DM-only and DM plus baryons with
-magneto-hydrodynamical (MHD) physics.  
-
 \begin{table*}
 \centering
 \begin{tabular}{l|cc|cc|cc|cc}
@@ -285,6 +212,53 @@ halo 27&39.617&39.056&0.324&0.273&227.908&223.484&14.048&13.244\\
 \label{tab:level3}
 \end{table*} 
 
+
+
+\section{Numerical Simulations}
+
+In this work we use the results of the state-of-the art Auriga
+simulations \citep{auriga}. 
+The objects in those simulations were selected from a set of 30
+isolated halos in the Evolution and Assembly of GaLaxies and their
+Environments (EAGLE)  project \citep{Eagle}.   
+These halos were randomly selected from a sample of the most isolated
+halos whose virial mass $M_{200}$ varied between $10^{12}M_\odot$ and
+$2\times 10^{12}M_\odot$. 
+These halos were re-simulated with higher resolution an varying
+physical realism using the AREPO code \citep{arepo}.
+ 
+All 30 halos were simulated within resolution defined for Aquarius
+simulations corresponding to $\sim 3\times 10^6$ high resolution DM
+particles of $\sim 2.5 \times 10^5 M_\odot$.  
+This resolution is labeled as Level 4, the main details for each halo
+are consigned in Table \ref{tab:level4}. 
+From these 30 halos, 6 of them where re-simulated at higher resolution
+(labeled as Level 3) taking into account a spatial factor of 2 in each
+dimension.   
+Details of Level 3 halos are in Table \ref{tab:level3}. 
+Furthermore, for each halo in each level of resolution there are two
+versions of the simulation: DM-only and DM plus baryons with
+magneto-hydrodynamical (MHD) physics.  
+
+
+
+
+
+\begin{figure*}
+  \centering
+  \subfloat[halo 27 DM shape at small
+    radius]{\includegraphics[width=0.5\textwidth]{./pics/MHD_Vs_DM/level4_DM_halo_27_inner.png}} 
+  \hfill
+  \subfloat[halo 27 DM shape at big
+    radius]{\includegraphics[width=0.5\textwidth]{./pics/MHD_Vs_DM/level4_DM_halo_27_outter.png}} 
+  \hfill 
+  \caption{DM density for inner/outer (left/right panel) DM halo regions.  
+  Slice 20 percent of the max-min range in the "z" position of
+  particles belonging to the main structure, centered at halo defined
+  position (calculated with most bounded particle) }  
+  \label{fig:slices}
+\end{figure*}
+
 \section{Determining the halo shape}
 
 %\subsection{The solid ellipsoid method}
@@ -340,20 +314,6 @@ redshift for all halos in the sample.
 
 \subsection{Radial trends at $z=0$}
 
-\begin{figure*}
-  \centering
-  \subfloat[halo 27 DM shape at small
-    radius]{\includegraphics[width=0.5\textwidth]{./pics/MHD_Vs_DM/level4_DM_halo_27_inner.png}} 
-  \hfill
-  \subfloat[halo 27 DM shape at big
-    radius]{\includegraphics[width=0.5\textwidth]{./pics/MHD_Vs_DM/level4_DM_halo_27_outter.png}} 
-  \hfill 
-  \caption{DM density for inner/outer (left/right panel) DM halo regions.  
-  Slice 20 percent of the max-min range in the "z" position of
-  particles belonging to the main structure, centered at halo defined
-  position (calculated with most bounded particle) }  
-  \label{fig:slices}
-\end{figure*}
 
 We find that in DM-only simulations halos are monotonically rounder
 with increasing radius, confirming results already reported in the
@@ -558,30 +518,31 @@ the apparent smoother growth in DM-only simulations.
 %Discuss if this correlation may be recovered if compared for example at Disk radius in stead of virial radius.\\
 
 
-\subsection{The orientation of the principa axes}
+\subsection{DM halo - Stellar Disk Alignment}
 
-One of the principal assumptions of observational models of the MW's
-DM halo is that its minor axis is perfectly aligned with the disk
-axis. Although this is a reasonable assumption to guarantee the
+
+A common assumption in observational models of the MW DM halo is that
+its minor axis is perfectly aligned with the disk axis.
+Although it is a reasonable assumption to guarantee the
 stability of the galactic disk in simplified models of isolated
-galaxies, it may not be the case for galaxies evolved in the whole
-cosmological context nor at every radii at which the shape is
-sampled. 
+galaxies, this might not hold in an explicit cosmological context.
 
-Therefore, it is of special interest to us to examin the strength of
-this alignment assumption in the context of simulations. For this
-purpose, we sampled the shape at 5 different radii and plotted the
-axial directions, as well as the disk direction in the \textbf{name}
-diagrams \cite{} (explain diagrams). Explain disk direction
-calculation. 
+To examine the validity of this assumption  we sampled the shape at 5
+different radii and plotted  directions in a cartesiian coordinate
+system where the $z$-axis always corresponds to the minor axis
+measured at the virial radius.
 
-We found that there is not a representative example of what happens in
-terms of alignments. We found that the majority of the disks are
-aligned with the minor axis of their DM halo within $\approx 30^o$; in
-some special cases, this alignment was almost perfect and in some
+{\bf en Este caso hace falta la figura con la distribuci\'on integrada de cos theta}.
+Figure \ref{fig:alignment} is the cumulative distribution of $\cos\theta$, where $\theta$ is the 
+summarizes our results. 
+We find that the majority of the disks are aligned with the minor axis of their DM halo within $\approx 30^{\circ}$.
+in some special cases, this alignment was almost perfect and in some
 other cases, the DM halo minor axis changed substantially to be able
 to determine an alignment. In figure \ref{fig:alignment} we present
 these three cases. \textbf{occurrencies for each case?} 
+
+
+%---AVANCE
 
 
 \textit{This is an important result of our study. We study the radial
@@ -597,13 +558,13 @@ these three cases. \textbf{occurrencies for each case?}
   strong constrains on the MW DM halo models.} 
 
 
-\begin{figure}
+\begin{figure*}
   \centering
-  \subfloat[Perfectly aligned Axes]{\includegraphics[width=1\columnwidth]{./pics/well_axes.png}}
+  \subfloat[Perfectly aligned Axes]{\includegraphics[width=0.6\columnwidth]{./pics/well_axes.png}}
   \hfill
-  \subfloat[Somewhat aligned Axes]{\includegraphics[width=1\columnwidth]{./pics/rotating_axes.png}}
+  \subfloat[Somewhat aligned Axes]{\includegraphics[width=0.6\columnwidth]{./pics/rotating_axes.png}}
   \hfill
-  \subfloat[Chaotic Axes]{\includegraphics[width=1\columnwidth]{./pics/chaotic_axes.png}}
+  \subfloat[Chaotic Axes]{\includegraphics[width=0.6\columnwidth]{./pics/chaotic_axes.png}}
   \hfill
   \caption{Star: Minor Axis
     Triangle: Medium Axis
@@ -615,7 +576,7 @@ these three cases. \textbf{occurrencies for each case?}
     stellar disk nor are they usually aligned with each other from
     different radii. We show some cases that may happen.} 
   \label{fig:alignment}
-\end{figure}
+\end{figure*}
 
 \textbf{Discussion about the distribution of alignments and their
   evolution in time: Precesion or temporary instabilities?} 
@@ -623,6 +584,52 @@ these three cases. \textbf{occurrencies for each case?}
 
 
 \subsection{Comparison with observational constraints}
+
+
+
+\begin{table*}
+\begin{tabular}{|l|cc|cc|c|c|p{4cm}|}\hline
+Reference&$q_{\rho}$&$s_{\rho}$&$q_{\phi}$&$s_{\phi}$&$R$&$\theta$&comment\\ \hline \hline
+\citet{Olling_and_Merrifield_2000}& $\mathbf{1.00}$ & $\mathbf{0.80}$ & & & $\simeq 8$kpc & $0^{\circ}$&Method: Stellar dynamics and HI density. \\\hline
+\citet{Law_and_Majewski_2009}&&&$\mathbf{0.83}$&$\mathbf{0.67}$& $\lesssim 60$kpc&$90^{\circ}$&Mid-axis orientation. Method: Sagittarius stream\\\hline
+%
+\citet{Law_and_Majewski_2010}&&&$\mathbf{0.99}$&$\mathbf{0.72}$& $[20$kpc,$60$kpc$]$&$90^{\circ}$&Mid-axis orientation, Method: Sagittarius stream\\\hline
+%
+\citet{Loebman_et_al._2012}&$\mathbf{1.00}$&$\mathbf{0.47}$&&&$\sim 20$kpc &$0^{\circ}$&Method: SDSS statistics\\\hline
+%
+\citet{Deg_and_Widrow_2013}&$0.72$&$0.28$&$0.82$&$0.40$&$[20$kpc,$60$kpc$]$&$90^{\circ}$& Mid-axis orientation. Method: Sagittarius stream\\\hline
+%
+\multirow{2}{*}{\citet{Vera-Ciro_and_Helmi_2013}}&&&$\mathbf{1.00}$&$\mathbf{0.90}$&$\lesssim 10$kpc&$0^{\circ}$ & Method: Sagittarius stream \& LMC \\
+&&&$\mathbf{0.90}$&$\mathbf{0.80}$&$\gtrsim 10$kpc&$90^{\circ}$& Mid-axis orientation on the outside. \\\hline
+%
+\citet{Bovy_et_el._2016}&$\mathbf{0.95}$&$\mathbf{0.95}$&&&$\lesssim 20$kpc&$90^{\circ}$ & Method: Stellar streams\\\hline
+%
+\citet{Bowden_et_al._2016}&&&$\mathbf{[0.5,0.66]}$&$\mathbf{[0.5,0.66]}$&$[5$kpc,$10$kpc$]$&$90^{\circ}$& Weak constraint on prolate halo. Method: SDSS stars dynamics.\\\hline
+%
+\multirow{2}{*}{\citet{Banerjee_and_Chanda_2011}}&$\mathbf{1}$&$\mathbf{1}$&&&$9$kpc&$0^{\circ}$&Method: HI gas. \\
+&$\mathbf{0.5}$&$\mathbf{0.5}$&&&$24$kpc&$0^{\circ}$&Monotonical change between radial regimes.\\\hline
+%
+\cite{Johnston_et_al._2005}&$\mathbf{1}$&$\mathbf{[0.83-0.92]}$&&&$\lesssim 60$kpc&$0^{\circ}$&Method: Sagittarius stream\\\hline\hline
+\end{tabular}
+\caption{(TODO: compute analogues in isopotential or isodensity according to Binney and Tremaine)}
+\end{table*}
+%\end{multicols}
+
+\begin{table*}
+%\setlength{\tabcolsep}{3pt}
+\begin{tabular}{|l|cc|cc|c|p{4cm}|}\hline
+Reference&$q_{\rho}$&$s_{\rho}$&$q_{\phi}$&$s_{\phi}$&$R$&comment\\ \hline \hline
+\citet{Chua_et_al._2018}&$\mathbf{0.88\pm0.10}$&$\mathbf{0.70\pm0.11}$&&&$0.15R_{200}$& Illustris\\\hline
+%
+\citet{Bryan_et_al._2013}&$\mathbf{[0.84,0.86]}$&$\mathbf{[0.66,0.70]}$&&&$R_{200}$& For different cosmologies and feedback recipies. Calculated from a fit at $M_\odot=10^12$\\\hline
+%
+\multirow{2}{*}{\citet{Abadi_et_al._2010}}&&&$\mathbf{0.98}$&$\mathbf{0.85}$&-& Almost independent of radius. No feedback: boundary case\\\hline
+\end{tabular}
+\caption{(TODO: compute analogues in isopotential or isodensity according to Binney and Tremaine)}
+\end{table*}
+
+
+
 To be able to compare our results with observational values, we must relate the calculated quanties with their corresponding isopotential analogue, in which observational constraints are usually presented. For this purpose, we run a simple algorithm to find an approximation of the shape of the isopotential contour. Here, we calculate the mean and standard deviation of the potential over a spherical shell of width equals to $10\%$ of the radius at which it is sampled. Then, we calculate the inertia tensor of particles with potential within $1\sigma$ around the mean potential and calculate its triaxial characterization with the reduced inertia tensor. We repeat the process of calculating the potential mean and standard deviation until convergence is achieved with tolerance of $10^{-4}$. We repeat this process for the different radii from table \ref{tabe:isopotential}. \\
 
 \begin{table}
