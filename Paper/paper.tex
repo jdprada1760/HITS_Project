@@ -573,10 +573,111 @@ This trend is summarized in Figure \ref{fig:alignment_history}.
 \textbf{Discussion about the distribution of alignments and their
   evolution in time: Precesion or temporary instabilities?} 
 
-\section{Analysis}
+\section{Discussion}
+
+
+\subsection{What drives the rounding effect?}
+
+From our characterization of radial shapes it is clear that
+MHD halos are rounder than DM halos every sampled radii. 
+It is also noticeable that the rounding effect of baryons is stronger
+at the disk regime, where the DM halo is almost perfectly oblate. 
+Furthermore, MHD halos tend towards more oblate shapes (T < 0.5)
+despite DM halos tendency towards more prolate shapes (T>0.5). 
+This rounding effect can be explained by gravitational effect of the
+flattened axisymmetric galactic disk. 
+It also explanes the weakness of this affect around $\approx 100$kpc,
+where the disk potential is weaker compared to the DM halo potential. 
+
+{\bf Hace falta una grafica de la distribucion cumulativa de
+  triaxialidad para (R\_vir y R\_vir/16 por separado), en cada panel se
+  com para MHD vs DM.}
+
+
+Following that linea reasoning, one would also expect that the rounding
+effect of baryons is related to some  galactic parameters such as its
+component masses and radii. 
+We look for these kind of correlations and to find that the strongest
+can be found for the stellar density.
+However, the correlation is relatively low ({\bf cuanto vale el
+  coeficiente de correlation}) most likely due to the different
+formation histories.
+In other words, the effect of the baryonic disk on the shape of the DM halo
+does not fully explain the deviation from oblateness of MHD halos at
+$r<10$kpc. 
+
+Figure  \ref{fig:Star_Density_effect} shows the
+{\bf que es es lo que muestra esta grafica? falta las unidades de la
+  densidad. y el eje vertical que es? es un cambio absoluto? fraccional?}
+
+{\bf Finalmente cuales son las cantidades disponibles en el disco?
+  cuales son las que muestran una mayor correlacion? Haria falta un
+  plot con todas las correlaciones y la mencion de alguna prueba de
+  machine learning del fit lineal para ver cuales son los parametros
+  mas importantes.}
+
+\textbf{Actually we have not examined the relation of c/a in MHD halos
+  with some measure of c/a from the disk, that is something like
+  Zdisk/Rdisk. This actually would make more sense from a physical
+  point of view: effect of the potential. } 
+
+
+\textit{ Talk about source of triaxiality at the inner parts of the
+  halos (bar?). This source of triaxiality at the inner parts explains
+  why the axial ratios are $\approx 0.95$ and not exactly $1$. We
+  should also discuss that the decrease in the axial ratios for bigger
+  radii may actually be bigger/steeper but it is dimmed by the
+  contribution of inner parts.} 
+
+
+\begin{figure}
+  \includegraphics[width=\columnwidth]{./pics/Delta asphericity Vs Star Density.png}
+  \caption{Difference in asphericities between MHD and DM shapes Vs
+    Star Density of the simulation. Unsure about this graphic. Take
+    delta asphericity as the strength of the rounding effect of
+    baryons.}  
+  \label{fig:Star_Density_effect}
+\end{figure}
+
+
 
 \subsection{Comparison against observational constraints}
 
+
+
+\begin{table*}
+\begin{tabular}{|l|cc|c|c|p{7cm}|}\hline
+Reference&$q_{\rho}$&$s_{\rho}$&$R$&$\theta$&
+Methodology\\ 
+\hline \hline \citet{Olling_and_Merrifield_2000}& $1.00$
+& $0.80$ &  $\simeq 8$kpc & $0^{\circ}$&Stellar dynamics and HI
+density. \\
+
+\multirow{2}{*}{\citet{Banerjee_and_Chanda_2011}}&${1}$&${1}$&$9$kpc&$0^{\circ}$&Method:
+HI
+gas. \\ &${0.5}$&${0.5}$&$24$kpc&$0^{\circ}$&Monotonical
+change between radial regimes.\\
+
+\citet{Loebman_et_al._2012}&${1.00}$&${0.47}$&$\sim
+20$kpc &$0^{\circ}$&Method: SDSS statistics\\
+
+\cite{Johnston_et_al._2005}&${1}$&$0.83-0.92$&$\lesssim
+60$kpc&$0^{\circ}$&Method: Sagittarius stream\\
+
+\citet{Bovy_et_el._2016}&${0.95}$&${0.95}$&$\lesssim
+20$kpc&$90^{\circ}$ & Stellar streams\\
+
+\citet{Deg_and_Widrow_2013}&$0.72$&$0.28$&
+$20$kpc-$60$kpc$ $&$90^{\circ}$&
+Mid-axis orientation. Sagittarius stream\\\hline\hline
+
+\citet{Abadi_et_al._2010} &${0.98}$&${0.85}$& & & Simulations. Almost
+  independent of radius. No feedback: boundary case\\\hline
+
+\end{tabular}
+\caption{{\bf Cuales son las incertidumbres? Con respecto a que eje
+    esta medido theta?}}
+\end{table*}
 
 
 \begin{table*}
@@ -618,61 +719,13 @@ at $M_\odot=10^12$\\\hline
 %\end{multicols}
 
 
-\begin{table*}
-\begin{tabular}{|l|cc|c|c|p{7cm}|}\hline
-Reference&$q_{\rho}$&$s_{\rho}$&$R$&$\theta$&
-Methodology\\ 
-\hline \hline \citet{Olling_and_Merrifield_2000}& $1.00$
-& $0.80$ &  $\simeq 8$kpc & $0^{\circ}$&Stellar dynamics and HI
-density. \\
 
-\multirow{2}{*}{\citet{Banerjee_and_Chanda_2011}}&${1}$&${1}$&$9$kpc&$0^{\circ}$&Method:
-HI
-gas. \\ &${0.5}$&${0.5}$&$24$kpc&$0^{\circ}$&Monotonical
-change between radial regimes.\\
-
-\citet{Loebman_et_al._2012}&${1.00}$&${0.47}$&$\sim
-20$kpc &$0^{\circ}$&Method: SDSS statistics\\
-
-\cite{Johnston_et_al._2005}&${1}$&$0.83-0.92$&$\lesssim
-60$kpc&$0^{\circ}$&Method: Sagittarius stream\\
-
-\citet{Bovy_et_el._2016}&${0.95}$&${0.95}$&$\lesssim
-20$kpc&$90^{\circ}$ & Stellar streams\\
-
-\citet{Deg_and_Widrow_2013}&$0.72$&$0.28$&
-$20$kpc-$60$kpc$ $&$90^{\circ}$&
-Mid-axis orientation. Sagittarius stream\\\hline\hline
-
-\citet{Abadi_et_al._2010} &${0.98}$&${0.85}$& & & Simulations. Almost
-  independent of radius. No feedback: boundary case\\\hline
-
-\end{tabular}
-\caption{{\bf Cuales son las incertidumbres? Con respecto a que eje
-    esta medido theta?}}
-\end{table*}
-
-
-\begin{table*}
-\begin{tabular}{|l|cc|cc|c|p{4cm}|}\hline
-Reference&$q_{\rho}$&$s_{\rho}$&$q_{\phi}$&$s_{\phi}$&$R$& Methodology
-\\ \hline \hline
-
-
-\multirow{2}{*}{\citet{Abadi_et_al._2010}}&&&${0.98}$&${0.85}$&-&
-Almost independent of radius. No feedback: boundary case\\\hline 
-\end{tabular}
-\caption{(TODO: compute analogues in isopotential or isodensity
-  according to Binney and Tremaine) {\bf Al final estos numeros son
-    isodensidad o isopotencial}}
-\end{table*}
-
-
-
-To compare our results against observational values have we to
-translate first the isodensity into the corresponding isopotential
-rations, in which observational constraints are usually presented.
-For this purpose, we run a simple algorithm to find an
+Half of the observational constraints are computed in terms of
+isodensity contours, the other half in terms of isopotential contours.
+To compare our results against the second kind we must either
+translate the isodensity results or recompute in terms of isopotential
+regions.
+For this purpose, we run a simple iterative algorithm to find an
 approximation of the shape of the isopotential contour. 
 
 First, we calculate the mean and standard deviation of the potential over a
@@ -685,6 +738,22 @@ We repeat the
 process of calculating the potential mean and standard deviation until
 convergence is achieved with tolerance of $10^{-4}$. 
 
+In Figure \ref{fig:density_potential} we compare the two approaches to
+measure the axial rations and plot the analytic expectation for $q$, 
+$(1-q_{\phi})\approx \frac{1}{3}(1-q_{\rho})$
+\citep{Binney_and_Tremaine_2008}, taking the volume-enclosed axial
+ratios  as an approximation for the isodensity contour ratios
+$q_{\rho}$. 
+This plot is computed at four different radii.
+
+Although the analytic expression is meant to be used on the outer
+regions of logarithmic axisymmetric halos, it works well as a first
+approximation for nearly axisymmetric halos as those produced by our
+simulations 
+We find that the difference between the measured and the
+approximated isopotential axial ratios is not bigger than $quantity
+percent$ {\bf }. 
+
 
 {\bf Aqui hace falta una grafica comparando explicitamente los
   valores para q y para s, esto para diferentes radios.
@@ -695,25 +764,6 @@ convergence is achieved with tolerance of $10^{-4}$.
   10-20kpc se acerca a 1/8Rvir, 20-25 1/4Rvir, 60kpc aproximadamente 1/2Rvir
 }
 
-As a consistency check we compare the isopotential results with the analytic expectation of the
-$(1-q_{\phi})\approx \frac{1}{3}(1-q_{\rho})$
-\citep{Binney_and_Tremaine_2008}, taking the volume-enclosed axial
-ratios  as an approximation for the isodensity contour ratios
-$q_{\rho}$. 
-Although this analytic expression if meant to be used on the outer
-regions of logarithmic axisymmetric halos, it works well as a first
-approximation for nearly axisymmetric halos as those produced by our
-simulations 
-We find that the difference between the measured and the
-approximated isopotential axial ratios is not bigger than $quantity
-percent$ {\bf }. 
-
-
-Little discussion: Are our results congruent with observations? at
-which radii, does the DM halo shape vary that much?. Which models are
-favored? 
-
-We repeat this process for the different radii from table
 
 
 \begin{table}
@@ -731,81 +781,11 @@ $\bar{T}$&$0.18^{+0.23}_{-0.10}$&$0.36^{+0.19}_{-0.21}$&$0.40^{+0.26}_{-0.20}$&$
 \end{table}
 
 
-
-\subsection{The rounding effect of baryons}
-
-From the previous characterization of radial shapes it is clear that
-MHD halos are rounder than DM halos (i.e. axial ratios are bigger) at
-every sampled radii. This can be compared on tables \ref{tabe:DM
-  table} and \ref{tabe:MHD table} or at the representative example on
-figure \ref{fig:DM_MHD}. From there, it is also noticeable that the
-rounding effect of baryons is stronger at the disk regime, where the
-DM halo is almost perfectly oblate. Furthermore, MHD halos tend
-towards more oblate shapes (T < 0.5) despite DM halos tendency towards
-more prolate shapes (T>0.5). 
-
-This rounding effect is expected from the gravitational effect of the
-flattened axisymmetric galactic disk. It is also reasonable that this
-effect is not as strong at $\approx 100$kpc, where the disk potential
-is dimmer compared to the DM halo potential. Keeping this in mind, one
-would expect that the rounding effect of baryons is related to some
-galactic parameters such as its component masses and radii. However,
-even for the parameter of highest correlation with this rounding
-effect (the baryonic fraction), the relation is not clear nor
-conclusive due to the dispersion from galaxy peculiarities. In figure
-\ref{fig:Star_Density_effect} we plot the ratios $c/a$ compared to the
-baryonic fraction of each galaxy. Although some linear tendency is
-suggested qualitatively, the dispersion of the sample is very high to
-obtain some conclusive relation. This is an evidence that
-adiabatic-contraction models are not realistic as they may neglect
-some effects of the galaxy evolution in the whole cosmological
-context.  
-
-\begin{figure}
-  \includegraphics[width=\columnwidth]{./pics/Delta asphericity Vs Star Density.png}
-  \caption{Difference in asphericities between MHD and DM shapes Vs
-    Star Density of the simulation. Unsure about this graphic. Take
-    delta asphericity as the strength of the rounding effect of
-    baryons.}  
-  \label{fig:Star_Density_effect}
-\end{figure}
-
-\textbf{Actually we have not examined the relation of c/a in MHD halos
-  with some measure of c/a from the disk, that is something like
-  Zdisk/Rdisk. This actually would make more sense from a physical
-  point of view: effect of the potential.} 
-
-Although the effect of the baryonic disk on the shape of the DM halo
-is a reasonable explanation for the rounding effect, it does not
-actually explain the deviation from oblateness of MHD halos at
-$r<10$kpc. In other words, if the disk is perfectly axisymmetric,
-there must be some source of triaxiality at $r<10$kpc to explain the
-low axial ratios. 
-
-\textit{ Talk about source of triaxiality at the inner parts of the
-  halos (bar?). This source of triaxiality at the inner parts explains
-  why the axial ratios are $\approx 0.95$ and not exactly $1$. We
-  should also discuss that the decrease in the axial ratios for bigger
-  radii may actually be bigger/steeper but it is dimmed by the
-  contribution of inner parts.} 
-%
-%\begin{figure}
-%  \centering
-%  \subfloat[Level4 MHD Vs DM at inner regions]{\includegraphics[width=0.5\columnwidth]{./pics/Triaxial_Plane/Triaxiality_Inner_lvl4.png}}
-%  \hfill
-%  \subfloat[Level4 MHD Vs DM at outer regions]{\includegraphics[width=0.5\columnwidth]{./pics/Triaxial_Plane/Triaxiality_Outter_lvl4.png}}
-%  \hfill
-%  \caption{Axial ratios as shown on $c/a$ Vs $b/a$. Each dot represents a halo shape at some radius. Some observational constraints are plotted alongside our results. Here, dots are clustered, proving the general tendence of halos to get rounder on the outer parts.(Optimize space. caption replaces title.  Present constraints representation of density)}
-%  \label{fig:Triaxiality_Inner_Outer}
-%\end{figure}
-
-
 \section{Conclusions}
 
-\section{Discussion}
 
 \section*{Acknowledgements}
-This project has received funding from the European Union’s Horizon
+This project has received funding from the European Union's Horizon
 2020 Research and Innovation Programme under the Marie
 Sk\l{}odowska-Curie grant agreement No 734374. 
 
